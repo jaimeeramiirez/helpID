@@ -3,39 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpID - Pulseras de Emergencia</title>
+  <title>HelpID - Tu Seguridad en Una Pulsera</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     :root {
-      --primary: #2E86AB; /* Azul confianza */
-      --secondary: #48A999; /* Verde seguridad */
-      --accent: #F4A261; /* Naranja cálido */
-      --light: #f9f9f9;
-      --dark: #333;
+      --primary: #1E3A8A; /* Azul oscuro confianza */
+      --secondary: #38BDF8; /* Azul celeste seguridad */
+      --accent: #FFFFFF; /* Blanco para contraste */
+      --dark: #0f172a; /* Negro azulado */
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: var(--dark);
-      background: var(--light);
+      background: var(--accent);
       scroll-behavior: smooth;
     }
 
     header {
-      background: var(--primary);
+      background: var(--dark);
       color: white;
-      padding: 20px;
+      padding: 15px 20px;
       position: sticky;
       top: 0;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    header img {
+      height: 50px;
     }
 
     nav ul {
@@ -54,7 +54,7 @@
     }
 
     nav ul li a:hover {
-      color: var(--accent);
+      color: var(--secondary);
     }
 
     section {
@@ -69,21 +69,23 @@
 
     .hero {
       text-align: center;
-      padding: 100px 20px;
+      padding: 120px 20px;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       color: white;
     }
 
     .hero h1 {
       font-size: 3rem;
+      margin-bottom: 15px;
     }
 
     .hero p {
       font-size: 1.3rem;
+      margin-bottom: 20px;
     }
 
     .btn {
-      background: var(--accent);
+      background: var(--dark);
       color: white;
       padding: 12px 25px;
       border-radius: 8px;
@@ -94,6 +96,7 @@
 
     .btn:hover {
       background: var(--secondary);
+      color: var(--dark);
     }
 
     .cards {
@@ -106,7 +109,7 @@
       background: white;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
       transition: transform 0.3s;
     }
 
@@ -116,11 +119,12 @@
 
     blockquote {
       background: var(--secondary);
-      color: white;
+      color: var(--dark);
       padding: 20px;
       border-radius: 10px;
       margin: 20px 0;
       font-style: italic;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
     footer {
@@ -154,15 +158,26 @@
     }
 
     form button:hover {
-      background: var(--accent);
+      background: var(--secondary);
+      color: var(--dark);
+    }
+
+    .slogan {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-top: 5px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
   <header>
+    <div>
+      <img src="logo.png" alt="HelpID Logo">
+      <div class="slogan">Tu seguridad en una pulsera</div>
+    </div>
     <nav>
-      <div><strong>HelpID</strong></div>
       <ul>
         <li><a href="#mision">Misión</a></li>
         <li><a href="#historia">Historia</a></li>
@@ -182,14 +197,16 @@
 
   <section id="mision" data-aos="fade-right">
     <h2>Nuestra Misión</h2>
-    <p>En <strong>HelpID</strong>, creemos que la seguridad debe estar al alcance de todos. Nuestra misión es proporcionar a las personas una herramienta simple, confiable y accesible que pueda marcar la diferencia en situaciones críticas.</p>
-    <p>Las pulseras HelpID contienen información vital para que en caso de emergencia, médicos, rescatistas o cualquier persona pueda actuar de inmediato.</p>
+    <p>En <strong>HelpID</strong>, creemos que la seguridad no debe ser un privilegio, sino un derecho universal. Queremos que cualquier persona, sin importar su edad, condición médica o lugar donde viva, pueda sentirse protegida en todo momento.</p>
+    <p>Las pulseras HelpID están diseñadas para contener información vital como alergias, medicación, historial médico y contactos de emergencia. De esta manera, si ocurre un accidente o crisis de salud, los rescatistas y profesionales médicos tendrán acceso inmediato a los datos necesarios para actuar de la mejor forma posible.</p>
+    <p>Queremos salvar vidas, reducir riesgos y dar tranquilidad a millones de familias en el mundo.</p>
   </section>
 
   <section id="historia" data-aos="fade-left">
     <h2>Cómo Nació HelpID</h2>
-    <p>HelpID surgió en 2020 tras la experiencia de uno de nuestros fundadores, quien sufrió un accidente y no pudo comunicar sus alergias a tiempo. Ese momento crítico encendió la idea de crear una herramienta sencilla, discreta y efectiva para salvar vidas.</p>
-    <p>Desde entonces, hemos trabajado con médicos, familias y asociaciones para perfeccionar nuestras pulseras y convertirlas en un aliado indispensable.</p>
+    <p>La historia de HelpID comienza en 2020, cuando uno de nuestros fundadores sufrió un accidente en bicicleta. Debido a la gravedad del golpe, no pudo comunicar sus alergias a los medicamentos. Esa situación crítica inspiró la idea: crear una herramienta que hable por ti cuando tú no puedas hacerlo.</p>
+    <p>Con la ayuda de médicos, desarrolladores y diseñadores, nació la primera pulsera HelpID. Al principio era un proyecto local, pero pronto se convirtió en un movimiento global: familias con niños, personas mayores, deportistas, viajeros y pacientes crónicos comenzaron a confiar en nosotros.</p>
+    <p>Hoy, HelpID no es solo una pulsera: es una red de seguridad invisible que acompaña a quienes más quieres.</p>
   </section>
 
   <section id="valores" data-aos="zoom-in">
@@ -197,15 +214,19 @@
     <div class="cards">
       <div class="card">
         <h3><i class="fas fa-heart"></i> Confianza</h3>
-        <p>Construimos relaciones sólidas basadas en la transparencia y el compromiso con tu bienestar.</p>
+        <p>Queremos que confíes en nosotros. Por eso trabajamos con la máxima transparencia, usamos materiales resistentes y seguros, y actualizamos constantemente nuestra tecnología.</p>
       </div>
       <div class="card">
         <h3><i class="fas fa-hand-holding-medical"></i> Cercanía</h3>
-        <p>Estamos contigo en cada paso, escuchando tus necesidades y ofreciendo soluciones personalizadas.</p>
+        <p>No somos solo una empresa, somos personas que escuchan a personas. Nos importa cada historia, cada familia y cada necesidad individual.</p>
       </div>
       <div class="card">
         <h3><i class="fas fa-shield-alt"></i> Seguridad</h3>
-        <p>Nuestras pulseras están diseñadas para protegerte en los momentos más importantes.</p>
+        <p>Nuestras pulseras están certificadas para resistir agua, sudor, caídas y condiciones extremas. Porque tu seguridad no admite errores.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-globe"></i> Innovación</h3>
+        <p>Miramos al futuro. Nuestro objetivo es integrar HelpID con nuevas tecnologías de salud digital y emergencias globales.</p>
       </div>
     </div>
   </section>
@@ -215,6 +236,8 @@
     <blockquote>"Gracias a HelpID, cuando mi hijo sufrió una crisis epiléptica en el colegio, los profesores supieron exactamente qué hacer. Fue un alivio enorme." – Laura M.</blockquote>
     <blockquote>"Soy alérgico a los mariscos. Una vez terminé en urgencias y gracias a la pulsera me atendieron sin riesgos." – Carlos G.</blockquote>
     <blockquote>"Mi madre tiene Alzheimer. Con HelpID, cualquier persona que la encuentre sabe a quién llamar de inmediato." – Ana R.</blockquote>
+    <blockquote>"Soy corredora de maratones. Saber que llevo mi HelpID me da tranquilidad, incluso cuando entreno sola." – Paula S.</blockquote>
+    <blockquote>"Trabajo en la construcción y mi HelpID me hace sentir más seguro cada día. Mis compañeros saben cómo ayudarme si pasa algo." – Jorge T.</blockquote>
   </section>
 
   <section id="faq" data-aos="fade-up">
@@ -222,22 +245,30 @@
     <div class="cards">
       <div class="card">
         <h3>¿Qué información lleva la pulsera?</h3>
-        <p>Datos vitales como nombre, condición médica, alergias, medicamentos y contactos de emergencia.</p>
+        <p>Incluye nombre, grupo sanguíneo, alergias, condiciones médicas, medicación y contactos de emergencia. Toda la información es personalizable.</p>
       </div>
       <div class="card">
         <h3>¿Es resistente al agua?</h3>
-        <p>Sí, nuestras pulseras están diseñadas para resistir el uso diario, incluyendo agua y sudor.</p>
+        <p>Sí. Puedes ducharte, nadar o practicar deportes acuáticos sin preocuparte.</p>
       </div>
       <div class="card">
-        <h3>¿Cómo puedo pedir una?</h3>
-        <p>A través de nuestro formulario de contacto, te guiaremos paso a paso para personalizar tu pulsera.</p>
+        <h3>¿Qué pasa si cambio de medicación?</h3>
+        <p>Podrás actualizar la información fácilmente a través de nuestro sistema online.</p>
+      </div>
+      <div class="card">
+        <h3>¿Quién debería usar HelpID?</h3>
+        <p>Niños, personas mayores, viajeros, deportistas, trabajadores de riesgo o cualquier persona que quiera sentirse más segura.</p>
+      </div>
+      <div class="card">
+        <h3>¿Dónde puedo comprarla?</h3>
+        <p>Directamente a través de nuestra web en el apartado de contacto o en farmacias y distribuidores autorizados.</p>
       </div>
     </div>
   </section>
 
   <section id="contacto" data-aos="fade-right">
     <h2>Contacto</h2>
-    <p>Si deseas más información o solicitar tu pulsera, completa este formulario:</p>
+    <p>¿Quieres más información o solicitar tu pulsera? Rellena este formulario y te responderemos lo antes posible:</p>
     <form action="https://formspree.io/f/xeozyzny" method="POST">
       <input type="text" name="nombre" placeholder="Tu nombre" required>
       <input type="email" name="email" placeholder="Tu correo electrónico" required>
