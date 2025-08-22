@@ -1,98 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpID - Tu pulsera de emergencia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; color: #333; background: #fafafa; line-height: 1.6; }
-    header { background: #e63946; color: #fff; padding: 60px 20px; text-align: center; }
-    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-    header p { font-size: 1.2rem; margin-bottom: 20px; }
-    header a { background: #fff; color: #e63946; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; }
-    section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-    h2 { color: #e63946; margin-bottom: 20px; }
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    .card h3 { margin-bottom: 10px; color: #333; }
-    form { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    form label { display: block; margin: 10px 0 5px; font-weight: bold; }
-    form input, form textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; }
-    form button { background: #e63946; color: #fff; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; }
-    form button:hover { background: #d62828; }
-    footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HelpID - Pulseras de Emergencia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-  <!-- HERO -->
-  <header>
-    <h1>HelpID</h1>
-    <p>La pulsera que puede salvar vidas en una emergencia</p>
-    <a href="#pedido">Solicita tu HelpID</a>
+  <!-- Header -->
+  <header class="bg-red-600 text-white p-6 shadow-md">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">HelpID</h1>
+      <nav>
+        <a href="#about" class="px-3 hover:underline">¿Qué es?</a>
+        <a href="#contact" class="px-3 hover:underline">Contacto</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- QUÉ ES HELPID -->
-  <section>
-    <h2>¿Qué es HelpID?</h2>
-    <p>
-      HelpID es una pulsera sencilla con información vital para casos de emergencia. 
-      Está pensada para personas mayores, niños, o quienes padecen condiciones médicas específicas. 
-      En un accidente o crisis, permite que cualquier persona pueda acceder rápidamente a los datos médicos y contactos de emergencia.
+  <!-- Hero -->
+  <section class="bg-red-100 text-center py-16 px-6">
+    <h2 class="text-4xl font-bold text-red-700 mb-4">Pulseras que salvan vidas</h2>
+    <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+      HelpID es una pulsera de emergencia con información vital. 
+      Diseñada para que, en caso de accidente o crisis, la ayuda llegue más rápido y con la información correcta.
     </p>
   </section>
 
-  <!-- CASOS DE USO -->
-  <section>
-    <h2>Casos de Uso</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Adultos Mayores</h3>
-        <p>Personas con demencia o Alzheimer que pueden perderse o desorientarse.</p>
-      </div>
-      <div class="card">
-        <h3>Niños</h3>
-        <p>En caso de extravío, la pulsera facilita el reencuentro con sus familiares.</p>
-      </div>
-      <div class="card">
-        <h3>Condiciones Médicas</h3>
-        <p>Epilepsia, autismo u otras condiciones donde la información médica inmediata es clave.</p>
-      </div>
-      <div class="card">
-        <h3>Alergias Graves</h3>
-        <p>Permite actuar rápido frente a reacciones alérgicas que pueden ser mortales.</p>
-      </div>
+  <!-- About -->
+  <section id="about" class="max-w-4xl mx-auto py-16 px-6">
+    <h3 class="text-3xl font-semibold text-red-700 mb-6">¿Cómo funciona?</h3>
+    <p class="text-lg mb-4">
+      Cada pulsera HelpID contiene datos esenciales de la persona que la lleva: 
+      nombre, condición médica, alergias, contactos de emergencia y otra información personalizada.
+    </p>
+    <p class="text-lg mb-4">
+      Si ocurre una emergencia, los rescatistas o transeúntes pueden identificar rápidamente la situación y actuar de inmediato.
+    </p>
+    <p class="text-lg">
+      Nuestro objetivo es crear conciencia social y ofrecer una solución sencilla que puede marcar la diferencia en situaciones críticas.
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-white py-16 px-6 shadow-inner">
+    <div class="max-w-2xl mx-auto">
+      <h3 class="text-3xl font-semibold text-red-700 mb-6 text-center">Solicita tu pulsera</h3>
+      <p class="text-lg text-center mb-8">
+        Completa el siguiente formulario y nos pondremos en contacto contigo para personalizar tu HelpID.
+      </p>
+      <form action="https://formspree.io/f/xeozyzny" method="POST" class="space-y-4">
+        <div>
+          <label for="name" class="block text-gray-700">Nombre completo</label>
+          <input type="text" id="name" name="name" required class="w-full border rounded-lg p-2">
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700">Correo electrónico</label>
+          <input type="email" id="email" name="email" required class="w-full border rounded-lg p-2">
+        </div>
+        <div>
+          <label for="message" class="block text-gray-700">Datos / Mensaje</label>
+          <textarea id="message" name="message" rows="4" required class="w-full border rounded-lg p-2"></textarea>
+        </div>
+        <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition w-full">
+          Enviar solicitud
+        </button>
+      </form>
     </div>
   </section>
 
-  <!-- FORMULARIO -->
-  <section id="pedido">
-    <h2>Solicita tu HelpID</h2>
-    <form action="https://formspree.io/f/xeozyzny" method="POST">
-      <label for="nombre">Nombre completo</label>
-      <input type="text" id="nombre" name="nombre" required>
-
-      <label for="email">Correo electrónico</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="telefono">Teléfono</label>
-      <input type="text" id="telefono" name="telefono">
-
-      <label for="info">Información médica a incluir</label>
-      <textarea id="info" name="info" rows="4" required></textarea>
-
-      <label for="emergencia">Contacto de emergencia</label>
-      <input type="text" id="emergencia" name="emergencia" required>
-
-      <button type="submit">Enviar Solicitud</button>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 HelpID - Conciencia y seguridad para todos</p>
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+    <p>&copy; 2025 HelpID. Todos los derechos reservados.</p>
   </footer>
 
 </body>
