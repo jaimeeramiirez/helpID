@@ -3,179 +3,208 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpID - Seguridad en tu muñeca</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e0e6ad0d.js" crossorigin="anonymous"></script>
+  <title>HelpID - Pulseras de Emergencia</title>
   <style>
-    html {
-      scroll-behavior: smooth;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background: #f9f9f9;
     }
+
+    /* --- HERO SECTION CON LOGO DE FONDO --- */
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tu-banner.png') no-repeat center center/cover;
+      height: 100vh;
+      background: url('logotipo.png') no-repeat center center;
+      background-size: contain;
+      background-color: #f2f7fb; /* fondo de apoyo */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
     }
-    .accordion-content {
-      display: none;
+
+    .hero h1 {
+      font-size: 2.8em;
+      color: #004d66;
+      margin-top: 20px;
     }
-    .accordion.active .accordion-content {
-      display: block;
+
+    .hero p {
+      font-size: 1.3em;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .btn-scroll {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      color: white;
+      background: #007acc;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-scroll:hover {
+      background: #005f99;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #007acc;
+      padding: 15px 0;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    header nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    header nav a:hover {
+      color: #ffcc00;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #004d66;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background: #004d66;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Testimonios */
+    .testimonio {
+      background: #f1f9ff;
+      border-left: 5px solid #007acc;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
     }
   </style>
+  <script>
+    function scrollToContent() {
+      document.getElementById("contenido").scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body>
 
-  <!-- HEADER -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow-lg z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <div class="flex items-center space-x-4">
-        <img src="logotipo.png" alt="HelpID Logo" class="h-14 w-auto">
-        <h1 class="text-2xl font-bold text-blue-600">HelpID</h1>
-      </div>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#inicio" class="hover:text-blue-600">Inicio</a>
-        <a href="#historia" class="hover:text-blue-600">Historia</a>
-        <a href="#mision" class="hover:text-blue-600">Misión</a>
-        <a href="#funciona" class="hover:text-blue-600">Cómo Funciona</a>
-        <a href="#faq" class="hover:text-blue-600">FAQ</a>
-        <a href="#testimonios" class="hover:text-blue-600">Testimonios</a>
-        <a href="#contacto" class="hover:text-blue-600">Contacto</a>
-      </nav>
-    </div>
+  <!-- HERO con logo -->
+  <div class="hero">
+    <h1>HelpID</h1>
+    <p>Identidad médica siempre contigo</p>
+    <button class="btn-scroll" onclick="scrollToContent()">Descubrir más</button>
+  </div>
+
+  <!-- Menú -->
+  <header>
+    <nav>
+      <a href="#que-es">Qué es</a>
+      <a href="#mision">Misión</a>
+      <a href="#historia">Historia</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="inicio" class="hero h-screen flex items-center justify-center text-center text-white">
-    <div>
-      <h2 class="text-4xl md:text-6xl font-bold mb-6">Tu seguridad en un solo gesto</h2>
-      <p class="text-lg md:text-2xl mb-6">HelpID: La pulsera que habla por ti en emergencias</p>
-      <a href="#contacto" class="px-6 py-3 bg-blue-600 rounded-lg shadow hover:bg-blue-700">Solicita la tuya</a>
-    </div>
-  </section>
-
-  <!-- HISTORIA -->
-  <section id="historia" class="py-20 px-6 bg-white">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-blue-600">Nuestra Historia</h2>
-      <p class="mb-4">HelpID surge en 2022 tras la experiencia personal de su fundador, quien enfrentó una situación de emergencia en la que la comunicación era imposible. La necesidad de contar con una herramienta sencilla, accesible y confiable dio origen a esta iniciativa.</p>
-      <p class="mb-4">Tras meses de investigación y pruebas, se desarrolló una pulsera con un código QR que almacena información vital de salud, contactos de emergencia y datos relevantes que pueden salvar vidas.</p>
-      <p>Hoy, HelpID acompaña a cientos de personas que viven más seguras gracias a este pequeño pero poderoso dispositivo.</p>
-    </div>
-  </section>
-
-  <!-- MISIÓN -->
-  <section id="mision" class="py-20 px-6 bg-gray-100">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-blue-600">Misión y Visión</h2>
-      <p class="mb-4">Nuestra misión es ofrecer tranquilidad a las familias y confianza a los usuarios, sabiendo que siempre habrá una forma rápida de comunicar información médica crítica en cualquier situación.</p>
-      <p class="mb-4">Queremos convertirnos en un referente en soluciones tecnológicas de identificación médica, llevando HelpID a cada rincón del mundo.</p>
-    </div>
-  </section>
-
-  <!-- CÓMO FUNCIONA -->
-  <section id="funciona" class="py-20 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold mb-10 text-center text-blue-600">¿Cómo Funciona?</h2>
-      <div class="grid md:grid-cols-3 gap-10 text-center">
-        <div>
-          <i class="fas fa-qrcode text-5xl text-blue-600 mb-4"></i>
-          <h3 class="font-bold text-xl mb-2">Registro</h3>
-          <p>Completa el formulario con tu información médica y contactos de emergencia.</p>
-        </div>
-        <div>
-          <i class="fas fa-link text-5xl text-blue-600 mb-4"></i>
-          <h3 class="font-bold text-xl mb-2">Creación del QR</h3>
-          <p>Generamos un código QR único que se vincula con tu perfil seguro.</p>
-        </div>
-        <div>
-          <i class="fas fa-hand-holding-heart text-5xl text-blue-600 mb-4"></i>
-          <h3 class="font-bold text-xl mb-2">Protección</h3>
-          <p>En caso de emergencia, tu información estará disponible al instante para los rescatistas.</p>
-        </div>
+  <!-- Contenido -->
+  <div id="contenido">
+    <section id="que-es">
+      <h2>¿Qué es HelpID?</h2>
+      <div class="card">
+        <p>
+          HelpID es una pulsera de emergencia con código QR que almacena tu información médica y contactos de emergencia. 
+          Diseñada para que en situaciones críticas, la ayuda llegue rápido y de manera precisa.
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="py-20 px-6 bg-gray-100">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold mb-10 text-center text-blue-600">Preguntas Frecuentes</h2>
-      <div class="space-y-4">
-        <div class="accordion bg-white p-4 rounded shadow cursor-pointer">
-          <h3 class="font-bold">¿Qué pasa si pierdo mi pulsera?</h3>
-          <div class="accordion-content mt-2 text-gray-600">
-            <p>Puedes solicitar una nueva, y transferiremos tu información al nuevo dispositivo de manera segura.</p>
-          </div>
-        </div>
-        <div class="accordion bg-white p-4 rounded shadow cursor-pointer">
-          <h3 class="font-bold">¿Quién puede leer mi información?</h3>
-          <div class="accordion-content mt-2 text-gray-600">
-            <p>Solo personal autorizado o cualquier persona con un smartphone podrá acceder a los datos básicos necesarios para tu seguridad.</p>
-          </div>
-        </div>
-        <div class="accordion bg-white p-4 rounded shadow cursor-pointer">
-          <h3 class="font-bold">¿La información está protegida?</h3>
-          <div class="accordion-content mt-2 text-gray-600">
-            <p>Sí, usamos servidores seguros y encriptación para proteger tus datos personales.</p>
-          </div>
-        </div>
+    <section id="mision">
+      <h2>Nuestra Misión</h2>
+      <div class="card">
+        <p>
+          Nuestra misión es brindar seguridad y tranquilidad a las personas y sus familias mediante una 
+          herramienta accesible y confiable en casos de emergencia. Queremos que cada persona esté protegida 
+          y que la atención llegue a tiempo.
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TESTIMONIOS -->
-  <section id="testimonios" class="py-20 px-6 bg-white">
-    <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-10 text-blue-600">Testimonios</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-gray-50 rounded shadow">
-          <img src="https://i.pravatar.cc/100?img=1" class="mx-auto rounded-full mb-4">
-          <p>"Gracias a HelpID, cuando sufrí una crisis epiléptica, pudieron contactar a mi familia de inmediato."</p>
-          <h3 class="mt-4 font-bold">Ana López</h3>
-        </div>
-        <div class="p-6 bg-gray-50 rounded shadow">
-          <img src="https://i.pravatar.cc/100?img=2" class="mx-auto rounded-full mb-4">
-          <p>"Mi hijo es alérgico y ahora me siento mucho más tranquilo sabiendo que siempre lleva su HelpID."</p>
-          <h3 class="mt-4 font-bold">Carlos Méndez</h3>
-        </div>
-        <div class="p-6 bg-gray-50 rounded shadow">
-          <img src="https://i.pravatar.cc/100?img=3" class="mx-auto rounded-full mb-4">
-          <p>"Trabajo sola y me da paz saber que, si me pasa algo, podrán acceder a mi información al instante."</p>
-          <h3 class="mt-4 font-bold">Lucía Fernández</h3>
-        </div>
+    <section id="historia">
+      <h2>Cómo surge HelpID</h2>
+      <div class="card">
+        <p>
+          HelpID nació de una experiencia cercana: un accidente en el que la falta de información retrasó la atención médica. 
+          Desde entonces, nos propusimos crear una solución simple pero poderosa: una pulsera que hable por ti 
+          cuando tú no puedes hacerlo.
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACTO -->
-  <section id="contacto" class="py-20 px-6 bg-gray-100">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-blue-600">Contacto</h2>
-      <p class="mb-6">¿Quieres tu HelpID o tienes dudas? Rellena el formulario y nos pondremos en contacto contigo.</p>
-      <form action="https://formspree.io/f/xeozyzny" method="POST" class="space-y-4">
-        <input type="text" name="nombre" placeholder="Nombre completo" class="w-full px-4 py-2 border rounded">
-        <input type="email" name="email" placeholder="Correo electrónico" class="w-full px-4 py-2 border rounded">
-        <textarea name="mensaje" placeholder="Tu mensaje" class="w-full px-4 py-2 border rounded"></textarea>
-        <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Enviar</button>
-      </form>
-    </div>
-  </section>
+    <section id="testimonios">
+      <h2>Testimonios</h2>
+      <div class="testimonio">
+        <p><strong>María, madre de un niño con alergias:</strong> “Gracias a HelpID, los médicos supieron al instante qué evitar y salvaron a mi hijo.”</p>
+      </div>
+      <div class="testimonio">
+        <p><strong>Carlos, deportista:</strong> “Entreno solo y tener mi HelpID me da tranquilidad. Mis padres también se sienten seguros.”</p>
+      </div>
+      <div class="testimonio">
+        <p><strong>Ana, persona mayor:</strong> “Me siento acompañada siempre. Sé que si me pasa algo, mis datos están ahí.”</p>
+      </div>
+    </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-blue-600 text-white py-6 text-center">
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <div class="card">
+        <p>Si deseas tu pulsera HelpID o tienes preguntas, rellena el siguiente formulario:</p>
+        <form action="https://formspree.io/f/xeozyzny" method="POST">
+          <label>Nombre:<br><input type="text" name="nombre" required></label><br><br>
+          <label>Email:<br><input type="email" name="email" required></label><br><br>
+          <label>Mensaje:<br><textarea name="mensaje" rows="5" required></textarea></label><br><br>
+          <button type="submit" style="padding:10px 20px; background:#007acc; color:white; border:none; border-radius:6px; cursor:pointer;">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <footer>
     <p>&copy; 2025 HelpID. Todos los derechos reservados.</p>
-    <div class="flex justify-center space-x-6 mt-4">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-    </div>
   </footer>
-
-  <!-- SCRIPT -->
-  <script>
-    document.querySelectorAll('.accordion').forEach(item => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-  </script>
 </body>
 </html>
