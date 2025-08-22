@@ -5,50 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HelpID - Pulseras de Emergencia</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
   <!-- Header -->
-  <header class="bg-red-600 text-white p-6 shadow-md">
-    <div class="max-w-4xl mx-auto flex justify-between items-center">
+  <header class="bg-red-600 text-white p-6 shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
       <h1 class="text-2xl font-bold">HelpID</h1>
-      <nav>
-        <a href="#about" class="px-3 hover:underline">¿Qué es?</a>
-        <a href="#contact" class="px-3 hover:underline">Contacto</a>
+      <nav class="space-x-4">
+        <a href="#about" class="hover:underline">¿Qué es?</a>
+        <a href="#benefits" class="hover:underline">Beneficios</a>
+        <a href="#how" class="hover:underline">Cómo funciona</a>
+        <a href="#faq" class="hover:underline">FAQ</a>
+        <a href="#contact" class="hover:underline">Contacto</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="bg-red-100 text-center py-16 px-6">
-    <h2 class="text-4xl font-bold text-red-700 mb-4">Pulseras que salvan vidas</h2>
-    <p class="text-lg text-gray-700 max-w-2xl mx-auto">
-      HelpID es una pulsera de emergencia con información vital. 
-      Diseñada para que, en caso de accidente o crisis, la ayuda llegue más rápido y con la información correcta.
+  <section class="bg-red-100 text-center py-28 px-6">
+    <h2 class="text-5xl font-bold text-red-700 mb-4">Pulseras que salvan vidas</h2>
+    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
+      HelpID es una pulsera de emergencia con información vital para que la ayuda llegue rápido, precisa y efectiva.
     </p>
+    <a href="#contact" class="bg-red-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-red-700 transition">
+      Solicita la tuya
+    </a>
   </section>
 
   <!-- About -->
-  <section id="about" class="max-w-4xl mx-auto py-16 px-6">
-    <h3 class="text-3xl font-semibold text-red-700 mb-6">¿Cómo funciona?</h3>
+  <section id="about" class="max-w-5xl mx-auto py-20 px-6">
+    <h3 class="text-3xl font-semibold text-red-700 mb-6">¿Qué es HelpID?</h3>
     <p class="text-lg mb-4">
-      Cada pulsera HelpID contiene datos esenciales de la persona que la lleva: 
-      nombre, condición médica, alergias, contactos de emergencia y otra información personalizada.
-    </p>
-    <p class="text-lg mb-4">
-      Si ocurre una emergencia, los rescatistas o transeúntes pueden identificar rápidamente la situación y actuar de inmediato.
+      HelpID es una solución sencilla y práctica: una pulsera que contiene datos esenciales como nombre, condición médica, alergias, medicamentos y contactos de emergencia.
     </p>
     <p class="text-lg">
-      Nuestro objetivo es crear conciencia social y ofrecer una solución sencilla que puede marcar la diferencia en situaciones críticas.
+      Está diseñada para ser resistente, cómoda y siempre accesible en cualquier situación.
     </p>
   </section>
 
+  <!-- Benefits -->
+  <section id="benefits" class="bg-white py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h3 class="text-3xl font-semibold text-red-700 mb-12 text-center">¿Por qué elegir HelpID?</h3>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="p-6 shadow-md rounded-xl bg-red-50">
+          <i class="fas fa-heartbeat text-red-600 text-4xl mb-4"></i>
+          <h4 class="text-xl font-bold mb-2">Seguridad</h4>
+          <p>Brinda tranquilidad a familias y cuidadores en caso de emergencias médicas.</p>
+        </div>
+        <div class="p-6 shadow-md rounded-xl bg-red-50">
+          <i class="fas fa-user-shield text-red-600 text-4xl mb-4"></i>
+          <h4 class="text-xl font-bold mb-2">Protección</h4>
+          <p>Datos vitales accesibles de inmediato para médicos, paramédicos o cualquier persona.</p>
+        </div>
+        <div class="p-6 shadow-md rounded-xl bg-red-50">
+          <i class="fas fa-clock text-red-600 text-4xl mb-4"></i>
+          <h4 class="text-xl font-bold mb-2">Rapidez</h4>
+          <p>En emergencias, cada segundo cuenta. HelpID facilita una reacción inmediata.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="bg-gray-100 py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h3 class="text-3xl font-semibold text-red-700 mb-12 text-center">Historias reales</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <p class="italic">“Gracias a la pulsera HelpID, los paramédicos supieron inmediatamente que mi hijo es alérgico al maní. Eso evitó una complicación mayor.”</p>
+          <p class="mt-4 font-bold">– Ana, madre de Tomás (7 años)</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <p class="italic">“Tengo epilepsia y la tranquilidad que me da llevar mi HelpID no tiene precio. Mis compañeros saben cómo ayudarme.”</p>
+          <p class="mt-4 font-bold">– Luis, 25 años</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="max-w-6xl mx-auto py-20 px-6">
+    <h3 class="text-3xl font-semibold text-red-700 mb-12 text-center">¿Cómo funciona?</h3>
+    <div class="grid md:grid-cols-3 gap-10 text-center">
+      <div>
+        <i class="fas fa-pencil-alt text-red-600 text-4xl mb-4"></i>
+        <h4 class="font-bold text-xl mb-2">1. Completa tus datos</h4>
+        <p>Indícanos tu información médica esencial y contactos de emergencia.</p>
+      </div>
+      <div>
+        <i class="fas fa-wristband text-red-600 text-4xl mb-4"></i>
+        <h4 class="font-bold text-xl mb-2">2. Personalizamos tu pulsera</h4>
+        <p>Diseñamos tu HelpID única y adaptada a tus necesidades.</p>
+      </div>
+      <div>
+        <i class="fas fa-ambulance text-red-600 text-4xl mb-4"></i>
+        <h4 class="font-bold text-xl mb-2">3. Siempre contigo</h4>
+        <p>Llévala a diario y deja que te acompañe en cualquier emergencia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="bg-gray-100 py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <h3 class="text-3xl font-semibold text-red-700 mb-12 text-center">Preguntas frecuentes</h3>
+      <div class="space-y-6">
+        <div>
+          <h4 class="font-bold">¿Qué pasa si cambio de teléfono o datos médicos?</h4>
+          <p>Puedes solicitarnos una actualización de tu HelpID en cualquier momento.</p>
+        </div>
+        <div>
+          <h4 class="font-bold">¿Es resistente al agua?</h4>
+          <p>Sí, las pulseras están hechas para resistir agua y uso diario.</p>
+        </div>
+        <div>
+          <h4 class="font-bold">¿Para quién está recomendada?</h4>
+          <p>Niños, adultos mayores, personas con enfermedades crónicas, alergias o cualquier condición médica relevante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
-  <section id="contact" class="bg-white py-16 px-6 shadow-inner">
+  <section id="contact" class="bg-white py-20 px-6 shadow-inner">
     <div class="max-w-2xl mx-auto">
       <h3 class="text-3xl font-semibold text-red-700 mb-6 text-center">Solicita tu pulsera</h3>
       <p class="text-lg text-center mb-8">
-        Completa el siguiente formulario y nos pondremos en contacto contigo para personalizar tu HelpID.
+        Completa el siguiente formulario y nos pondremos en contacto contigo.
       </p>
       <form action="https://formspree.io/f/xeozyzny" method="POST" class="space-y-4">
         <div>
@@ -71,8 +157,13 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+  <footer class="bg-gray-800 text-white text-center py-8 mt-12">
     <p>&copy; 2025 HelpID. Todos los derechos reservados.</p>
+    <div class="flex justify-center space-x-6 mt-4">
+      <a href="#" class="hover:text-red-400"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-red-400"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-red-400"><i class="fab fa-twitter"></i></a>
+    </div>
   </footer>
 
 </body>
