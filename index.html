@@ -4,174 +4,282 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HelpID - Pulseras de Emergencia</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* Reset */
+    * {margin:0; padding:0; box-sizing:border-box;}
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       line-height: 1.6;
       color: #333;
+      scroll-behavior: smooth;
+      background: #F5F5F5;
     }
+
+    /* Paleta */
+    :root {
+      --azul: #1E88E5;
+      --azul-oscuro: #1565C0;
+      --verde: #43A047;
+      --naranja: #FB8C00;
+      --gris-suave: #F5F5F5;
+      --blanco: #FFFFFF;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--azul);
+      color: var(--blanco);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li a {
+      color: var(--blanco);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav ul li a:hover {
+      color: var(--naranja);
+    }
+
+    /* Hero Section */
     header {
-      background: #1976D2;
-      color: white;
+      height: 100vh;
+      background: linear-gradient(to right, var(--azul), #42A5F5);
+      color: var(--blanco);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 2rem 1rem;
-    }
-    header img {
-      max-height: 80px;
-      margin-bottom: 1rem;
+      padding: 2rem;
     }
     header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
     header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.2rem;
-      font-style: italic;
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      max-width: 600px;
     }
+    header a {
+      background: var(--blanco);
+      color: var(--azul);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    header a:hover {
+      background: var(--naranja);
+      color: var(--blanco);
+    }
+
+    /* Sections */
     section {
-      padding: 3rem 2rem;
-      max-width: 900px;
+      padding: 4rem 2rem;
+      max-width: 1000px;
       margin: auto;
     }
     section h2 {
-      color: #1976D2;
+      color: var(--azul);
       margin-bottom: 1rem;
+      text-align: center;
+      font-size: 2rem;
     }
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-    .step {
-      background: #E3F2FD;
-      padding: 1rem;
-      border-radius: 8px;
+    section p {
+      margin-bottom: 1rem;
       text-align: center;
     }
-    .testimonios {
-      background: #F5F5F5;
+
+    /* Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
+    .card {
+      background: var(--blanco);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card i {
+      font-size: 2.2rem;
+      color: var(--verde);
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--azul-oscuro);
+    }
+
+    /* Testimonials */
     blockquote {
-      background: white;
-      border-left: 5px solid #1976D2;
-      margin: 1rem 0;
+      background: var(--blanco);
+      border-left: 5px solid var(--verde);
       padding: 1rem;
       font-style: italic;
-    }
-    .faq details {
       margin: 1rem 0;
-      border: 1px solid #ddd;
-      padding: 0.8rem;
       border-radius: 6px;
-      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
+
+    /* FAQ */
+    details {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: var(--blanco);
+    }
+
+    /* Contact */
     form {
       display: grid;
       gap: 1rem;
       max-width: 500px;
       margin: auto;
+      background: var(--blanco);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 7px rgba(0,0,0,0.1);
     }
     input, textarea, button {
       padding: 0.8rem;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 1rem;
     }
     button {
-      background: #1976D2;
-      color: white;
-      border: none;
+      background: var(--verde);
+      color: var(--blanco);
       cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
     }
     button:hover {
-      background: #1565C0;
+      background: var(--naranja);
     }
+
+    /* Footer */
     footer {
+      background: var(--azul);
+      color: var(--blanco);
       text-align: center;
       padding: 2rem 1rem;
-      background: #1976D2;
-      color: white;
-      font-size: 0.9rem;
     }
+
+    /* Spacer for nav */
+    .spacer { height: 60px; }
   </style>
 </head>
 <body>
 
-<header>
-  <!-- Aquí insertaremos el logotipo cuando lo tengas -->
+<!-- Navbar -->
+<nav>
+  <h1>HelpID</h1>
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#sobre">Sobre Nosotros</a></li>
+    <li><a href="#mision">Misión</a></li>
+    <li><a href="#funciona">Cómo Funciona</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header id="inicio">
   <h1>HelpID</h1>
   <p>"Tu seguridad en una pulsera"</p>
+  <a href="#contacto">Solicita tu pulsera</a>
 </header>
 
-<section>
-  <h2>¿Qué es HelpID?</h2>
-  <p>
-    HelpID es una iniciativa que busca brindar seguridad y tranquilidad en situaciones de emergencia 
-    a través de pulseras de identificación personal con un código QR. 
-    Estas pulseras contienen información vital como condiciones médicas, alergias, contactos de emergencia y más.
-  </p>
+<div class="spacer"></div>
+
+<!-- Sobre Nosotros -->
+<section id="sobre">
+  <h2>Sobre Nosotros</h2>
+  <p>HelpID nace de la necesidad de brindar seguridad en casos de emergencia. Nuestro equipo busca proteger a personas vulnerables, garantizando que en cualquier situación crítica, la información esencial esté siempre disponible.</p>
 </section>
 
-<section>
-  <h2>Misión y Visión</h2>
-  <p>
-    Nuestra misión es salvar vidas al facilitar el acceso inmediato a información crítica en momentos de emergencia.  
-    Queremos que cada persona vulnerable, ya sea por condiciones médicas, edad o discapacidad, pueda sentirse protegida.
-  </p>
-  <p>
-    Nuestra visión es convertirnos en una herramienta global de apoyo y prevención, 
-    donde HelpID sea sinónimo de seguridad y confianza en cualquier lugar del mundo.
-  </p>
-</section>
-
-<section>
-  <h2>¿Cómo funciona?</h2>
-  <div class="steps">
-    <div class="step">
-      <h3>1. Solicita tu pulsera</h3>
-      <p>Rellena el formulario de contacto con tus datos.</p>
-    </div>
-    <div class="step">
-      <h3>2. Creamos tu QR</h3>
-      <p>Diseñamos tu código con la información vital proporcionada.</p>
-    </div>
-    <div class="step">
-      <h3>3. Recibe tu HelpID</h3>
-      <p>Te enviamos tu pulsera lista para usar en cualquier situación.</p>
-    </div>
+<!-- Misión -->
+<section id="mision">
+  <h2>Nuestra Misión</h2>
+  <p>Salvar vidas facilitando información médica inmediata en emergencias. Queremos que HelpID sea una herramienta de confianza global.</p>
+  <div class="grid">
+    <div class="card"><i class="fas fa-heartbeat"></i><h3>Salud</h3><p>Información vital al alcance de un escaneo.</p></div>
+    <div class="card"><i class="fas fa-hands-helping"></i><h3>Apoyo</h3><p>Acompañamos a familias y cuidadores.</p></div>
+    <div class="card"><i class="fas fa-globe"></i><h3>Impacto Global</h3><p>Funciona en cualquier parte del mundo.</p></div>
   </div>
 </section>
 
-<section class="testimonios">
+<!-- Cómo Funciona -->
+<section id="funciona">
+  <h2>Cómo Funciona</h2>
+  <div class="grid">
+    <div class="card"><i class="fas fa-user-plus"></i><h3>1. Solicita</h3><p>Rellena el formulario de contacto.</p></div>
+    <div class="card"><i class="fas fa-qrcode"></i><h3>2. Creamos tu QR</h3><p>Diseñamos tu pulsera con la información necesaria.</p></div>
+    <div class="card"><i class="fas fa-truck"></i><h3>3. Recibe</h3><p>Obtén tu HelpID en casa y comienza a usarla.</p></div>
+  </div>
+</section>
+
+<!-- Beneficios -->
+<section id="beneficios">
+  <h2>Beneficios</h2>
+  <div class="grid">
+    <div class="card"><i class="fas fa-shield-alt"></i><h3>Seguridad</h3><p>Siempre tendrás tu información médica contigo.</p></div>
+    <div class="card"><i class="fas fa-user-friends"></i><h3>Tranquilidad</h3><p>Tu familia y cuidadores estarán más tranquilos.</p></div>
+    <div class="card"><i class="fas fa-clock"></i><h3>Rapidez</h3><p>Acceso inmediato a tus datos en emergencias.</p></div>
+  </div>
+</section>
+
+<!-- Testimonios -->
+<section id="testimonios">
   <h2>Testimonios</h2>
-  <blockquote>
-    “Gracias a HelpID mi hijo con autismo pudo recibir ayuda rápidamente cuando se perdió en un parque. ¡Increíble herramienta!”
-  </blockquote>
-  <blockquote>
-    “Soy alérgica a los mariscos, y con mi pulsera HelpID me siento mucho más tranquila cuando como fuera de casa.”
-  </blockquote>
+  <blockquote>"Gracias a HelpID mi padre con Alzheimer pudo recibir ayuda cuando se desorientó. ¡Nos salvó de un gran susto!"</blockquote>
+  <blockquote>"Me siento más segura sabiendo que mis alergias están registradas en mi pulsera."</blockquote>
 </section>
 
-<section class="faq">
+<!-- FAQ -->
+<section id="faq">
   <h2>Preguntas Frecuentes</h2>
-  <details>
-    <summary>¿Qué pasa si pierdo mi pulsera?</summary>
-    <p>Puedes solicitarnos una reposición en cualquier momento, mantendremos tu información actualizada.</p>
-  </details>
-  <details>
-    <summary>¿La información es privada?</summary>
-    <p>Sí, tus datos están protegidos y solo se muestran en caso de escaneo en emergencias.</p>
-  </details>
-  <details>
-    <summary>¿Sirve en cualquier país?</summary>
-    <p>Sí, el código QR se puede escanear con cualquier dispositivo móvil en cualquier parte del mundo.</p>
-  </details>
+  <details><summary>¿Qué pasa si pierdo la pulsera?</summary><p>Podemos hacerte una reposición en cualquier momento.</p></details>
+  <details><summary>¿Es seguro compartir mis datos?</summary><p>Sí, tu información está protegida y solo se muestra en emergencias.</p></details>
+  <details><summary>¿Funciona en cualquier país?</summary><p>Sí, cualquier dispositivo puede escanear el QR.</p></details>
 </section>
 
-<section>
-  <h2>Contáctanos</h2>
+<!-- Contacto -->
+<section id="contacto">
+  <h2>Contacto</h2>
   <p>Déjanos tus datos para solicitar tu pulsera HelpID:</p>
   <form action="https://formspree.io/f/xeozyzny" method="POST">
     <input type="text" name="nombre" placeholder="Tu nombre" required>
@@ -181,6 +289,7 @@
   </form>
 </section>
 
+<!-- Footer -->
 <footer>
   <p>© 2025 HelpID - Todos los derechos reservados</p>
 </footer>
