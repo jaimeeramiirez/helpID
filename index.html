@@ -3,82 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generador de QRs</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <title>Generador de QR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 40px;
-      background: #f4f6f8;
+      padding: 30px;
+      background: #f7f7f7;
     }
     h1 {
-      color: #1976D2;
-    }
-    #qrcode {
-      margin: 20px auto;
-      padding: 15px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: inline-block;
+      color: #1565C0;
     }
     input {
+      width: 300px;
       padding: 10px;
-      width: 60%;
-      max-width: 400px;
-      margin-top: 20px;
+      margin: 10px 0;
+      font-size: 16px;
     }
     button {
-      margin: 10px;
       padding: 10px 20px;
-      border: none;
-      background: #1976D2;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
       font-size: 16px;
+      background: #1565C0;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
     }
     button:hover {
       background: #0d47a1;
+    }
+    #qrcode {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Generador de Códigos QR</h1>
-  <p>Escribe un texto o enlace y genera tu código QR al instante.</p>
+  <p>Escribe un texto o enlace y genera tu QR:</p>
 
-  <input type="text" id="text" placeholder="Introduce URL o texto aquí">
+  <input type="text" id="texto" placeholder="Escribe aquí...">
   <br>
-  <button onclick="generateQR()">Generar QR</button>
-  <button onclick="downloadQR()">Descargar PNG</button>
+  <button onclick="generarQR()">Generar QR</button>
 
   <div id="qrcode"></div>
 
+  <!-- Librería de QR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    let qrcode;
-
-    function generateQR() {
-      const text = document.getElementById("text").value;
-      if (qrcode) {
-        document.getElementById("qrcode").innerHTML = "";
+    function generarQR() {
+      let contenedor = document.getElementById("qrcode");
+      contenedor.innerHTML = ""; // limpiar anterior
+      let texto = document.getElementById("texto").value;
+      if(texto.trim() === "") {
+        alert("Por favor escribe algo para generar el QR");
+        return;
       }
-      qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: text,
+      new QRCode(contenedor, {
+        text: texto,
         width: 200,
-        height: 200,
+        height: 200
       });
-    }
-
-    function downloadQR() {
-      if (!qrcode) return;
-      const img = document.querySelector("#qrcode img");
-      if (img) {
-        const link = document.createElement("a");
-        link.href = img.src;
-        link.download = "qrcode.png";
-        link.click();
-      }
     }
   </script>
 </body>
