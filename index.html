@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de QRs</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f4f6f8;
+    }
+    h1 {
+      color: #1976D2;
+    }
+    #qrcode {
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    input {
+      padding: 10px;
+      width: 60%;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: #1976D2;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0d47a1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generador de Códigos QR</h1>
+  <p>Escribe un texto o enlace y genera tu código QR al instante.</p>
+
+  <input type="text" id="text" placeholder="Introduce URL o texto aquí">
+  <br>
+  <button onclick="generateQR()">Generar QR</button>
+  <button onclick="downloadQR()">Descargar PNG</button>
+
+  <div id="qrcode"></div>
+
+  <script>
+    let qrcode;
+
+    function generateQR() {
+      const text = document.getElementById("text").value;
+      if (qrcode) {
+        document.getElementById("qrcode").innerHTML = "";
+      }
+      qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: text,
+        width: 200,
+        height: 200,
+      });
+    }
+
+    function downloadQR() {
+      if (!qrcode) return;
+      const img = document.querySelector("#qrcode img");
+      if (img) {
+        const link = document.createElement("a");
+        link.href = img.src;
+        link.download = "qrcode.png";
+        link.click();
+      }
+    }
+  </script>
+</body>
+</html>
