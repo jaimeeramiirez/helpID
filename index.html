@@ -8,22 +8,23 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fafb;
-      color: #1f2937;
+      background-color: #ffffff;
+      color: #111827;
     }
 
     header {
-      background-color: #3b82f6;
+      background-color: #1e3a8a; /* Azul oscuro */
       color: white;
       padding: 1rem 2rem;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 10;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
     header img {
-      height: 50px;
+      height: 60px;
       vertical-align: middle;
       margin-right: 10px;
     }
@@ -41,7 +42,7 @@
     }
 
     nav a:hover {
-      color: #dbeafe;
+      color: #d1d5db;
     }
 
     section {
@@ -55,21 +56,33 @@
       margin-bottom: 1.5rem;
     }
 
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #1e3a8a;
+    }
+
     /* Accordion */
     .accordion {
-      border-top: 2px solid #e5e7eb;
+      border-top: 2px solid #d1d5db;
     }
 
     .accordion-item {
-      border-bottom: 2px solid #e5e7eb;
+      border-bottom: 2px solid #d1d5db;
     }
 
     .accordion-header {
-      background-color: #f3f4f6;
-      padding: 1rem;
+      background-color: #f9fafb;
+      padding: 1.2rem;
       cursor: pointer;
       font-weight: bold;
       transition: background-color 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .accordion-header:hover {
@@ -78,9 +91,10 @@
 
     .accordion-content {
       display: none;
-      padding: 1rem;
-      background-color: white;
+      padding: 1.2rem;
+      background-color: #ffffff;
       animation: fadeIn 0.5s ease-in-out;
+      line-height: 1.7;
     }
 
     .accordion-content img {
@@ -88,6 +102,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      width: 130px;
     }
 
     @keyframes fadeIn {
@@ -97,11 +112,12 @@
 
     /* Contacto */
     .contact {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      background-color: #1e3a8a;
       color: white;
       border-radius: 12px;
       padding: 2rem;
       text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
     }
 
     .contact form {
@@ -110,16 +126,17 @@
 
     .contact input, .contact textarea {
       width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0;
+      padding: 0.9rem;
+      margin: 0.6rem 0;
       border: none;
       border-radius: 8px;
+      font-size: 1rem;
     }
 
     .contact button {
-      background-color: #facc15;
-      color: #1f2937;
-      padding: 0.8rem 1.5rem;
+      background-color: #000000;
+      color: #ffffff;
+      padding: 0.9rem 1.8rem;
       border: none;
       border-radius: 8px;
       font-weight: bold;
@@ -128,14 +145,22 @@
     }
 
     .contact button:hover {
-      background-color: #fbbf24;
+      background-color: #1f2937;
     }
 
     footer {
-      background-color: #1f2937;
+      background-color: #111827;
       color: #9ca3af;
       text-align: center;
-      padding: 1rem;
+      padding: 1.5rem;
+    }
+
+    /* Logo en secciones */
+    .logo-presente {
+      display: block;
+      margin: 1.5rem auto;
+      width: 100px;
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -160,13 +185,15 @@
         <div class="accordion-header">¿Qué es HelpID?</div>
         <div class="accordion-content">
           <p>
-            HelpID es mucho más que una pulsera. Es una herramienta diseñada para salvar vidas en momentos críticos.  
-            A través de un código QR, personal médico, rescatistas o cualquier persona pueden acceder de inmediato 
-            a información vital: condiciones médicas, alergias, medicación y contactos de emergencia.  
-            Nuestro objetivo es reducir el tiempo de respuesta y aumentar las posibilidades de recibir ayuda adecuada 
-            en los primeros minutos de una emergencia.
+            HelpID no es simplemente una pulsera: es un puente entre la vida cotidiana y la seguridad en los momentos más delicados.  
+            Cada unidad está diseñada para actuar como un identificador vital en situaciones de emergencia, ofreciendo a médicos, rescatistas o personas cercanas 
+            acceso inmediato a información médica crítica. Imagina un escenario donde el tiempo es oro: con solo escanear un código QR, se despliega una ficha con tus datos médicos, alergias, medicamentos, antecedentes y contactos directos de familiares.
           </p>
-          <img src="logo.png" alt="Logo HelpID" style="width:120px;">
+          <p>
+            La esencia de HelpID está en su sencillez. No necesita aplicaciones complicadas ni procesos largos. Funciona en cualquier dispositivo con cámara y conexión a internet. 
+            Nuestro compromiso es salvar minutos que pueden marcar la diferencia entre la vida y la muerte.
+          </p>
+          <img src="logo.png" alt="Logo HelpID">
         </div>
       </div>
 
@@ -175,11 +202,14 @@
         <div class="accordion-header">Nuestra misión</div>
         <div class="accordion-content">
           <p>
-            En HelpID creemos que la seguridad personal no debería ser un lujo, sino un derecho.  
-            Nacimos con la misión de ofrecer un dispositivo accesible, simple y confiable que brinde tranquilidad 
-            tanto a los usuarios como a sus familias. Queremos crear una comunidad donde cada persona vulnerable, 
-            ya sea por una condición médica, edad avanzada o situaciones de riesgo, pueda sentirse respaldada.
+            Nuestra misión es clara: democratizar la seguridad personal. Creemos que toda persona, sin importar edad, condición médica o situación económica, merece sentirse protegida y respaldada. 
+            HelpID nace de la convicción de que un pequeño accesorio puede transformar la forma en que enfrentamos las emergencias.  
           </p>
+          <p>
+            Queremos construir un futuro donde nadie quede indefenso. Personas mayores con enfermedades crónicas, niños en actividades al aire libre, deportistas en competencias o viajeros en el extranjero: todos pueden encontrar en HelpID un aliado fiel.  
+            Nuestra visión va más allá de la tecnología; buscamos crear una red solidaria donde cada pulsera se convierta en un símbolo de cuidado y confianza.
+          </p>
+          <img src="logo.png" alt="Logo HelpID">
         </div>
       </div>
 
@@ -188,11 +218,14 @@
         <div class="accordion-header">Nuestra historia</div>
         <div class="accordion-content">
           <p>
-            HelpID surge tras una experiencia cercana: uno de nuestros fundadores presenció una emergencia en la vía pública, 
-            donde una persona sufrió un ataque epiléptico y nadie sabía cómo ayudarla ni a quién llamar.  
-            De esa vivencia nació la idea: un accesorio sencillo, resistente y universal que pudiera brindar 
-            información inmediata en caso de necesidad.
+            HelpID nació de una experiencia real. Uno de nuestros fundadores presenció cómo un hombre sufrió un ataque epiléptico en plena calle. A su alrededor, la gente quería ayudar, pero nadie sabía cómo. 
+            No había datos médicos, no había familiares a quienes llamar. La angustia de ese momento fue la chispa que encendió nuestra iniciativa.  
           </p>
+          <p>
+            Desde entonces, nos propusimos crear una herramienta práctica, duradera y universal. Tras meses de investigación, pruebas de materiales resistentes al agua, al calor y al uso diario, dimos forma a HelpID: una pulsera sencilla pero poderosa. 
+            Hoy, esa idea se ha transformado en un movimiento que conecta a miles de usuarios en distintos países, con un solo objetivo: salvar vidas.
+          </p>
+          <img src="logo.png" alt="Logo HelpID">
         </div>
       </div>
 
@@ -201,11 +234,16 @@
         <div class="accordion-header">Beneficios de usar HelpID</div>
         <div class="accordion-content">
           <ul>
-            <li>Acceso rápido a tu información médica.</li>
-            <li>Mayor tranquilidad para familiares y cuidadores.</li>
-            <li>Diseño resistente al agua y cómodo de llevar.</li>
-            <li>Ideal para personas mayores, niños o deportistas.</li>
+            <li><b>Acceso inmediato:</b> información médica disponible en segundos gracias al QR.</li>
+            <li><b>Tranquilidad familiar:</b> tus seres queridos sabrán que, en caso de accidente, habrá un canal directo de comunicación.</li>
+            <li><b>Durabilidad:</b> materiales resistentes al agua, al sudor y a la fricción diaria.</li>
+            <li><b>Universal:</b> funciona en cualquier smartphone sin necesidad de descargar aplicaciones.</li>
+            <li><b>Versatilidad:</b> diseñado para adultos mayores, niños, personas con enfermedades crónicas y deportistas.</li>
           </ul>
+          <p>
+            Usar HelpID significa estar un paso adelante frente a lo inesperado. No es solo un accesorio: es una inversión en tu seguridad y la de quienes más quieres.
+          </p>
+          <img src="logo.png" alt="Logo HelpID">
         </div>
       </div>
 
@@ -214,10 +252,17 @@
         <div class="accordion-header">¿Cómo funciona?</div>
         <div class="accordion-content">
           <p>
-            Cada pulsera cuenta con un código QR único. Al escanearlo con un smartphone, se despliega un perfil médico 
-            seguro con toda la información que el usuario ha registrado previamente.  
-            Este sistema evita retrasos en situaciones críticas y garantiza una atención más rápida y eficaz.
+            La magia de HelpID radica en su simplicidad tecnológica. Cada pulsera cuenta con un <b>código QR único</b> que enlaza con un perfil seguro en la nube.  
+            Al escanearlo, se accede de inmediato a la información médica que el usuario registró previamente: nombre, alergias, medicación actual, enfermedades crónicas, grupo sanguíneo, datos de contacto y más.  
           </p>
+          <p>
+            Los datos están protegidos con estándares de seguridad, pero al mismo tiempo son accesibles en segundos para quien lo necesite en una emergencia. 
+            De esta manera, evitamos retrasos en la atención médica y reducimos el riesgo de procedimientos equivocados.
+          </p>
+          <p>
+            HelpID no requiere baterías, actualizaciones constantes ni aplicaciones externas. Su diseño es práctico y funcional, pensado para durar años y ser tu compañero en cada paso de tu vida diaria.
+          </p>
+          <img src="logo.png" alt="Logo HelpID">
         </div>
       </div>
     </div>
@@ -226,28 +271,40 @@
   <!-- TESTIMONIOS -->
   <section id="testimonios">
     <h2>Testimonios</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      "Gracias a HelpID mi madre pudo recibir atención médica adecuada cuando se desorientó en la calle.  
-      El personal de salud contactó conmigo en minutos." – Ana G.
+    <p style="text-align:center; max-width:800px; margin:auto; font-style:italic;">
+      "Gracias a HelpID mi madre, que padece Alzheimer, recibió atención adecuada cuando se desorientó en la calle. 
+      El personal de salud pudo leer su información médica en segundos y contactarme inmediatamente. Fue un alivio enorme." – Ana G.
     </p>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      "Soy corredor y siempre llevo mi HelpID. Me da tranquilidad saber que si me pasa algo, mis datos están ahí." – Carlos M.
+    <p style="text-align:center; max-width:800px; margin:auto; font-style:italic;">
+      "Soy corredor y siempre llevo mi HelpID. Entreno largas distancias y me da tranquilidad saber que, si algo sucede, mis datos y contactos estarán disponibles. 
+      Es ligero, resistente y ya forma parte de mi vida diaria." – Carlos M.
     </p>
+    <p style="text-align:center; max-width:800px; margin:auto; font-style:italic;">
+      "Trabajo viajando constantemente y a menudo estoy en lugares donde no conozco a nadie. 
+      Con HelpID sé que, si ocurre una emergencia, la información correcta estará disponible para quien me auxilie." – María L.
+    </p>
+    <img src="logo.png" alt="Logo HelpID" class="logo-presente">
   </section>
 
   <!-- CONTACTO -->
   <section id="contacto" class="contact">
     <h2>Contáctanos</h2>
+    <p>
+      Si deseas más información, colaborar con nuestro proyecto o adquirir tu HelpID, no dudes en escribirnos.  
+      Estamos disponibles para responder todas tus preguntas y acompañarte en el proceso de obtener tu pulsera de seguridad.
+    </p>
     <form action="https://formspree.io/f/xeozyzny" method="POST">
       <input type="text" name="name" placeholder="Tu nombre" required>
       <input type="email" name="email" placeholder="Tu correo electrónico" required>
       <textarea name="message" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
       <button type="submit">Enviar</button>
     </form>
+    <img src="logo.png" alt="Logo HelpID" class="logo-presente">
   </section>
 
   <footer>
     <p>&copy; 2025 HelpID - Todos los derechos reservados</p>
+    <img src="logo.png" alt="Logo HelpID" class="logo-presente">
   </footer>
 
   <script>
