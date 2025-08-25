@@ -3,277 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpID - Seguridad Siempre Contigo</title>
+  <title>HelpID - Seguridad en tu muñeca</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9fbfd;
-      color: #333;
+      background-color: #f9fafb;
+      color: #1f2937;
     }
 
-    /* --- HEADER --- */
     header {
+      background-color: #3b82f6;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
       position: sticky;
       top: 0;
-      background: #0a2540;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 28px;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 10;
     }
 
     header img {
-      height: 48px;
+      height: 50px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    nav {
+      margin-top: 10px;
     }
 
     nav a {
       color: white;
-      margin: 0 15px;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 1em;
+      margin: 0 1rem;
+      font-weight: bold;
       transition: color 0.3s;
     }
 
     nav a:hover {
-      color: #d4af37;
+      color: #dbeafe;
     }
 
-    /* --- HERO --- */
-    .hero {
-      padding: 120px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #0a2540, #174a73);
-      color: white;
-    }
-
-    .hero h1 {
-      font-size: 3.2em;
-      margin-bottom: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .hero p {
-      font-size: 1.3em;
-      opacity: 0.9;
-      max-width: 600px;
+    section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
       margin: auto;
     }
 
-    /* --- SECCIONES DESPLEGABLES --- */
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Accordion */
     .accordion {
-      max-width: 950px;
-      margin: 60px auto;
+      border-top: 2px solid #e5e7eb;
     }
 
     .accordion-item {
-      background: white;
-      border-radius: 12px;
-      margin: 18px 0;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      overflow: hidden;
-      border-left: 5px solid #0a2540;
+      border-bottom: 2px solid #e5e7eb;
     }
 
     .accordion-header {
-      padding: 22px;
-      font-size: 1.25em;
-      font-weight: 600;
-      background: #f5f9fc;
+      background-color: #f3f4f6;
+      padding: 1rem;
       cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #0a2540;
+      font-weight: bold;
+      transition: background-color 0.3s;
     }
 
     .accordion-header:hover {
-      background: #e9f2fa;
+      background-color: #e5e7eb;
     }
 
     .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-      padding: 0 22px;
+      display: none;
+      padding: 1rem;
+      background-color: white;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
-    .accordion-content p {
-      margin: 18px 0;
-      line-height: 1.6;
-      font-size: 1.05em;
-    }
-
-    .accordion-item.active .accordion-content {
-      max-height: 600px;
-      padding: 22px;
-    }
-
-    /* --- TESTIMONIOS --- */
-    #testimonios {
-      max-width: 1000px;
-      margin: 70px auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    #testimonios h2 {
-      font-size: 2em;
-      margin-bottom: 25px;
-      color: #0a2540;
-    }
-
-    .testimonio {
-      background: #f1f7fb;
-      border-left: 5px solid #d4af37;
-      padding: 18px;
-      margin: 18px 0;
-      border-radius: 10px;
-      font-style: italic;
-    }
-
-    .testimonio strong {
-      color: #0a2540;
-    }
-
-    /* --- CONTACTO --- */
-    #contacto {
-      background: linear-gradient(135deg, #0a2540, #174a73);
-      padding: 70px 20px;
-      text-align: center;
-      color: white;
-    }
-
-    #contacto h2 {
-      margin-bottom: 20px;
-      font-size: 2.2em;
-      color: #d4af37;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: auto;
-      text-align: left;
-    }
-
-    .contact-form label {
+    .accordion-content img {
+      margin-top: 1rem;
       display: block;
-      margin: 14px 0 6px;
-      font-weight: bold;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      margin-bottom: 10px;
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
 
-    .contact-form button {
-      margin-top: 20px;
-      padding: 16px;
+    /* Contacto */
+    .contact {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .contact form {
+      margin-top: 1rem;
+    }
+
+    .contact input, .contact textarea {
       width: 100%;
-      background: #d4af37;
-      color: #0a2540;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
       border: none;
       border-radius: 8px;
-      font-size: 1.2em;
+    }
+
+    .contact button {
+      background-color: #facc15;
+      color: #1f2937;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background-color 0.3s;
     }
 
-    .contact-form button:hover {
-      background: #b9942c;
+    .contact button:hover {
+      background-color: #fbbf24;
     }
 
-    /* --- FOOTER --- */
     footer {
-      background: #0a2540;
-      color: white;
+      background-color: #1f2937;
+      color: #9ca3af;
       text-align: center;
-      padding: 25px;
-      position: relative;
-      margin-top: 60px;
-    }
-
-    footer::before {
-      content: "";
-      background: url('logotipo.png') no-repeat center;
-      background-size: 90px;
-      opacity: 0.08;
-      position: absolute;
-      inset: 0;
-    }
-
-    footer p {
-      position: relative;
-      z-index: 1;
-      font-size: 0.95em;
+      padding: 1rem;
     }
   </style>
 </head>
 <body>
-
-  <!-- HEADER -->
   <header>
-    <img src="logotipo.png" alt="HelpID Logo">
+    <img src="logo.png" alt="Logo HelpID">
+    <h1>HelpID - Seguridad en tu muñeca</h1>
     <nav>
-      <a href="#info">Info</a>
+      <a href="#info">Información</a>
       <a href="#testimonios">Testimonios</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>HelpID</h1>
-    <p>La pulsera que guarda tu historia médica y conecta la ayuda que necesitas en el momento justo.</p>
-  </section>
-
-  <!-- INFO -->
+  <!-- INFO SECCIONES DESPLEGABLES -->
   <section id="info">
+    <h2>Más sobre HelpID</h2>
     <div class="accordion">
+
+      <!-- ¿Qué es HelpID? -->
       <div class="accordion-item">
         <div class="accordion-header">¿Qué es HelpID?</div>
         <div class="accordion-content">
           <p>
-            <strong>HelpID</strong> es una pulsera inteligente de emergencia diseñada para brindar seguridad, confianza y tranquilidad a las personas y a sus familias. 
-            Su función principal es almacenar y proporcionar acceso inmediato a información médica esencial y contactos de emergencia a través de un código QR único y personal.
+            HelpID es mucho más que una pulsera. Es una herramienta diseñada para salvar vidas en momentos críticos.  
+            A través de un código QR, personal médico, rescatistas o cualquier persona pueden acceder de inmediato 
+            a información vital: condiciones médicas, alergias, medicación y contactos de emergencia.  
+            Nuestro objetivo es reducir el tiempo de respuesta y aumentar las posibilidades de recibir ayuda adecuada 
+            en los primeros minutos de una emergencia.
           </p>
+          <img src="logo.png" alt="Logo HelpID" style="width:120px;">
+        </div>
+      </div>
+
+      <!-- Nuestra misión -->
+      <div class="accordion-item">
+        <div class="accordion-header">Nuestra misión</div>
+        <div class="accordion-content">
           <p>
-            En una situación de crisis —un accidente, una caída, un ataque alérgico o una complicación médica inesperada— los primeros minutos son los más importantes. 
-            Muchas veces los profesionales de salud o las personas alrededor no cuentan con la información clave para actuar con rapidez y precisión. 
-            <strong>HelpID resuelve este problema</strong> al poner en manos de quien te auxilia tus datos médicos vitales, de forma rápida, sencilla y segura.
+            En HelpID creemos que la seguridad personal no debería ser un lujo, sino un derecho.  
+            Nacimos con la misión de ofrecer un dispositivo accesible, simple y confiable que brinde tranquilidad 
+            tanto a los usuarios como a sus familias. Queremos crear una comunidad donde cada persona vulnerable, 
+            ya sea por una condición médica, edad avanzada o situaciones de riesgo, pueda sentirse respaldada.
           </p>
+        </div>
+      </div>
+
+      <!-- Historia -->
+      <div class="accordion-item">
+        <div class="accordion-header">Nuestra historia</div>
+        <div class="accordion-content">
           <p>
-            Cada pulsera HelpID puede incluir datos como: nombre completo, tipo de sangre, alergias, medicamentos en uso, condiciones médicas crónicas y hasta la información de tus contactos más cercanos. 
-            Todo accesible en cuestión de segundos mediante un simple escaneo del código QR con cualquier teléfono móvil. 
-            Así, incluso si la persona afectada no puede comunicarse, la pulsera habla por ella.
+            HelpID surge tras una experiencia cercana: uno de nuestros fundadores presenció una emergencia en la vía pública, 
+            donde una persona sufrió un ataque epiléptico y nadie sabía cómo ayudarla ni a quién llamar.  
+            De esa vivencia nació la idea: un accesorio sencillo, resistente y universal que pudiera brindar 
+            información inmediata en caso de necesidad.
           </p>
+        </div>
+      </div>
+
+      <!-- Beneficios -->
+      <div class="accordion-item">
+        <div class="accordion-header">Beneficios de usar HelpID</div>
+        <div class="accordion-content">
+          <ul>
+            <li>Acceso rápido a tu información médica.</li>
+            <li>Mayor tranquilidad para familiares y cuidadores.</li>
+            <li>Diseño resistente al agua y cómodo de llevar.</li>
+            <li>Ideal para personas mayores, niños o deportistas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cómo funciona -->
+      <div class="accordion-item">
+        <div class="accordion-header">¿Cómo funciona?</div>
+        <div class="accordion-content">
           <p>
-            El diseño de HelpID está pensado para acompañarte siempre: es resistente al agua, cómodo, duradero y adaptable a cualquier estilo de vida. 
-            Puedes llevarlo en el trabajo, en actividades deportivas, durante viajes o en tu día a día, sabiendo que siempre tendrás contigo una herramienta de protección silenciosa pero poderosa.
+            Cada pulsera cuenta con un código QR único. Al escanearlo con un smartphone, se despliega un perfil médico 
+            seguro con toda la información que el usuario ha registrado previamente.  
+            Este sistema evita retrasos en situaciones críticas y garantiza una atención más rápida y eficaz.
           </p>
-          <p>
-            HelpID surge de una idea sencilla pero poderosa: <em>“salvar tiempo es salvar vidas”</em>. 
-            La iniciativa nació tras experiencias reales en las que familiares y amigos pasaron por emergencias sin que los médicos pudieran acceder a su historial de salud en el momento crítico. 
-            Con ese aprendizaje, decidimos crear una solución accesible, estética y altamente funcional que pueda marcar la diferencia entre la incertidumbre y una atención médica precisa y rápida.
-          </p>
-          <p>
-            Más allá de un accesorio, HelpID representa confianza, cuidado y cercanía. 
-            Es un recordatorio de que nunca estamos completamente solos y de que siempre habrá una forma de conectar la ayuda que necesitamos con quienes pueden brindarla.
-          </p>
-          <div style="text-align:center; margin-top:20px;">
-            <img src="img/helpid_logo.png" alt="Logotipo HelpID" style="max-width:200px;">
-          </div>
         </div>
       </div>
     </div>
@@ -282,45 +226,36 @@
   <!-- TESTIMONIOS -->
   <section id="testimonios">
     <h2>Testimonios</h2>
-    <div class="testimonio">
-      <p><strong>María, madre:</strong> “Gracias a HelpID, los médicos supieron al instante qué evitar y salvaron a mi hijo.”</p>
-    </div>
-    <div class="testimonio">
-      <p><strong>Carlos, deportista:</strong> “Entreno solo y tener mi HelpID me da tranquilidad. Mis padres también se sienten seguros.”</p>
-    </div>
-    <div class="testimonio">
-      <p><strong>Ana, persona mayor:</strong> “Me siento acompañada siempre. Sé que si me pasa algo, mis datos están ahí.”</p>
-    </div>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+      "Gracias a HelpID mi madre pudo recibir atención médica adecuada cuando se desorientó en la calle.  
+      El personal de salud contactó conmigo en minutos." – Ana G.
+    </p>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+      "Soy corredor y siempre llevo mi HelpID. Me da tranquilidad saber que si me pasa algo, mis datos están ahí." – Carlos M.
+    </p>
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto">
+  <section id="contacto" class="contact">
     <h2>Contáctanos</h2>
-    <p>¿Quieres tu pulsera o tienes dudas? Escríbenos y te responderemos pronto:</p>
-    <div class="contact-form">
-      <form action="https://formspree.io/f/xeozyzny" method="POST">
-        <label>Nombre</label>
-        <input type="text" name="nombre" required>
-        <label>Email</label>
-        <input type="email" name="email" required>
-        <label>Mensaje</label>
-        <textarea name="mensaje" rows="5" required></textarea>
-        <button type="submit">Enviar Mensaje</button>
-      </form>
-    </div>
+    <form action="https://formspree.io/f/xeozyzny" method="POST">
+      <input type="text" name="name" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu correo electrónico" required>
+      <textarea name="message" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 HelpID. Todos los derechos reservados.</p>
+    <p>&copy; 2025 HelpID - Todos los derechos reservados</p>
   </footer>
 
   <script>
-    // Script para acordeón
-    const items = document.querySelectorAll(".accordion-item");
-    items.forEach(item => {
-      item.querySelector(".accordion-header").addEventListener("click", () => {
-        item.classList.toggle("active");
+    const headers = document.querySelectorAll(".accordion-header");
+    headers.forEach(header => {
+      header.addEventListener("click", () => {
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
       });
     });
   </script>
