@@ -69,11 +69,13 @@
       margin-bottom: 2rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      background: linear-gradient(90deg, #1e3a8a, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
 
+      background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+      -webkit-background-clip: text;   /* 🔹 Safari / Chrome */
+      background-clip: text;           /* 🔹 Estándar */
+      -webkit-text-fill-color: transparent; /* 🔹 Necesario para que se vea el degradado */
+    }
+    
     h2 {
       font-size: 1.6rem;
       color: #1e3a8a;
