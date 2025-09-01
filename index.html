@@ -233,6 +233,28 @@
     html {
     scroll-behavior: smooth;
     }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card.destacado {
+      border: 2px solid #facc15;
+      background: #fffbea;
+    }
   </style>
 </head>
 <body>
@@ -487,6 +509,27 @@
   </div>
 </section>
 
+  <!-- PRECIOS -->
+  <section id="precios">
+    <h2>Planes y Precios</h2>
+    <div class="pricing-grid">
+      <div class="card">
+        <h3>Básico</h3>
+        <p>1 pulsera QR</p>
+        <p><strong>S/. 40</strong></p>
+      </div>
+      <div class="card destacado">
+        <h3>Familiar</h3>
+        <p>3 pulseras QR</p>
+        <p><strong>S/. 100</strong></p>
+      </div>
+      <div class="card">
+        <h3>Pro</h3>
+        <p>5 pulseras QR</p>
+        <p><strong>S/. 150</strong></p>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACTO -->
   <section id="contacto" class="contact">
