@@ -229,6 +229,28 @@
       display: block;
       margin-top: 0.5rem;
     }
+
+      /* Botón FAQ debajo del título */
+  .cta-faq {
+    margin: 1rem 0;
+  }
+
+  .cta-faq a {
+    display: inline-block;
+    background-color: #facc15; /* amarillo llamativo */
+    color: #111827;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .cta-faq a:hover {
+    background-color: #eab308;
+    transform: translateY(-2px);
+  }
+
   </style>
 </head>
 <body>
@@ -239,6 +261,12 @@
   <header>
     <img src="logo.png" alt="Logo HelpID">
     <h1>HelpID - Seguridad en tu muñeca</h1>
+
+        <!-- 🔹 Botón directo a FAQ -->
+    <div class="cta-faq">
+      <a href="#faq">Ir a Preguntas Frecuentes</a>
+    </div>
+
     <nav>
       <a href="#info">Información</a>
       <a href="#testimonios">Testimonios</a>
