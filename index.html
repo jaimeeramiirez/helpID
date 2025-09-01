@@ -423,14 +423,59 @@
   <section id="contacto" class="contact">
     <h2>Contáctanos</h2>
     <p>
-      Si deseas más información, colaborar con nuestro proyecto o adquirir tu HelpID, no dudes en escribirnos.  
-      Estamos disponibles para responder todas tus preguntas y acompañarte en el proceso de obtener tu pulsera de seguridad.
+      Si deseas más información, colaborar con nuestro proyecto o adquirir tu HelpID, completa el siguiente formulario.  
+      Cuéntanos un poco más sobre ti y tus necesidades para que podamos orientarte mejor y ofrecerte la pulsera o chapa más adecuada.
     </p>
+
     <form action="https://formspree.io/f/xeozyzny" method="POST">
-      <input type="text" name="name" placeholder="Tu nombre" required>
+      
+      <!-- Datos personales -->
+      <h3>Datos personales</h3>
+      <input type="text" name="name" placeholder="Tu nombre completo" required>
       <input type="email" name="email" placeholder="Tu correo electrónico" required>
-      <textarea name="message" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
-      <button type="submit">Enviar</button>
+      <input type="tel" name="phone" placeholder="Tu teléfono de contacto">
+
+      <!-- Tipo de producto -->
+      <h3>Producto de interés</h3>
+      <label>
+        <input type="radio" name="producto" value="Pulsera" required> Pulsera
+      </label>
+      <label>
+        <input type="radio" name="producto" value="Chapa"> Chapa
+      </label>
+      <label>
+        <input type="radio" name="producto" value="Llavero"> Llavero
+      </label>
+
+      <!-- Información para grabado/QR -->
+      <h3>Información a incluir</h3>
+      <input type="text" name="emergency_contact" placeholder="Teléfono de emergencia">
+      <input type="text" name="medical_conditions" placeholder="Condiciones médicas importantes">
+      <input type="text" name="allergies" placeholder="Alergias (si aplica)">
+      <input type="text" name="medications" placeholder="Medicamentos relevantes">
+
+      <!-- Preferencias -->
+      <h3>Preferencias</h3>
+      <select name="color">
+        <option value="">Color preferido</option>
+        <option value="Negro">Negro</option>
+        <option value="Rojo">Rojo</option>
+        <option value="Azul">Azul</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <select name="talla">
+        <option value="">Talla de pulsera</option>
+        <option value="S">S (pequeña)</option>
+        <option value="M">M (mediana)</option>
+        <option value="L">L (grande)</option>
+      </select>
+
+      <!-- Mensaje adicional -->
+      <h3>Mensaje adicional</h3>
+      <textarea name="message" rows="4" placeholder="Cuéntanos cualquier detalle extra..."></textarea>
+
+      <!-- Botón de envío -->
+      <button type="submit">Enviar solicitud</button>
     </form>
   </section>
 
