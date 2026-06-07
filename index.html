@@ -7,12 +7,12 @@
   <title>Faro — Información médica siempre accesible</title>
   <!--
   ════════════════════════════════════════════════
-  FOTOS: crea una carpeta "img/" en tu repositorio
-  y sube tus fotos con estos nombres:
-    img/bracelet-hero.jpg    (foto principal)
-    img/bracelet-roja.jpg
-    img/bracelet-gris.jpg
-    img/bracelet-blanca.jpg
+  ARCHIVOS QUE DEBES SUBIR A LA CARPETA img/ EN GITHUB:
+    img/faro-bracelet.svg        (ilustración animada — foto principal)
+    img/faro-bracelet.png        (ilustración estática blanca — fallback)
+    img/faro-bracelet-roja.png   (variante roja — selector de colores)
+    img/faro-bracelet-gris.png   (variante gris — selector de colores)
+    img/faro-bracelet-azul.png   (variante azul — selector de colores)
   FORMULARIO: registra en formspree.io y pon tu ID
   donde pone TU_ID_AQUI.
   ════════════════════════════════════════════════
@@ -153,7 +153,7 @@
 
     /* ── PRODUCT ── */
     .product__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .product__photo { aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 50%, var(--celeste) 100%); }
+    .product__photo { aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; background: var(--paper); display:flex; align-items:center; justify-content:center; }
     .product__feats { display: flex; flex-direction: column; gap: 32px; }
     .feat { display: flex; gap: 20px; align-items: flex-start; }
     .feat__icon { width: 48px; height: 48px; border-radius: 12px; background: var(--paper); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
@@ -455,7 +455,11 @@
   <div class="container">
     <div class="product__layout">
       <div class="product__photo reveal">
-        <img src="img/bracelet-hero.jpg" alt="Pulsera Faro con QR grabado" onerror="this.style.display='none'">
+        <object type="image/svg+xml" data="img/faro-bracelet.svg"
+          style="width:90%;height:90%;object-fit:contain;"
+          aria-label="Ilustración animada de la pulsera Faro con QR">
+          <img src="img/faro-bracelet.png" alt="Pulsera Faro con QR grabado a láser">
+        </object>
       </div>
       <div class="product__feats">
         <div class="reveal">
@@ -479,11 +483,23 @@
           <div class="feat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
           <div><p class="feat__title">App de gestión — iOS y Android</p><p class="feat__body">La ficha médica se crea y actualiza desde la app Faro. Para instituciones, el personal del centro gestiona todos los perfiles desde un único panel.</p></div>
         </div>
-        <div class="colors__strip reveal" style="transition-delay:.4s">
-          <div class="color-chip"><span class="color-dot" style="background:#e63946"></span>Roja</div>
-          <div class="color-chip"><span class="color-dot" style="background:#9ca3af"></span>Gris</div>
-          <div class="color-chip"><span class="color-dot" style="background:#f3f4f6;border:1px solid #d1d5db"></span>Blanca</div>
-          <div class="color-chip"><span class="color-dot" style="background:#111"></span>Negra</div>
+        <div class="colors__strip reveal" style="transition-delay:.5s">
+          <div class="color-chip" style="flex-direction:column;align-items:center;padding:12px 8px;gap:8px">
+            <img src="img/faro-bracelet-roja.png" alt="Pulsera roja" style="width:56px;height:auto;object-fit:contain">
+            <span>Roja</span>
+          </div>
+          <div class="color-chip" style="flex-direction:column;align-items:center;padding:12px 8px;gap:8px">
+            <img src="img/faro-bracelet-gris.png" alt="Pulsera gris" style="width:56px;height:auto;object-fit:contain">
+            <span>Gris</span>
+          </div>
+          <div class="color-chip" style="flex-direction:column;align-items:center;padding:12px 8px;gap:8px">
+            <img src="img/faro-bracelet.png" alt="Pulsera blanca" style="width:56px;height:auto;object-fit:contain">
+            <span>Blanca</span>
+          </div>
+          <div class="color-chip" style="flex-direction:column;align-items:center;padding:12px 8px;gap:8px">
+            <img src="img/faro-bracelet-azul.png" alt="Pulsera azul" style="width:56px;height:auto;object-fit:contain">
+            <span>Azul</span>
+          </div>
         </div>
       </div>
     </div>
