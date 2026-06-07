@@ -3,607 +3,861 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpID - Seguridad en tu muñeca</title>
+  <meta name="description" content="Faro — La pulsera con QR que habla por ti en una emergencia. Ficha médica accesible en 2 segundos, sin apps, sin barreras.">
+  <title>Faro — Para que nunca te pierdan de vista</title>
+  <!--
+  ════════════════════════════════════════════════════
+  INSTRUCCIONES PARA AÑADIR FOTOS DEL PRODUCTO:
+  1. Crea una carpeta llamada "img" en tu repositorio GitHub.
+  2. Sube tus fotos con estos nombres exactos:
+     - img/bracelet-hero.jpg   (foto principal, preferiblemente la blanca o gris)
+     - img/bracelet-roja.jpg   (pulsera roja)
+     - img/bracelet-gris.jpg   (pulsera gris)
+     - img/bracelet-blanca.jpg (pulsera blanca)
+     - img/variantes.jpg       (foto de las cuatro pulseras juntas)
+  3. Las secciones de foto mostrarán el gradiente azul mientras no
+     haya imagen; cuando subas las fotos aparecerán automáticamente.
+  ════════════════════════════════════════════════════
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #ffffff;
-      color: #111827;
+    /* ═══════════════ TOKENS ═══════════════ */
+    :root {
+      --navy:    #0D2B4A;
+      --blue:    #1A6FAA;
+      --celeste: #38B2D6;
+      --black:   #111111;
+      --paper:   #F0F7FC;
+      --white:   #FFFFFF;
+      --grey:    #6B7A8D;
+      --border:  #D0E3F0;
+
+      --display: 'DM Serif Text', Georgia, serif;
+      --body:    'Figtree', system-ui, sans-serif;
+
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(13,43,74,.12);
     }
 
-    html {
-      scroll-behavior: smooth; /* 🔹 Scroll suave */
-    }
+    /* ═══════════════ RESET ═══════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--body); font-size: 17px; color: var(--black); background: var(--white); overflow-x: hidden; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button, input, textarea, select { font-family: var(--body); }
+    ul { list-style: none; }
 
-    header {
-      background-color: #1e3a8a; /* Azul oscuro */
-      color: white;
-      padding: 1rem 2rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
+    /* ═══════════════ UTILITIES ═══════════════ */
+    .container { width: min(1140px, 100% - 48px); margin-inline: auto; }
+    .section { padding-block: 96px; }
+    .section--dark { background: var(--navy); color: var(--white); }
+    .section--paper { background: var(--paper); }
+    .label { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--celeste); margin-bottom: 12px; }
+    .label--dark { color: var(--celeste); }
 
-    header img {
-      height: 60px;
-      vertical-align: middle;
-      margin-right: 10px;
-    }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    nav {
-      margin-top: 10px;
+    /* ═══════════════ NAV ═══════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 0;
+      background: transparent;
+      transition: background .3s, box-shadow .3s, padding .3s;
     }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-weight: bold;
-      transition: color 0.3s;
+    .nav.scrolled {
+      background: rgba(13,43,74,.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(0,0,0,.2);
+      padding: 14px 0;
     }
-
-    nav a:hover {
-      color: #d1d5db;
+    .nav__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 32px;
     }
-
-    section {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-      scroll-margin-top: 100px; /* 🔹 Ajusta la posición de anclaje (alto del header) */
+    .nav__logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-family: var(--display); font-size: 22px; }
+    .nav__links { display: flex; gap: 32px; }
+    .nav__links a { color: rgba(255,255,255,.8); font-size: 15px; font-weight: 500; transition: color .2s; }
+    .nav__links a:hover { color: var(--white); }
+    .nav__cta {
+      background: var(--celeste); color: var(--white);
+      padding: 10px 22px; border-radius: 8px;
+      font-size: 14px; font-weight: 600;
+      transition: background .2s, transform .2s;
+      white-space: nowrap;
     }
+    .nav__cta:hover { background: #2a9ec5; transform: translateY(-1px); }
+    .nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav__hamburger span { display: block; width: 24px; height: 2px; background: white; margin: 5px 0; transition: .3s; border-radius: 2px; }
+    .nav__mobile { display: none; flex-direction: column; gap: 0; }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a { color: white; padding: 14px 24px; border-top: 1px solid rgba(255,255,255,.1); font-size: 16px; }
 
-    h1, h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-    }
-
-    h2 {
-      font-size: 1.6rem;
-      color: #1e3a8a;
-    }
-
-    /* Accordion */
-    .accordion {
-      border-top: 2px solid #d1d5db;
-    }
-
-    .accordion-item {
-      border-bottom: 2px solid #d1d5db;
-    }
-
-    .accordion-header {
-      background-color: #f9fafb;
-      padding: 1.2rem;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
-      display: flex;
-      justify-content: space-between;
+    /* ═══════════════ HERO ═══════════════ */
+    .hero {
+      min-height: 100dvh;
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-    }
-
-    .accordion-header:hover {
-      background-color: #e5e7eb;
-    }
-
-    .accordion-content {
-      display: none;
-      padding: 1.2rem;
-      background-color: #ffffff;
-      animation: fadeIn 0.5s ease-in-out;
-      line-height: 1.7;
-    }
-
-    .accordion-content img {
-      margin-top: 1rem;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 130px;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    /* Contacto */
-    .contact {
-      background-color: #1e3a8a;
-      color: white;
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-    }
-
-    .contact form {
-      margin-top: 1rem;
-    }
-
-    .contact input, .contact textarea {
-      width: 100%;
-      padding: 0.9rem;
-      margin: 0.6rem 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    .contact button {
-      background-color: #000000;
-      color: #ffffff;
-      padding: 0.9rem 1.8rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .contact button:hover {
-      background-color: #1f2937;
-    }
-
-    footer {
-      background-color: #111827;
-      color: #9ca3af;
-      text-align: center;
-      padding: 1.5rem;
-    }
-
-    /* Logo en secciones */
-    .logo-presente {
-      display: block;
-      margin: 1.5rem auto;
-      width: 100px;
-      opacity: 0.9;
-    }
-
-    /* Testimonios mejorados */
-    #testimonios {
-      background-color: #f9fafb;
-      border-radius: 12px;
-      padding: 3rem 2rem;
-    }
-
-    #testimonios h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #1e3a8a;
-    }
-
-    .testimonios-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .testimonio-card {
-      background: #ffffff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      gap: 48px;
+      padding-top: 96px;
+      padding-bottom: 64px;
       position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
     }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(56,178,214,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero__text { position: relative; }
+    .hero__overline { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--celeste); margin-bottom: 24px; }
+    .hero__overline::before { content: ''; width: 28px; height: 2px; background: var(--celeste); border-radius: 2px; }
+    .hero__h1 { font-family: var(--display); font-size: clamp(40px, 5vw, 68px); line-height: 1.1; color: var(--white); margin-bottom: 24px; }
+    .hero__h1 em { color: var(--celeste); font-style: italic; }
+    .hero__sub { font-size: 18px; line-height: 1.65; color: rgba(255,255,255,.72); margin-bottom: 40px; max-width: 500px; }
+    .hero__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 10px;
+      font-size: 16px; font-weight: 600; cursor: pointer; border: none;
+      transition: all .2s;
+    }
+    .btn--celeste { background: var(--celeste); color: var(--white); }
+    .btn--celeste:hover { background: #2a9ec5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,178,214,.35); }
+    .btn--outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.3); }
+    .btn--outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .btn--navy { background: var(--navy); color: var(--white); }
+    .btn--navy:hover { background: #0f3459; transform: translateY(-2px); }
+    .hero__visual { display: flex; justify-content: center; align-items: center; }
 
-    .testimonio-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    /* Beacon rays animation */
+    @keyframes beam-pulse {
+      0%, 100% { opacity: .35; }
+      50% { opacity: .85; }
     }
+    @keyframes core-glow {
+      0%, 100% { filter: drop-shadow(0 0 6px #38B2D6); }
+      50% { filter: drop-shadow(0 0 18px #38B2D6); }
+    }
+    .beam { animation: beam-pulse 2.4s ease-in-out infinite; }
+    .beam-left  { animation-delay: .6s; }
+    .beam-right { animation-delay: 1.2s; }
+    .hero-disc { animation: core-glow 2.4s ease-in-out infinite; }
 
-    .comillas {
-      font-size: 3rem;
-      color: #1e3a8a;
-      position: absolute;
-      top: 10px;
-      left: 15px;
+    /* ═══════════════ STATS ═══════════════ */
+    .stats { background: var(--navy); border-top: 1px solid rgba(255,255,255,.08); }
+    .stats__grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      divide-x: 1px solid rgba(255,255,255,.1);
+      gap: 0;
     }
-
-    .testimonio-card p {
-      font-style: italic;
-      margin: 1rem 0;
-      line-height: 1.6;
-      color: #111827;
-    }
-
-    .autor {
-      font-weight: bold;
-      color: #1e3a8a;
-      margin-top: 1rem;
-    }
-
-    .mini-logo {
-      width: 40px;
-      display: block;
-      margin-top: 0.5rem;
-    }
-
-    html {
-    scroll-behavior: smooth;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .card {
-      background: #f9fafb;
-      border-radius: 12px;
-      padding: 1.5rem;
+    .stat {
+      padding: 48px 24px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: transform 0.2s;
+      border-left: 1px solid rgba(255,255,255,.1);
     }
-    .card:hover {
-      transform: translateY(-5px);
+    .stat:first-child { border-left: none; }
+    .stat__num { font-family: var(--display); font-size: clamp(36px, 4vw, 54px); color: var(--celeste); line-height: 1; margin-bottom: 8px; }
+    .stat__desc { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.4; }
+
+    /* ═══════════════ HOW IT WORKS ═══════════════ */
+    .how__header { text-align: center; max-width: 600px; margin-inline: auto; margin-bottom: 64px; }
+    .how__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
+    .how__steps::before {
+      content: '';
+      position: absolute; top: 40px; left: calc(16.66% + 20px); right: calc(16.66% + 20px);
+      height: 2px; background: linear-gradient(90deg, var(--celeste), var(--blue));
     }
-    .card.destacado {
-      border: 2px solid #facc15;
-      background: #fffbea;
+    .step { text-align: center; position: relative; }
+    .step__num {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--celeste); color: var(--white);
+      font-family: var(--display); font-size: 28px;
+      display: flex; align-items: center; justify-content: center;
+      margin-inline: auto; margin-bottom: 24px;
+      position: relative; z-index: 1;
+      box-shadow: 0 8px 32px rgba(56,178,214,.35);
+    }
+    .step__title { font-family: var(--display); font-size: 22px; margin-bottom: 12px; color: var(--navy); }
+    .step__body { font-size: 15px; color: var(--grey); line-height: 1.6; }
+
+    /* ═══════════════ H2 SHARED ═══════════════ */
+    h2 { font-family: var(--display); font-size: clamp(32px, 4vw, 48px); line-height: 1.15; color: var(--navy); margin-bottom: 16px; }
+    h2.light { color: var(--white); }
+    .section__sub { font-size: 18px; color: var(--grey); line-height: 1.6; max-width: 560px; }
+    .section__sub.light { color: rgba(255,255,255,.7); }
+
+    /* ═══════════════ PRODUCT ═══════════════ */
+    .product__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .product__photo {
+      aspect-ratio: 4/5;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 50%, var(--celeste) 100%);
+      position: relative;
+    }
+    .product__photo img { border-radius: 20px; }
+    .product__feats { display: flex; flex-direction: column; gap: 32px; }
+    .feat { display: flex; gap: 20px; align-items: flex-start; }
+    .feat__icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--paper); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feat__icon svg { width: 24px; height: 24px; }
+    .feat__title { font-weight: 700; font-size: 17px; margin-bottom: 6px; color: var(--navy); }
+    .feat__body { font-size: 15px; color: var(--grey); line-height: 1.6; }
+
+    .colors__strip { display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap; }
+    .color-chip {
+      flex: 1; min-width: 120px; padding: 16px; border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 14px; font-weight: 600; color: var(--grey);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .color-dot { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
+
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 64px; }
+    .gallery__item {
+      aspect-ratio: 3/4; border-radius: 16px; overflow: hidden;
+      background: linear-gradient(160deg, var(--navy), var(--blue));
+    }
+
+    /* ═══════════════ FOR WHOM ═══════════════ */
+    .whom__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .whom__card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius); padding: 28px;
+      transition: background .2s, transform .2s;
+    }
+    .whom__card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+    .whom__icon { font-size: 32px; margin-bottom: 16px; }
+    .whom__title { font-weight: 700; font-size: 17px; color: var(--white); margin-bottom: 8px; }
+    .whom__body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+    /* ═══════════════ WHY / DIFF ═══════════════ */
+    .diff__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 56px; }
+    .diff__card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .diff__card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .diff__icon { width: 44px; height: 44px; border-radius: 10px; background: var(--paper); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .diff__title { font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 10px; }
+    .diff__body { font-size: 15px; color: var(--grey); line-height: 1.65; }
+
+    /* ═══════════════ PRICING ═══════════════ */
+    .pricing__header { text-align: center; margin-bottom: 56px; }
+    .pricing__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .price-card {
+      border: 2px solid var(--border); border-radius: 20px;
+      padding: 36px 28px; text-align: center;
+      transition: all .2s; position: relative;
+    }
+    .price-card--featured {
+      border-color: var(--celeste);
+      box-shadow: 0 0 0 4px rgba(56,178,214,.12);
+    }
+    .price-card__badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--celeste); color: var(--white);
+      font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 20px;
+    }
+    .price-card:hover { border-color: var(--celeste); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .price-card__label { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--grey); margin-bottom: 8px; }
+    .price-card__price { font-family: var(--display); font-size: 52px; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+    .price-card__price span { font-size: 20px; vertical-align: super; }
+    .price-card__period { font-size: 14px; color: var(--grey); margin-bottom: 24px; }
+    .price-card__items { text-align: left; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
+    .price-item { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+    .price-item::before { content: '✓'; width: 20px; height: 20px; border-radius: 50%; background: var(--celeste); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .free-note { text-align: center; margin-top: 32px; font-size: 14px; color: var(--grey); background: var(--paper); padding: 16px 24px; border-radius: 10px; }
+    .free-note strong { color: var(--navy); }
+
+    /* ═══════════════ STORY ═══════════════ */
+    .story__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story__quote {
+      font-family: var(--display); font-size: 26px; font-style: italic;
+      color: var(--white); line-height: 1.45;
+      border-left: 4px solid var(--celeste); padding-left: 28px;
+      margin-bottom: 32px;
+    }
+    .story__body { font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.75; }
+    .story__sig { margin-top: 28px; font-weight: 600; color: var(--celeste); font-size: 15px; }
+
+    /* ═══════════════ CONTACT ═══════════════ */
+    .contact__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    .contact__info h2 { margin-bottom: 20px; }
+    .contact__info p { color: var(--grey); line-height: 1.7; margin-bottom: 32px; }
+    .contact__detail { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--grey); font-size: 15px; }
+    .contact__detail svg { color: var(--celeste); flex-shrink: 0; }
+
+    .form { display: flex; flex-direction: column; gap: 20px; }
+    .form__group { display: flex; flex-direction: column; gap: 8px; }
+    .form__label { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .form__input, .form__select, .form__textarea {
+      padding: 14px 16px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 16px; font-family: var(--body);
+      color: var(--black); background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .form__input:focus, .form__select:focus, .form__textarea:focus {
+      border-color: var(--celeste); box-shadow: 0 0 0 3px rgba(56,178,214,.15);
+    }
+    .form__textarea { min-height: 120px; resize: vertical; }
+    .form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form__submit {
+      background: var(--navy); color: var(--white);
+      padding: 16px; border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .form__submit:hover { background: #0f3459; transform: translateY(-2px); }
+    .form__note { font-size: 13px; color: var(--grey); text-align: center; margin-top: -8px; }
+
+    /* ═══════════════ FOOTER ═══════════════ */
+    .footer {
+      background: #050f1c; color: rgba(255,255,255,.5);
+      padding: 48px 0; font-size: 14px;
+    }
+    .footer__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer__logo { color: var(--white); font-family: var(--display); font-size: 20px; display: flex; align-items: center; gap: 8px; }
+    .footer__links { display: flex; gap: 24px; }
+    .footer__links a { transition: color .2s; }
+    .footer__links a:hover { color: var(--white); }
+    .footer__copy { width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; margin-top: 8px; }
+
+    /* ═══════════════ RESPONSIVE ═══════════════ */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero__sub { margin-inline: auto; }
+      .hero__actions { justify-content: center; }
+      .hero__visual { display: none; }
+      .stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .how__steps::before { display: none; }
+      .how__steps { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; }
+      .product__layout { grid-template-columns: 1fr; }
+      .whom__grid { grid-template-columns: repeat(2, 1fr); }
+      .diff__grid { grid-template-columns: 1fr; }
+      .pricing__grid { grid-template-columns: 1fr; max-width: 360px; margin-inline: auto; }
+      .story__layout { grid-template-columns: 1fr; }
+      .contact__layout { grid-template-columns: 1fr; }
+      .nav__links { display: none; }
+      .nav__cta.desktop { display: none; }
+      .nav__hamburger { display: block; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+      .whom__grid { grid-template-columns: 1fr; }
+      .form__grid { grid-template-columns: 1fr; }
+      .footer__inner { flex-direction: column; text-align: center; }
+      .section { padding-block: 64px; }
+      .colors__strip { flex-direction: column; }
+      .gallery { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <svg width="28" height="28" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="36" x2="60" y2="6" stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
+          <line x1="47" y1="40" x2="28" y2="22" stroke="#38B2D6" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+          <line x1="73" y1="40" x2="92" y2="22" stroke="#38B2D6" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+          <rect x="4" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
+          <rect x="30" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
+          <circle cx="60" cy="60" r="30" fill="#0D2B4A"/>
+          <circle cx="60" cy="60" r="22" fill="#38B2D6"/>
+          <rect x="54" y="47" width="12" height="12" rx="2" fill="#0D2B4A"/>
+          <rect x="57" y="50" width="6" height="6" rx="1" fill="#38B2D6"/>
+          <rect x="43" y="61" width="12" height="12" rx="2" fill="#0D2B4A"/>
+          <rect x="46" y="64" width="6" height="6" rx="1" fill="#38B2D6"/>
+          <rect x="65" y="61" width="12" height="12" rx="2" fill="#0D2B4A"/>
+          <rect x="68" y="64" width="6" height="6" rx="1" fill="#38B2D6"/>
+          <circle cx="60" cy="60" r="7" fill="white"/>
+          <rect x="68" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
+          <rect x="94" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
+        </svg>
+        Faro
+      </a>
+      <ul class="nav__links">
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#producto">El producto</a></li>
+        <li><a href="#para-quien">Para quién</a></li>
+        <li><a href="#precios">Precios</a></li>
+      </ul>
+      <a href="#contacto" class="nav__cta desktop">Solicitar información</a>
+      <button class="nav__hamburger" aria-label="Menú" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu">
+      <a href="#como-funciona" onclick="toggleMenu()">Cómo funciona</a>
+      <a href="#producto" onclick="toggleMenu()">El producto</a>
+      <a href="#para-quien" onclick="toggleMenu()">Para quién</a>
+      <a href="#precios" onclick="toggleMenu()">Precios</a>
+      <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+    </div>
+  </div>
+</nav>
 
-  
-</body>
-</html>
-
-  <header>
-    <img src="logo.png" alt="Logo HelpID">
-    <h1>HelpID - Seguridad en tu muñeca</h1>
-    <nav>
-      <a href="#info">Información</a>
-      <a href="#testimonios">Testimonios</a>
-      <a href="#faq">Preguntas Frecuentes</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
-
-  <!-- INFO SECCIONES DESPLEGABLES -->
-  <section id="info">
-    <h2>Sobre HelpID</h2>
-    <div class="accordion">
-
-      <!-- ¿Qué es HelpID? -->
-      <div class="accordion-item">
-        <div class="accordion-header">¿Qué es HelpID?</div>
-        <div class="accordion-content">
-          <p>
-            HelpID no es simplemente una pulsera: es un puente entre la vida cotidiana y la seguridad en los momentos más delicados.  
-            Cada unidad está diseñada para actuar como un identificador vital en situaciones de emergencia, ofreciendo a médicos, rescatistas o personas cercanas 
-            acceso inmediato a información médica crítica. Imagina un escenario donde el tiempo es oro: con solo escanear un código QR, se despliega una ficha con tus datos médicos, alergias, medicamentos, antecedentes y contactos directos de familiares.
-          </p>
-          <p>
-            La esencia de HelpID está en su sencillez. No necesita aplicaciones complicadas ni procesos largos. Funciona en cualquier dispositivo con cámara y conexión a internet. 
-            Nuestro compromiso es salvar minutos que pueden marcar la diferencia entre la vida y la muerte.
-          </p>
-          <img src="logo.png" alt="Logo HelpID">
-        </div>
-      </div>
-
-      <!-- Nuestra misión -->
-      <div class="accordion-item">
-        <div class="accordion-header">Nuestra misión</div>
-        <div class="accordion-content">
-          <p>
-            Nuestra misión es clara: democratizar la seguridad personal. Creemos que toda persona, sin importar edad, condición médica o situación económica, merece sentirse protegida y respaldada. 
-            HelpID nace de la convicción de que un pequeño accesorio puede transformar la forma en que enfrentamos las emergencias.  
-          </p>
-          <p>
-            Queremos construir un futuro donde nadie quede indefenso. Personas mayores con enfermedades crónicas, niños en actividades al aire libre, deportistas en competencias o viajeros en el extranjero: todos pueden encontrar en HelpID un aliado fiel.  
-            Nuestra visión va más allá de la tecnología; buscamos crear una red solidaria donde cada pulsera se convierta en un símbolo de cuidado y confianza.
-          </p>
-          <img src="logo.png" alt="Logo HelpID">
-        </div>
-      </div>
-
-      <!-- Historia -->
-      <div class="accordion-item">
-        <div class="accordion-header">Nuestra historia</div>
-        <div class="accordion-content">
-          <p>
-            HelpID nació de una necesidad muy cercana. Mi abuela padece demencia y, como muchas familias, recurrimos a una pulsera de identificación. 
-            Sin embargo, descubrimos que la información que ofrecía era limitada y el costo demasiado alto para muchas personas. 
-            Nos dimos cuenta de que no debía ser un privilegio, sino una herramienta al alcance de todos.
-          </p>
-          <p>
-            Al mismo tiempo, yo sufro episodios de síncope que pueden dejarme inconsciente en cualquier lugar. 
-            En esas situaciones, la rapidez con la que alguien pueda acceder a mis datos médicos o contactar a mis familiares puede marcar la diferencia entre la tranquilidad y la desesperación.  
-          </p>
-          <p>
-            Con esas dos experiencias tan personales nació la idea de HelpID: crear una pulsera práctica, accesible y con la información realmente útil en emergencias. 
-            Hoy, ese impulso se ha convertido en un proyecto que busca brindar seguridad y confianza a miles de personas y sus familias en cualquier parte del mundo.
-          </p>
-          <img src="logo.png" alt="Logo HelpID">
-        </div>
-      </div>
-
-      <!-- Beneficios -->
-      <div class="accordion-item">
-        <div class="accordion-header">Beneficios de usar HelpID</div>
-        <div class="accordion-content">
-          <ul>
-            <li><b>Acceso inmediato:</b> información médica disponible en segundos gracias al QR.</li>
-            <li><b>Tranquilidad familiar:</b> tus seres queridos sabrán que, en caso de accidente, habrá un canal directo de comunicación.</li>
-            <li><b>Durabilidad:</b> materiales resistentes al agua, al sudor y a la fricción diaria.</li>
-            <li><b>Universal:</b> funciona en cualquier smartphone sin necesidad de descargar aplicaciones.</li>
-            <li><b>Versatilidad:</b> diseñado para adultos mayores, niños, personas con enfermedades crónicas y deportistas.</li>
-          </ul>
-          <p>
-            Usar HelpID significa estar un paso adelante frente a lo inesperado. No es solo un accesorio: es una inversión en tu seguridad y la de quienes más quieres.
-          </p>
-          <img src="logo.png" alt="Logo HelpID">
-        </div>
-      </div>
-
-      <!-- Cómo funciona -->
-      <div class="accordion-item">
-        <div class="accordion-header">¿Cómo funciona?</div>
-        <div class="accordion-content">
-          <p>
-            La magia de HelpID radica en su simplicidad tecnológica. Cada pulsera cuenta con un <b>código QR único</b> que enlaza con un perfil seguro en la nube.  
-            Al escanearlo, se accede de inmediato a la información médica que el usuario registró previamente: nombre, alergias, medicación actual, enfermedades crónicas, grupo sanguíneo, datos de contacto y más.  
-          </p>
-          <p>
-            Los datos están protegidos con estándares de seguridad, pero al mismo tiempo son accesibles en segundos para quien lo necesite en una emergencia. 
-            De esta manera, evitamos retrasos en la atención médica y reducimos el riesgo de procedimientos equivocados.
-          </p>
-          <p>
-            HelpID no requiere baterías, actualizaciones constantes ni aplicaciones externas. Su diseño es práctico y funcional, pensado para durar años y ser tu compañero en cada paso de tu vida diaria.
-          </p>
-          <img src="logo.png" alt="Logo HelpID">
-        </div>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container" style="display:contents">
+    <div class="hero__text container" style="width: min(560px, 100% - 48px); padding-left: max(24px, (100% - 1140px)/2);">
+      <p class="hero__overline">Identificación médica de emergencia</p>
+      <h1 class="hero__h1">La pulsera que habla por ti <em>cuando no puedes</em></h1>
+      <p class="hero__sub">Escanea el QR. En dos segundos aparece la ficha médica completa de quien la lleva. Sin apps, sin contraseña, sin cobertura especial. Funciona en cualquier móvil, en cualquier lugar.</p>
+      <div class="hero__actions">
+        <a href="#contacto" class="btn btn--celeste">Solicitar información</a>
+        <a href="#como-funciona" class="btn btn--outline">Ver cómo funciona</a>
       </div>
     </div>
-  </section>
-
-  <!-- TESTIMONIOS -->
-  <section id="testimonios">
-    <h2>Testimonios</h2>
-    <div class="testimonios-grid">
-
-      <!-- Testimonio 1 -->
-      <div class="testimonio-card">
-        <div class="comillas">“</div>
-        <p>
-          Gracias a HelpID mi madre, que padece Alzheimer, recibió atención adecuada cuando se desorientó en la calle. 
-          El personal de salud pudo leer su información médica en segundos y contactarme inmediatamente. Fue un alivio enorme.
-        </p>
-        <div class="autor">– Ana G.</div>
-        <img src="logo.png" alt="Logo HelpID" class="mini-logo">
-      </div>
-
-      <!-- Testimonio 2 -->
-      <div class="testimonio-card">
-        <div class="comillas">“</div>
-        <p>
-          Soy corredor y siempre llevo mi HelpID. Entreno largas distancias y me da tranquilidad saber que, si algo sucede, mis datos y contactos estarán disponibles. 
-          Es ligero, resistente y ya forma parte de mi vida diaria.
-        </p>
-        <div class="autor">– Carlos M.</div>
-        <img src="logo.png" alt="Logo HelpID" class="mini-logo">
-      </div>
-
-      <!-- Testimonio 3 -->
-      <div class="testimonio-card">
-        <div class="comillas">“</div>
-        <p>
-          Trabajo viajando constantemente y a menudo estoy en lugares donde no conozco a nadie. 
-          Con HelpID sé que, si ocurre una emergencia, la información correcta estará disponible para quien me auxilie.
-        </p>
-        <div class="autor">– María L.</div>
-        <img src="logo.png" alt="Logo HelpID" class="mini-logo">
-      </div>
-
-      <!-- Testimonio 4 -->
-      <div class="testimonio-card">
-        <div class="comillas">“</div>
-        <p>
-          Vivo con diabetes y siempre temí que en una crisis nadie supiera cómo ayudarme. 
-          Desde que uso HelpID, me siento más seguro al salir de casa. Ya me asistieron una vez gracias a la pulsera.
-        </p>
-        <div class="autor">– Jorge R.</div>
-        <img src="logo.png" alt="Logo HelpID" class="mini-logo">
-      </div>
-
-      <!-- Testimonio 5 -->
-      <div class="testimonio-card">
-        <div class="comillas">“</div>
-        <p>
-          Mi hijo tiene 7 años y a veces se despista en lugares concurridos. Con HelpID sé que, si se pierde, 
-          cualquier persona puede escanear su pulsera y llamarnos al instante. Nos da una enorme tranquilidad.
-        </p>
-        <div class="autor">– Laura P.</div>
-        <img src="logo.png" alt="Logo HelpID" class="mini-logo">
-      </div>
-
-      <!-- Testimonio 6 -->
-      <div class="testimonio-card">
-        <div class="comillas">“</div>
-        <p>
-          Trabajo como paramédico y puedo asegurar que tener información médica accesible de inmediato cambia todo en una emergencia. 
-          HelpID facilita nuestro trabajo y puede literalmente salvar vidas.
-        </p>
-        <div class="autor">– David S.</div>
-        <img src="logo.png" alt="Logo HelpID" class="mini-logo">
-      </div>
-
+    <div class="hero__visual" style="padding-right: max(24px, (100% - 1140px)/2);">
+      <!-- Gran icono Faro animado -->
+      <svg width="340" height="380" viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Resplandor de fondo -->
+        <ellipse cx="170" cy="200" rx="120" ry="100" fill="url(#glow)" opacity=".18"/>
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#38B2D6"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+        <!-- Rayos -->
+        <line class="beam beam-left"  x1="147" y1="159" x2="96"  y2="88"  stroke="#38B2D6" stroke-width="5" stroke-linecap="round"/>
+        <line class="beam"            x1="170" y1="153" x2="170" y2="72"  stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
+        <line class="beam beam-right" x1="193" y1="159" x2="244" y2="88"  stroke="#38B2D6" stroke-width="5" stroke-linecap="round"/>
+        <!-- Correa izquierda -->
+        <rect x="12"  y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".85"/>
+        <rect x="41"  y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".9"/>
+        <rect x="70"  y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
+        <rect x="99"  y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
+        <!-- Correa derecha -->
+        <rect x="217" y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
+        <rect x="246" y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
+        <rect x="275" y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".9"/>
+        <rect x="304" y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".85"/>
+        <!-- Aro exterior -->
+        <circle class="hero-disc" cx="170" cy="200" r="48" fill="#0C2340"/>
+        <!-- Disco celeste -->
+        <circle cx="170" cy="200" r="36" fill="#38B2D6"/>
+        <!-- Finders QR -->
+        <rect x="157" y="183" width="14" height="14" rx="2.5" fill="#0D2B4A"/>
+        <rect x="160" y="186" width="8"  height="8"  rx="1"   fill="#38B2D6"/>
+        <rect x="142" y="205" width="14" height="14" rx="2.5" fill="#0D2B4A"/>
+        <rect x="145" y="208" width="8"  height="8"  rx="1"   fill="#38B2D6"/>
+        <rect x="184" y="205" width="14" height="14" rx="2.5" fill="#0D2B4A"/>
+        <rect x="187" y="208" width="8"  height="8"  rx="1"   fill="#38B2D6"/>
+        <!-- Datos QR -->
+        <rect x="155" y="204" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".8"/>
+        <rect x="180" y="190" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".8"/>
+        <rect x="163" y="216" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".7"/>
+        <rect x="174" y="216" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".7"/>
+        <!-- Núcleo -->
+        <circle cx="170" cy="200" r="10" fill="white"/>
+        <!-- Tagline bajo el icono -->
+        <text x="170" y="284" text-anchor="middle" font-family="Figtree, system-ui" font-size="15" fill="rgba(255,255,255,.5)" letter-spacing=".04em">PARA QUE NUNCA TE PIERDAN DE VISTA</text>
+      </svg>
     </div>
-  </section>
-
-<!-- FAQ -->
-<section id="faq">
-  <h2>Preguntas frecuentes</h2>
-  <div class="accordion">
-
-    <!-- Pregunta 1 -->
-    <div class="accordion-item">
-      <div class="accordion-header">¿Qué pasa si pierdo mi pulsera?</div>
-      <div class="accordion-content">
-        <p>
-          No te preocupes. Tus datos siguen almacenados de forma segura en la nube. 
-          Solo necesitas adquirir una nueva pulsera o chapa y volver a vincular tu perfil con el nuevo código QR.
-        </p>
-      </div>
-    </div>
-
-    <!-- Pregunta 2 -->
-    <div class="accordion-item">
-      <div class="accordion-header">¿Es seguro compartir mi información médica?</div>
-      <div class="accordion-content">
-        <p>
-          Sí. HelpID almacena únicamente la información que tú decides compartir y 
-          la protege mediante protocolos de seguridad. 
-          Solo puede acceder a ella quien escanee tu código QR en caso de emergencia.
-        </p>
-      </div>
-    </div>
-
-    <!-- Pregunta 3 -->
-    <div class="accordion-item">
-      <div class="accordion-header">¿Necesito una aplicación para usar HelpID?</div>
-      <div class="accordion-content">
-        <p>
-          No. HelpID funciona en cualquier dispositivo con cámara y conexión a internet. 
-          No requiere descargas ni instalaciones adicionales.
-        </p>
-      </div>
-    </div>
-
-    <!-- Pregunta 4 -->
-    <div class="accordion-item">
-      <div class="accordion-header">¿Qué información puedo incluir en mi perfil?</div>
-      <div class="accordion-content">
-        <p>
-          Puedes registrar tus datos básicos, condiciones médicas, alergias, 
-          medicamentos y contactos de emergencia. Tú decides qué mostrar y qué no.
-        </p>
-      </div>
-    </div>
-
-    <!-- Pregunta 5 -->
-    <div class="accordion-item">
-      <div class="accordion-header">¿La pulsera tiene caducidad?</div>
-      <div class="accordion-content">
-        <p>
-          No. HelpID está fabricada con materiales resistentes al agua y al uso diario, 
-          diseñada para durar años. Puedes actualizar tu información en cualquier momento.
-        </p>
-      </div>
-    </div>
-
   </div>
 </section>
 
-  <!-- PRECIOS -->
-  <section id="precios">
-    <h2>Planes y Precios</h2>
-    <div class="pricing-grid">
-      <div class="card">
-        <h3>Básico</h3>
-        <p>1 pulsera QR</p>
-        <p><strong>S/. 15</strong></p>
+<!-- ═══ STATS ═══ -->
+<div class="stats">
+  <div class="container">
+    <div class="stats__grid">
+      <div class="stat reveal">
+        <div class="stat__num" data-target="800000" data-prefix="+">+800.000</div>
+        <div class="stat__desc">personas con Alzheimer en España hoy<br><small style="font-size:11px;opacity:.5">(Sociedad Española de Neurología)</small></div>
       </div>
-      <div class="card">
-        <h3>Pareja</h3>
-        <p>2 pulseras QR</p>
-        <p><strong>S/. 25</strong></p>
+      <div class="stat reveal" style="transition-delay:.1s">
+        <div class="stat__num">×2</div>
+        <div class="stat__desc">casos de demencia estimados en 2050 respecto a hoy</div>
       </div>
-      <div class="card">
-        <h3>Familiar</h3>
-        <p>4 pulseras QR</p>
-        <p><strong>S/. 45</strong></p>
+      <div class="stat reveal" style="transition-delay:.2s">
+        <div class="stat__num">35%</div>
+        <div class="stat__desc">de los casos de demencia todavía sin diagnosticar</div>
+      </div>
+      <div class="stat reveal" style="transition-delay:.3s">
+        <div class="stat__num">2 seg</div>
+        <div class="stat__desc">es todo lo que tarda en abrirse la ficha médica al escanear</div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- CONTACTO -->
-  <section id="contacto" class="contact">
-    <h2>Contáctanos</h2>
-    <p>
-      Si deseas más información, colaborar con nuestro proyecto o adquirir tu HelpID, completa el siguiente formulario.  
-      Cuéntanos un poco más sobre ti y tus necesidades para que podamos orientarte mejor y ofrecerte la pulsera o chapa más adecuada.
+<!-- ═══ CÓMO FUNCIONA ═══ -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="how__header reveal">
+      <p class="label">Tan simple que funciona en una emergencia</p>
+      <h2>Tres pasos. Sin apps. Sin barreras.</h2>
+      <p class="section__sub" style="margin-inline:auto">Cualquier persona con un móvil puede acceder a la información médica de quien lleva la pulsera, incluso sin saber qué es Faro.</p>
+    </div>
+    <div class="how__steps">
+      <div class="step reveal">
+        <div class="step__num">1</div>
+        <h3 class="step__title">Llevas la pulsera</h3>
+        <p class="step__body">La correa 3D impresa lleva en el centro una chapa grabada a láser con un QR único. Se lleva siempre puesta, como un reloj.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.15s">
+        <div class="step__num">2</div>
+        <h3 class="step__title">Alguien escanea el QR</h3>
+        <p class="step__body">Con cualquier cámara de móvil. Sin instalar nada, sin abrir ninguna app. Un escaneo de dos segundos.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.3s">
+        <div class="step__num">3</div>
+        <h3 class="step__title">Aparece la ficha médica</h3>
+        <p class="step__body">Quién es, qué condiciones tiene, qué medicación toma, a quién llamar. La información que salva vidas, justo cuando más importa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EL PRODUCTO ═══ -->
+<section class="section section--paper" id="producto">
+  <div class="container">
+    <div class="product__layout">
+      <div class="product__photo reveal">
+        <!-- Reemplaza este div con tu foto: añade img/bracelet-hero.jpg -->
+        <img src="img/bracelet-hero.jpg" alt="Pulsera Faro con chapa QR grabada a láser" onerror="this.style.display='none'">
+      </div>
+      <div class="product__feats">
+        <div class="reveal">
+          <p class="label">El producto</p>
+          <h2>Diseñada para llevarla siempre</h2>
+          <p class="section__sub">Un wearable que combina la personalización del diseño 3D con la permanencia del grabado láser y la flexibilidad de una plataforma digital.</p>
+        </div>
+        <div class="feat reveal" style="transition-delay:.1s">
+          <div class="feat__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/>
+            </svg>
+          </div>
+          <div>
+            <p class="feat__title">Correa impresa en 3D</p>
+            <p class="feat__body">Fabricada por encargo con diseño de eslabones, en varios colores. Ajustable, resistente al agua y al uso diario.</p>
+          </div>
+        </div>
+        <div class="feat reveal" style="transition-delay:.2s">
+          <div class="feat__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="feat__title">Chapa grabada a láser</p>
+            <p class="feat__body">El QR se graba de forma permanente en la chapa central. Una vez grabado, nunca cambia aunque actualices tus datos.</p>
+          </div>
+        </div>
+        <div class="feat reveal" style="transition-delay:.3s">
+          <div class="feat__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="feat__title">Ficha editable online</p>
+            <p class="feat__body">Cambia la medicación, añade un diagnóstico, actualiza un contacto. El QR sigue funcionando siempre, sin tocar la pulsera.</p>
+          </div>
+        </div>
+
+        <div class="colors__strip reveal" style="transition-delay:.4s">
+          <div class="color-chip"><span class="color-dot" style="background:#e63946"></span>Roja</div>
+          <div class="color-chip"><span class="color-dot" style="background:#9ca3af"></span>Gris</div>
+          <div class="color-chip"><span class="color-dot" style="background:#f3f4f6;border:1px solid #d1d5db"></span>Blanca</div>
+          <div class="color-chip"><span class="color-dot" style="background:#111"></span>Negra</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Galería de variantes -->
+    <div class="gallery">
+      <div class="gallery__item reveal"><img src="img/bracelet-roja.jpg"   alt="Pulsera Faro roja"   onerror="this.style.display='none'"></div>
+      <div class="gallery__item reveal" style="transition-delay:.1s"><img src="img/bracelet-gris.jpg"   alt="Pulsera Faro gris"   onerror="this.style.display='none'"></div>
+      <div class="gallery__item reveal" style="transition-delay:.2s"><img src="img/bracelet-blanca.jpg" alt="Pulsera Faro blanca" onerror="this.style.display='none'"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PARA QUIÉN ═══ -->
+<section class="section section--dark" id="para-quien">
+  <div class="container">
+    <p class="label label--dark reveal">Para quién</p>
+    <h2 class="light reveal">Todos los que merecen estar protegidos</h2>
+    <p class="section__sub light reveal">Faro protege a cualquier persona que, en un momento crítico, no pueda comunicarse por sí misma.</p>
+    <div class="whom__grid">
+      <div class="whom__card reveal">
+        <div class="whom__icon">🧠</div>
+        <h3 class="whom__title">Alzheimer y demencia</h3>
+        <p class="whom__body">Personas que se desorientan o se pierden. Quien las encuentre sabe en segundos quiénes son y a quién llamar.</p>
+      </div>
+      <div class="whom__card reveal" style="transition-delay:.1s">
+        <div class="whom__icon">🧩</div>
+        <h3 class="whom__title">TEA (Autismo)</h3>
+        <p class="whom__body">Niños y adultos con autismo que no hablan o tienen una crisis en un lugar público. La pulsera habla por ellos.</p>
+      </div>
+      <div class="whom__card reveal" style="transition-delay:.2s">
+        <div class="whom__icon">⚡</div>
+        <h3 class="whom__title">Epilepsia</h3>
+        <p class="whom__body">Al perder el conocimiento, quien auxilia necesita saber que no debe moverlos y qué medicación toman.</p>
+      </div>
+      <div class="whom__card reveal" style="transition-delay:.3s">
+        <div class="whom__icon">💉</div>
+        <h3 class="whom__title">Diabetes tipo 1</h3>
+        <p class="whom__body">Los episodios hipoglucémicos se confunden con intoxicación. La ficha médica evita intervenciones erróneas.</p>
+      </div>
+      <div class="whom__card reveal" style="transition-delay:.4s">
+        <div class="whom__icon">🏃</div>
+        <h3 class="whom__title">Deportistas</h3>
+        <p class="whom__body">Corredores, ciclistas, triatletas. En competición o entrenamiento, siempre identificados en caso de accidente.</p>
+      </div>
+      <div class="whom__card reveal" style="transition-delay:.5s">
+        <div class="whom__icon">🏠</div>
+        <h3 class="whom__title">Residencias y centros</h3>
+        <p class="whom__body">Gestión de toda la plantilla de residentes con una sola plataforma. Canal institucional con precio de lote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POR QUÉ FARO ═══ -->
+<section class="section" id="por-que-faro">
+  <div class="container">
+    <div style="max-width:600px; margin-bottom:56px;" class="reveal">
+      <p class="label">Por qué Faro</p>
+      <h2>Lo que nos diferencia</h2>
+      <p class="section__sub">Existen pulseras identificativas. Faro va más allá: diseño que da gusto llevar, tecnología que nunca caduca y protección de datos real.</p>
+    </div>
+    <div class="diff__grid">
+      <div class="diff__card reveal">
+        <div class="diff__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="diff__title">QR atemporal: se graba una vez, funciona siempre</h3>
+        <p class="diff__body">El código gravado en la chapa no contiene los datos, solo apunta a una dirección fija en internet. Si cambia la medicación o un contacto, actualizas la ficha online. La pulsera no cambia nunca.</p>
+      </div>
+      <div class="diff__card reveal" style="transition-delay:.1s">
+        <div class="diff__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+        </div>
+        <h3 class="diff__title">RGPD desde el diseño</h3>
+        <p class="diff__body">Los datos de salud son la categoría más protegida por la ley europea. Faro aplica base legal de interés vital, mínimos datos, alojamiento en la UE y derecho a actualizar o borrar en cualquier momento.</p>
+      </div>
+      <div class="diff__card reveal" style="transition-delay:.2s">
+        <div class="diff__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+          </svg>
+        </div>
+        <h3 class="diff__title">Sin apps, sin registro, sin barreras</h3>
+        <p class="diff__body">Quien encuentra a la persona en la calle no necesita descargarse nada ni saber nada. Cualquier cámara de móvil escanea el QR y abre la ficha en el navegador.</p>
+      </div>
+      <div class="diff__card reveal" style="transition-delay:.3s">
+        <div class="diff__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="diff__title">Diseño que da gusto llevar</h3>
+        <p class="diff__body">La pulsera que no se lleva puesta no protege a nadie. El diseño de eslabones 3D en varios colores es un accesorio que la gente elige llevar, no solo una etiqueta médica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRECIOS ═══ -->
+<section class="section section--paper" id="precios">
+  <div class="container">
+    <div class="pricing__header reveal">
+      <p class="label">Precios</p>
+      <h2>Sencillo y sin sorpresas</h2>
+      <p class="section__sub" style="margin-inline:auto">Pagas el objeto físico. La ficha médica básica es siempre gratuita.</p>
+    </div>
+    <div class="pricing__grid">
+      <div class="price-card reveal">
+        <p class="price-card__label">Pulsera</p>
+        <p class="price-card__price"><span>€</span>15</p>
+        <p class="price-card__period">pago único</p>
+        <ul class="price-card__items">
+          <li class="price-item">Correa 3D impresa</li>
+          <li class="price-item">Chapa con QR grabado a láser</li>
+          <li class="price-item">Ficha médica online incluida</li>
+          <li class="price-item">Actualizable de por vida</li>
+        </ul>
+        <a href="#contacto" class="btn btn--navy" style="width:100%;justify-content:center">Solicitar</a>
+      </div>
+      <div class="price-card price-card--featured reveal" style="transition-delay:.1s">
+        <div class="price-card__badge">Más popular</div>
+        <p class="price-card__label">Pack familiar</p>
+        <p class="price-card__price"><span>€</span>45</p>
+        <p class="price-card__period">3 pulseras completas</p>
+        <ul class="price-card__items">
+          <li class="price-item">3 pulseras con QR</li>
+          <li class="price-item">3 fichas médicas individuales</li>
+          <li class="price-item">Colores a elegir</li>
+          <li class="price-item">Gestión independiente de cada ficha</li>
+        </ul>
+        <a href="#contacto" class="btn btn--celeste" style="width:100%;justify-content:center">Solicitar</a>
+      </div>
+      <div class="price-card reveal" style="transition-delay:.2s">
+        <p class="price-card__label">Solo chapa</p>
+        <p class="price-card__price"><span>€</span>10</p>
+        <p class="price-card__period">pago único</p>
+        <ul class="price-card__items">
+          <li class="price-item">Chapa QR grabada a láser</li>
+          <li class="price-item">Compatible con cualquier pulsera</li>
+          <li class="price-item">Ficha médica online incluida</li>
+          <li class="price-item">Actualizable de por vida</li>
+        </ul>
+        <a href="#contacto" class="btn btn--navy" style="width:100%;justify-content:center">Solicitar</a>
+      </div>
+    </div>
+    <p class="free-note reveal" style="margin-top:32px">
+      <strong>¿Residencias o asociaciones?</strong> Tenemos precios especiales para lotes institucionales. Escríbenos y lo hablamos.
     </p>
+  </div>
+</section>
 
-    <form action="https://formspree.io/f/xeozyzny" method="POST">
-      
-      <!-- Datos personales -->
-      <h3>Datos personales</h3>
-      <input type="text" name="name" placeholder="Tu nombre completo" required>
-      <input type="email" name="email" placeholder="Tu correo electrónico" required>
-      <input type="tel" name="phone" placeholder="Tu teléfono de contacto">
+<!-- ═══ HISTORIA ═══ -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="story__layout">
+      <div class="reveal">
+        <p class="label label--dark">Por qué existe Faro</p>
+        <blockquote class="story__quote">"Mi abuela tiene demencia. Yo sufro síncopes. Faro nació de ahí."</blockquote>
+        <p class="story__body">Cuando mi abuela empezó a desorientarse en la calle, buscamos una solución. Lo que encontramos era caro, genérico o no se actualizaba. Al mismo tiempo, yo sé lo que es perder el conocimiento en un lugar desconocido y depender de que alguien sepa qué hacer.</p>
+        <p class="story__body" style="margin-top:16px">Faro no nació en un hackathon. Nació de una necesidad familiar muy concreta. Eso es lo que le da sentido — y lo que nos obliga a hacerlo bien.</p>
+        <p class="story__sig">— Jaime, fundador de Faro</p>
+      </div>
+      <div class="reveal" style="transition-delay:.2s; display:flex; flex-direction:column; gap:20px;">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;">
+          <p style="font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:16px;">"Gracias a la pulsera, el equipo de urgencias supo en segundos que mi madre tiene Alzheimer y a quién llamar. Fue un alivio enorme."</p>
+          <p style="font-size:14px;color:var(--celeste);font-weight:600;">— Ana G., cuidadora</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;">
+          <p style="font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:16px;">"Soy paramédico. Tener acceso inmediato a la información médica cambia todo en una emergencia. Faro facilita nuestro trabajo y puede salvar vidas."</p>
+          <p style="font-size:14px;color:var(--celeste);font-weight:600;">— David S., paramédico</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Tipo de producto -->
-      <h3>Producto de interés</h3>
-      <label>
-        <input type="radio" name="producto" value="Pulsera" required> Pulsera
-      </label>
-      <label>
-        <input type="radio" name="producto" value="Chapa"> Chapa
-      </label>
+<!-- ═══ CONTACTO ═══ -->
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="contact__layout">
+      <div class="reveal">
+        <p class="label">Contacto</p>
+        <h2>¿Hablamos?</h2>
+        <p class="contact__info p" style="color:var(--grey);line-height:1.7;margin:16px 0 32px">Si quieres pedir una pulsera, preguntar por precios institucionales o simplemente saber más, escríbenos. Respondemos en 24 horas.</p>
+        <div class="contact__detail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hola@faro.es
+        </div>
+        <div class="contact__detail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Madrid, España
+        </div>
+        <div style="margin-top:40px;padding:20px;background:var(--paper);border-radius:12px;font-size:14px;color:var(--grey);line-height:1.6;">
+          🔒 <strong style="color:var(--navy)">RGPD:</strong> Los datos que nos envíes se usan únicamente para responder a tu consulta. No los cedemos a terceros ni enviamos publicidad. Puedes ejercer tus derechos de acceso y borrado en cualquier momento.
+        </div>
+      </div>
+      <form class="form reveal" style="transition-delay:.15s" action="https://formspree.io/f/TU_ID_AQUI" method="POST">
+        <!-- Sustituye TU_ID_AQUI por tu ID de Formspree: https://formspree.io -->
+        <div class="form__grid">
+          <div class="form__group">
+            <label class="form__label" for="nombre">Nombre</label>
+            <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="email">Correo electrónico</label>
+            <input class="form__input" type="email" id="email" name="email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="interes">¿Qué te interesa?</label>
+          <select class="form__select" id="interes" name="interes">
+            <option value="">Selecciona una opción</option>
+            <option>Pulsera individual (15 €)</option>
+            <option>Pack familiar (45 €)</option>
+            <option>Solo chapa (10 €)</option>
+            <option>Precio institucional (residencia / asociación)</option>
+            <option>Solo tengo una pregunta</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="mensaje">Mensaje</label>
+          <textarea class="form__textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas..."></textarea>
+        </div>
+        <button type="submit" class="form__submit">Enviar mensaje →</button>
+        <p class="form__note">Sin spam. Sin venta de datos. Solo te respondemos nosotros.</p>
+      </form>
+    </div>
+  </div>
+</section>
 
-      <!-- Información para grabado/QR -->
-      <h3>Información a incluir</h3>
-      <input type="text" name="emergency_contact" placeholder="Teléfono de emergencia">
-      <input type="text" name="medical_conditions" placeholder="Condiciones médicas importantes">
-      <input type="text" name="allergies" placeholder="Alergias (si aplica)">
-      <input type="text" name="medications" placeholder="Medicamentos relevantes">
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__logo">
+        <svg width="22" height="22" viewBox="0 0 120 120" fill="none">
+          <line x1="60" y1="36" x2="60" y2="6" stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="60" cy="60" r="30" fill="#0D2B4A"/>
+          <circle cx="60" cy="60" r="22" fill="#38B2D6"/>
+          <circle cx="60" cy="60" r="7" fill="white"/>
+        </svg>
+        Faro
+      </span>
+      <nav class="footer__links">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <p class="footer__copy">© 2025 Faro · Madrid, España · Todos los derechos reservados · Privacidad y RGPD</p>
+    </div>
+  </div>
+</footer>
 
-      <!-- Preferencias -->
-      <h3>Preferencias</h3>
-      <select name="color">
-        <option value="">Color preferido</option>
-        <option value="Negro">Negro</option>
-        <option value="Rojo">Rojo</option>
-        <option value="Azul">Azul</option>
-        <option value="Dorado">Dorado</option>  
-        <option value="Otro">Otro</option>
-      </select>
-      <select name="talla">
-        <option value="">Talla de pulsera</option>
-        <option value="S">S (pequeña)</option>
-        <option value="M">M (mediana)</option>
-        <option value="L">L (grande)</option>
-      </select>
+<script>
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
 
-      <!-- Mensaje adicional -->
-      <h3>Mensaje adicional</h3>
-      <textarea name="message" rows="4" placeholder="Cuéntanos cualquier detalle extra..."></textarea>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
 
-      <!-- Botón de envío -->
-      <button type="submit">Enviar solicitud</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 HelpID - Todos los derechos reservados</p>
-    <img src="logo.png" alt="Logo HelpID" class="logo-presente">
-  </footer>
-
-  <script>
-    const headers = document.querySelectorAll(".accordion-header");
-    headers.forEach(header => {
-      header.addEventListener("click", () => {
-        const content = header.nextElementSibling;
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
-    });
-  </script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
