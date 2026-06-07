@@ -1,1 +1,279 @@
+<svg width="480" height="820" viewBox="0 0 480 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+  .bracelet { animation: float 4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+  .glow-ring { animation: glow-p 2.5s ease-in-out infinite; }
+  @keyframes glow-p { 0%,100%{opacity:.07} 50%{opacity:.28} }
+  .ray-c { animation: ray-a 2.5s ease-in-out infinite; }
+  .ray-l { animation: ray-a 2.5s ease-in-out infinite; animation-delay:.7s; }
+  .ray-r { animation: ray-a 2.5s ease-in-out infinite; animation-delay:1.3s; }
+  @keyframes ray-a { 0%,100%{opacity:.2} 50%{opacity:.92} }
+  .core  { animation: core-g 2.5s ease-in-out infinite; }
+  @keyframes core-g { 0%,100%{filter:drop-shadow(0 0 5px #38B2D6)} 50%{filter:drop-shadow(0 0 18px #38B2D6)} }
+  .scan  { animation: scan-a 3.2s ease-in-out infinite; }
+  @keyframes scan-a { 0%{transform:translateY(-30px);opacity:0} 10%{opacity:.6} 90%{opacity:.6} 100%{transform:translateY(30px);opacity:0} }
+</style>
+<defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#FFFFFF"/>
+    <stop offset="100%" stop-color="#D4E4F4"/>
+  </linearGradient>
+  <linearGradient id="lgd" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#FAFAFF"/>
+    <stop offset="100%" stop-color="#C4D4E8"/>
+  </linearGradient>
+  <linearGradient id="case-g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#1A3C64"/>
+    <stop offset="100%" stop-color="#061422"/>
+  </linearGradient>
+  <linearGradient id="disc-g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%"   stop-color="#4EC8E8"/>
+    <stop offset="100%" stop-color="#2490B8"/>
+  </linearGradient>
+  <radialGradient id="glow-bg" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#38B2D6" stop-opacity="1"/>
+    <stop offset="100%" stop-color="#38B2D6" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="sf" x="-20%" y="-10%" width="140%" height="130%">
+    <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0D2B4A" flood-opacity="0.22"/>
+  </filter>
+  <filter id="cf" x="-25%" y="-25%" width="150%" height="150%">
+    <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#0A1E36" flood-opacity="0.5"/>
+  </filter>
+  <clipPath id="disc-clip">
+    <circle cx="240" cy="395" r="46"/>
+  </clipPath>
+</defs>
 
+<!-- ──────────── ALL ELEMENTS FLOAT TOGETHER ──────────── -->
+<g class="bracelet">
+
+<!-- AMBIENT GLOW RING BEHIND DISC -->
+<ellipse class="glow-ring" cx="240" cy="395" rx="110" ry="90" fill="url(#glow-bg)"/>
+
+<!-- ──── LIGHT RAYS (above disc) ──── -->
+<line class="ray-c" x1="240" y1="348" x2="240" y2="305" stroke="#38B2D6" stroke-width="4" stroke-linecap="round"/>
+<line class="ray-l" x1="221" y1="358" x2="198" y2="328" stroke="#38B2D6" stroke-width="2.8" stroke-linecap="round"/>
+<line class="ray-r" x1="259" y1="358" x2="282" y2="328" stroke="#38B2D6" stroke-width="2.8" stroke-linecap="round"/>
+
+<!-- ──── TOP STRAP CAP ──── -->
+<rect x="219" y="55" width="42" height="15" rx="7.5" fill="url(#lgd)" stroke="#B8CCD8" stroke-width="0.8" filter="url(#sf)"/>
+
+<!-- ──── TOP STRAP LINKS (8 links, bottom-up) ──── -->
+<!-- Each link: body 44×28 + 4 tabs 8×11 -->
+<!-- link at Y -->
+<!-- y positions: 70,103,136,169,202,235,268,301 -->
+
+<!-- Helper macro (drawn as repeated blocks) -->
+<!-- Link Y=301 -->
+<g filter="url(#sf)">
+  <rect x="218" y="301" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="303" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="317" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="303" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="317" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="303" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=268 -->
+<g filter="url(#sf)">
+  <rect x="218" y="268" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="270" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="284" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="270" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="284" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="270" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=235 -->
+<g filter="url(#sf)">
+  <rect x="218" y="235" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="237" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="251" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="237" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="251" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="237" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=202 -->
+<g filter="url(#sf)">
+  <rect x="218" y="202" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="204" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="218" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="204" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="218" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="204" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=169 -->
+<g filter="url(#sf)">
+  <rect x="218" y="169" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="171" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="185" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="171" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="185" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="171" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=136 -->
+<g filter="url(#sf)">
+  <rect x="218" y="136" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="138" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="152" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="138" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="152" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="138" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=103 -->
+<g filter="url(#sf)">
+  <rect x="218" y="103" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="105" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="119" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="105" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="119" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="105" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=70 -->
+<g filter="url(#sf)">
+  <rect x="218" y="70" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="72" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="86" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="72" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="86" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="72" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+
+<!-- ──── CASE HOUSING ──── -->
+<circle cx="240" cy="395" r="66" fill="url(#case-g)" filter="url(#cf)"/>
+<!-- Case rim highlight -->
+<circle cx="240" cy="395" r="66" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+<!-- Case inner bevelled edge -->
+<circle cx="240" cy="395" r="62" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1"/>
+
+<!-- Lug top -->
+<rect x="224" y="329" width="32" height="10" rx="4" fill="url(#case-g)"/>
+<!-- Lug bottom -->
+<rect x="224" y="456" width="32" height="10" rx="4" fill="url(#case-g)"/>
+
+<!-- ──── QR DISC ──── -->
+<circle cx="240" cy="395" r="50" fill="url(#disc-g)"/>
+<!-- Disc inner shadow ring -->
+<circle cx="240" cy="395" r="50" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="2.5"/>
+<!-- Disc surface highlight -->
+<ellipse cx="232" cy="378" rx="18" ry="12" fill="rgba(255,255,255,0.15)" transform="rotate(-15,232,378)"/>
+
+<!-- QR PATTERN (Faro icon adapted) -->
+<g clip-path="url(#disc-clip)" fill="#0D2B4A">
+  <!-- Finder top center -->
+  <rect x="232" y="374" width="16" height="16" rx="3"/>
+  <rect x="235" y="377" width="10" height="10" rx="1.5" fill="#38B2D6"/>
+  <rect x="238" y="380" width="4" height="4" rx="0.8" fill="#0D2B4A"/>
+  <!-- Finder lower-left -->
+  <rect x="218" y="400" width="16" height="16" rx="3"/>
+  <rect x="221" y="403" width="10" height="10" rx="1.5" fill="#38B2D6"/>
+  <rect x="224" y="406" width="4" height="4" rx="0.8" fill="#0D2B4A"/>
+  <!-- Finder lower-right -->
+  <rect x="246" y="400" width="16" height="16" rx="3"/>
+  <rect x="249" y="403" width="10" height="10" rx="1.5" fill="#38B2D6"/>
+  <rect x="252" y="406" width="4" height="4" rx="0.8" fill="#0D2B4A"/>
+  <!-- Data modules -->
+  <rect x="226" y="392" width="5" height="5" rx="1"/>
+  <rect x="249" y="383" width="5" height="5" rx="1"/>
+  <rect x="225" y="410" width="4" height="4" rx="1" opacity="0.7"/>
+  <rect x="246" y="395" width="4" height="4" rx="1" opacity="0.7"/>
+  <rect x="238" y="413" width="4" height="4" rx="1" opacity="0.6"/>
+  <rect x="228" y="399" width="3" height="3" rx="0.8" opacity="0.5"/>
+</g>
+
+<!-- SCAN LINE (animated) -->
+<g class="scan" clip-path="url(#disc-clip)">
+  <rect x="192" y="393" width="96" height="4" rx="2" fill="url(#scan-line)"/>
+</g>
+<defs>
+  <linearGradient id="scan-line" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#38B2D6" stop-opacity="0"/>
+    <stop offset="30%"  stop-color="#38B2D6" stop-opacity="0.9"/>
+    <stop offset="70%"  stop-color="#38B2D6" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#38B2D6" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+
+<!-- WHITE CORE (the "eye" / faro focal point) -->
+<circle class="core" cx="240" cy="395" r="8" fill="white"/>
+<circle cx="240" cy="395" r="4" fill="#38B2D6" opacity="0.5"/>
+
+<!-- ──── BOTTOM STRAP LINKS (8 links) ──── -->
+<!-- y positions: 466,499,532,565,598,631,664,697 -->
+<!-- Link Y=466 -->
+<g filter="url(#sf)">
+  <rect x="218" y="466" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="468" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="482" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="468" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="482" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="468" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=499 -->
+<g filter="url(#sf)">
+  <rect x="218" y="499" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="501" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="515" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="501" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="515" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="501" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=532 -->
+<g filter="url(#sf)">
+  <rect x="218" y="532" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="534" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="548" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="534" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="548" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="534" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=565 -->
+<g filter="url(#sf)">
+  <rect x="218" y="565" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="567" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="581" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="567" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="581" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="567" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=598 -->
+<g filter="url(#sf)">
+  <rect x="218" y="598" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="600" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="614" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="600" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="614" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="600" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=631 -->
+<g filter="url(#sf)">
+  <rect x="218" y="631" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="633" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="647" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="633" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="647" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="633" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=664 -->
+<g filter="url(#sf)">
+  <rect x="218" y="664" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="666" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="680" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="666" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="680" width="8" height="10" rx="2.5" fill="url(#lgd)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="666" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+<!-- Link Y=697 -->
+<g filter="url(#sf)">
+  <rect x="218" y="697" width="44" height="28" rx="6" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="699" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="210" y="713" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="699" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="262" y="713" width="8" height="10" rx="2.5" fill="url(#lg)" stroke="#BED0DE" stroke-width="0.7"/>
+  <rect x="220" y="699" width="40" height="9" rx="4" fill="rgba(255,255,255,0.38)"/>
+</g>
+
+<!-- ──── BOTTOM STRAP CAP ──── -->
+<rect x="219" y="725" width="42" height="15" rx="7.5" fill="url(#lgd)" stroke="#B8CCD8" stroke-width="0.8" filter="url(#sf)"/>
+
+</g><!-- end .bracelet -->
+</svg>
