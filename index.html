@@ -3,27 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Faro — La pulsera con QR que habla por ti en una emergencia. Ficha médica accesible en 2 segundos, sin apps, sin barreras.">
-  <title>Faro — Para que nunca te pierdan de vista</title>
+  <meta name="description" content="Faro — Historial médico de emergencia siempre en la muñeca. Para hospitales, residencias y uso personal. Un escaneo, toda la información.">
+  <title>Faro — Información médica siempre accesible</title>
   <!--
-  ════════════════════════════════════════════════════
-  INSTRUCCIONES PARA AÑADIR FOTOS DEL PRODUCTO:
-  1. Crea una carpeta llamada "img" en tu repositorio GitHub.
-  2. Sube tus fotos con estos nombres exactos:
-     - img/bracelet-hero.jpg   (foto principal, preferiblemente la blanca o gris)
-     - img/bracelet-roja.jpg   (pulsera roja)
-     - img/bracelet-gris.jpg   (pulsera gris)
-     - img/bracelet-blanca.jpg (pulsera blanca)
-     - img/variantes.jpg       (foto de las cuatro pulseras juntas)
-  3. Las secciones de foto mostrarán el gradiente azul mientras no
-     haya imagen; cuando subas las fotos aparecerán automáticamente.
-  ════════════════════════════════════════════════════
+  ════════════════════════════════════════════════
+  FOTOS: crea una carpeta "img/" en tu repositorio
+  y sube tus fotos con estos nombres:
+    img/bracelet-hero.jpg    (foto principal)
+    img/bracelet-roja.jpg
+    img/bracelet-gris.jpg
+    img/bracelet-blanca.jpg
+  FORMULARIO: registra en formspree.io y pon tu ID
+  donde pone TU_ID_AQUI.
+  ════════════════════════════════════════════════
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════ TOKENS ═══════════════ */
     :root {
       --navy:    #0D2B4A;
       --blue:    #1A6FAA;
@@ -33,361 +30,254 @@
       --white:   #FFFFFF;
       --grey:    #6B7A8D;
       --border:  #D0E3F0;
-
       --display: 'DM Serif Text', Georgia, serif;
       --body:    'Figtree', system-ui, sans-serif;
-
-      --radius: 12px;
-      --shadow: 0 4px 24px rgba(13,43,74,.12);
+      --radius: 14px;
+      --shadow: 0 4px 32px rgba(13,43,74,.13);
     }
-
-    /* ═══════════════ RESET ═══════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     body { font-family: var(--body); font-size: 17px; color: var(--black); background: var(--white); overflow-x: hidden; }
     img { display: block; width: 100%; height: 100%; object-fit: cover; }
     a { text-decoration: none; color: inherit; }
-    button, input, textarea, select { font-family: var(--body); }
     ul { list-style: none; }
 
-    /* ═══════════════ UTILITIES ═══════════════ */
     .container { width: min(1140px, 100% - 48px); margin-inline: auto; }
     .section { padding-block: 96px; }
-    .section--dark { background: var(--navy); color: var(--white); }
+    .section--dark  { background: var(--navy); color: var(--white); }
     .section--paper { background: var(--paper); }
-    .label { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--celeste); margin-bottom: 12px; }
-    .label--dark { color: var(--celeste); }
+    .label { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--celeste); margin-bottom: 14px; display: block; }
 
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ═══════════════ NAV ═══════════════ */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px 0;
-      background: transparent;
-      transition: background .3s, box-shadow .3s, padding .3s;
-    }
-    .nav.scrolled {
-      background: rgba(13,43,74,.97);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 2px 24px rgba(0,0,0,.2);
-      padding: 14px 0;
-    }
-    .nav__inner {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 32px;
-    }
+    h2 { font-family: var(--display); font-size: clamp(30px, 3.8vw, 46px); line-height: 1.15; color: var(--navy); margin-bottom: 18px; }
+    h2.light { color: var(--white); }
+    .sub { font-size: 18px; color: var(--grey); line-height: 1.65; max-width: 580px; }
+    .sub.light { color: rgba(255,255,255,.72); }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 0; transition: background .3s, padding .3s; }
+    .nav.scrolled { background: rgba(13,43,74,.97); backdrop-filter: blur(14px); padding: 14px 0; box-shadow: 0 2px 24px rgba(0,0,0,.22); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
     .nav__logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-family: var(--display); font-size: 22px; }
-    .nav__links { display: flex; gap: 32px; }
-    .nav__links a { color: rgba(255,255,255,.8); font-size: 15px; font-weight: 500; transition: color .2s; }
+    .nav__links { display: flex; gap: 28px; }
+    .nav__links a { color: rgba(255,255,255,.78); font-size: 15px; font-weight: 500; transition: color .2s; }
     .nav__links a:hover { color: var(--white); }
-    .nav__cta {
-      background: var(--celeste); color: var(--white);
-      padding: 10px 22px; border-radius: 8px;
-      font-size: 14px; font-weight: 600;
-      transition: background .2s, transform .2s;
-      white-space: nowrap;
-    }
+    .nav__cta { background: var(--celeste); color: var(--white); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; transition: background .2s, transform .2s; }
     .nav__cta:hover { background: #2a9ec5; transform: translateY(-1px); }
-    .nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
-    .nav__hamburger span { display: block; width: 24px; height: 2px; background: white; margin: 5px 0; transition: .3s; border-radius: 2px; }
-    .nav__mobile { display: none; flex-direction: column; gap: 0; }
+    .nav__hamburger { display: none; background: none; border: none; cursor: pointer; }
+    .nav__hamburger span { display: block; width: 24px; height: 2px; background: white; margin: 5px 0; border-radius: 2px; transition: .3s; }
+    .nav__mobile { display: none; flex-direction: column; }
     .nav__mobile.open { display: flex; }
     .nav__mobile a { color: white; padding: 14px 24px; border-top: 1px solid rgba(255,255,255,.1); font-size: 16px; }
 
-    /* ═══════════════ HERO ═══════════════ */
-    .hero {
-      min-height: 100dvh;
-      background: var(--navy);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 48px;
-      padding-top: 96px;
-      padding-bottom: 64px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(56,178,214,.12) 0%, transparent 60%);
-      pointer-events: none;
-    }
+    /* ── HERO ── */
+    .hero { min-height: 100dvh; background: var(--navy); display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; padding-top: 100px; padding-bottom: 72px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(56,178,214,.13) 0%, transparent 65%); pointer-events: none; }
     .hero__text { position: relative; }
-    .hero__overline { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--celeste); margin-bottom: 24px; }
-    .hero__overline::before { content: ''; width: 28px; height: 2px; background: var(--celeste); border-radius: 2px; }
-    .hero__h1 { font-family: var(--display); font-size: clamp(40px, 5vw, 68px); line-height: 1.1; color: var(--white); margin-bottom: 24px; }
+    .hero__pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,178,214,.15); border: 1px solid rgba(56,178,214,.3); color: var(--celeste); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 28px; }
+    .hero__h1 { font-family: var(--display); font-size: clamp(38px, 4.8vw, 64px); line-height: 1.1; color: var(--white); margin-bottom: 28px; }
     .hero__h1 em { color: var(--celeste); font-style: italic; }
-    .hero__sub { font-size: 18px; line-height: 1.65; color: rgba(255,255,255,.72); margin-bottom: 40px; max-width: 500px; }
-    .hero__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 10px;
-      font-size: 16px; font-weight: 600; cursor: pointer; border: none;
-      transition: all .2s;
-    }
+    .hero__sub { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,.72); margin-bottom: 44px; max-width: 520px; }
+    .hero__actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: all .2s; font-family: var(--body); }
     .btn--celeste { background: var(--celeste); color: var(--white); }
-    .btn--celeste:hover { background: #2a9ec5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,178,214,.35); }
-    .btn--outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.3); }
-    .btn--outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .btn--celeste:hover { background: #2a9ec5; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(56,178,214,.38); }
+    .btn--outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.28); }
+    .btn--outline:hover { border-color: var(--white); background: rgba(255,255,255,.07); }
     .btn--navy { background: var(--navy); color: var(--white); }
     .btn--navy:hover { background: #0f3459; transform: translateY(-2px); }
-    .hero__visual { display: flex; justify-content: center; align-items: center; }
+    .btn--white { background: var(--white); color: var(--navy); }
+    .btn--white:hover { background: var(--paper); transform: translateY(-2px); }
+    .hero__visual { display: flex; justify-content: center; align-items: center; position: relative; }
 
-    /* Beacon rays animation */
-    @keyframes beam-pulse {
-      0%, 100% { opacity: .35; }
-      50% { opacity: .85; }
-    }
-    @keyframes core-glow {
-      0%, 100% { filter: drop-shadow(0 0 6px #38B2D6); }
-      50% { filter: drop-shadow(0 0 18px #38B2D6); }
-    }
+    @keyframes beam-pulse { 0%,100%{opacity:.3} 50%{opacity:.88} }
+    @keyframes core-glow { 0%,100%{filter:drop-shadow(0 0 6px #38B2D6)} 50%{filter:drop-shadow(0 0 20px #38B2D6)} }
     .beam { animation: beam-pulse 2.4s ease-in-out infinite; }
-    .beam-left  { animation-delay: .6s; }
-    .beam-right { animation-delay: 1.2s; }
+    .beam-l { animation-delay:.6s; }
+    .beam-r { animation-delay:1.2s; }
     .hero-disc { animation: core-glow 2.4s ease-in-out infinite; }
 
-    /* ═══════════════ STATS ═══════════════ */
-    .stats { background: var(--navy); border-top: 1px solid rgba(255,255,255,.08); }
-    .stats__grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      divide-x: 1px solid rgba(255,255,255,.1);
-      gap: 0;
-    }
-    .stat {
-      padding: 48px 24px;
-      text-align: center;
-      border-left: 1px solid rgba(255,255,255,.1);
-    }
+    /* ── DOS CANALES ── */
+    .channels { background: var(--white); }
+    .channels__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .channel-card { border-radius: 20px; padding: 44px 36px; position: relative; overflow: hidden; }
+    .channel-card--inst { background: var(--navy); color: var(--white); }
+    .channel-card--pers { background: var(--paper); border: 1.5px solid var(--border); }
+    .channel-card__tag { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; opacity: .7; }
+    .channel-card__tag.light { color: var(--celeste); opacity: 1; }
+    .channel-card__h3 { font-family: var(--display); font-size: 28px; line-height: 1.2; margin-bottom: 16px; }
+    .channel-card--inst .channel-card__h3 { color: var(--white); }
+    .channel-card--pers .channel-card__h3 { color: var(--navy); }
+    .channel-card__body { font-size: 15.5px; line-height: 1.7; margin-bottom: 28px; }
+    .channel-card--inst .channel-card__body { color: rgba(255,255,255,.72); }
+    .channel-card--pers .channel-card__body { color: var(--grey); }
+    .channel-card__list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+    .channel-item { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; }
+    .channel-item::before { content: '→'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .channel-card--inst .channel-item { color: rgba(255,255,255,.85); }
+    .channel-card--inst .channel-item::before { color: var(--celeste); }
+    .channel-card--pers .channel-item { color: var(--black); }
+    .channel-card--pers .channel-item::before { color: var(--blue); }
+    .channel-card__deco { position: absolute; right: -30px; bottom: -30px; opacity: .05; font-size: 140px; pointer-events: none; }
+
+    /* ── INSTITUCIONAL ── */
+    .inst-section { border-top: 1px solid rgba(255,255,255,.08); }
+    .inst-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 64px; }
+    .inst-tab { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 40px 36px; }
+    .inst-tab__icon { font-size: 36px; margin-bottom: 20px; }
+    .inst-tab__title { font-family: var(--display); font-size: 24px; color: var(--white); margin-bottom: 14px; }
+    .inst-tab__body { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 28px; }
+    .inst-step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+    .inst-step__num { background: var(--celeste); color: var(--white); width: 26px; height: 26px; border-radius: 50%; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .inst-step__text { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.6; }
+    .inst-badge { display: inline-block; background: rgba(56,178,214,.18); color: var(--celeste); border: 1px solid rgba(56,178,214,.35); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-top: 4px; }
+
+    /* ── STATS ── */
+    .stats { background: var(--navy); border-top: 1px solid rgba(255,255,255,.07); }
+    .stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 52px 24px; text-align: center; border-left: 1px solid rgba(255,255,255,.09); }
     .stat:first-child { border-left: none; }
-    .stat__num { font-family: var(--display); font-size: clamp(36px, 4vw, 54px); color: var(--celeste); line-height: 1; margin-bottom: 8px; }
-    .stat__desc { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.4; }
+    .stat__num { font-family: var(--display); font-size: clamp(34px, 3.8vw, 52px); color: var(--celeste); line-height: 1; margin-bottom: 10px; }
+    .stat__desc { font-size: 14px; color: rgba(255,255,255,.58); line-height: 1.5; }
 
-    /* ═══════════════ HOW IT WORKS ═══════════════ */
-    .how__header { text-align: center; max-width: 600px; margin-inline: auto; margin-bottom: 64px; }
+    /* ── HOW ── */
+    .how__header { text-align: center; max-width: 620px; margin-inline: auto; margin-bottom: 64px; }
     .how__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
-    .how__steps::before {
-      content: '';
-      position: absolute; top: 40px; left: calc(16.66% + 20px); right: calc(16.66% + 20px);
-      height: 2px; background: linear-gradient(90deg, var(--celeste), var(--blue));
-    }
-    .step { text-align: center; position: relative; }
-    .step__num {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: var(--celeste); color: var(--white);
-      font-family: var(--display); font-size: 28px;
-      display: flex; align-items: center; justify-content: center;
-      margin-inline: auto; margin-bottom: 24px;
-      position: relative; z-index: 1;
-      box-shadow: 0 8px 32px rgba(56,178,214,.35);
-    }
-    .step__title { font-family: var(--display); font-size: 22px; margin-bottom: 12px; color: var(--navy); }
-    .step__body { font-size: 15px; color: var(--grey); line-height: 1.6; }
+    .how__steps::before { content: ''; position: absolute; top: 40px; left: calc(16.66% + 20px); right: calc(16.66% + 20px); height: 2px; background: linear-gradient(90deg, var(--celeste), var(--blue)); }
+    .step { text-align: center; }
+    .step__num { width: 80px; height: 80px; border-radius: 50%; background: var(--celeste); color: var(--white); font-family: var(--display); font-size: 28px; display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 24px; position: relative; z-index: 1; box-shadow: 0 8px 28px rgba(56,178,214,.35); }
+    .step__title { font-family: var(--display); font-size: 21px; margin-bottom: 12px; color: var(--navy); }
+    .step__body { font-size: 15px; color: var(--grey); line-height: 1.65; }
 
-    /* ═══════════════ H2 SHARED ═══════════════ */
-    h2 { font-family: var(--display); font-size: clamp(32px, 4vw, 48px); line-height: 1.15; color: var(--navy); margin-bottom: 16px; }
-    h2.light { color: var(--white); }
-    .section__sub { font-size: 18px; color: var(--grey); line-height: 1.6; max-width: 560px; }
-    .section__sub.light { color: rgba(255,255,255,.7); }
-
-    /* ═══════════════ PRODUCT ═══════════════ */
+    /* ── PRODUCT ── */
     .product__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .product__photo {
-      aspect-ratio: 4/5;
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 50%, var(--celeste) 100%);
-      position: relative;
-    }
-    .product__photo img { border-radius: 20px; }
+    .product__photo { aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 50%, var(--celeste) 100%); }
     .product__feats { display: flex; flex-direction: column; gap: 32px; }
     .feat { display: flex; gap: 20px; align-items: flex-start; }
-    .feat__icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: var(--paper); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .feat__icon svg { width: 24px; height: 24px; }
+    .feat__icon { width: 48px; height: 48px; border-radius: 12px; background: var(--paper); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .feat__title { font-weight: 700; font-size: 17px; margin-bottom: 6px; color: var(--navy); }
-    .feat__body { font-size: 15px; color: var(--grey); line-height: 1.6; }
+    .feat__body { font-size: 15px; color: var(--grey); line-height: 1.65; }
+    .colors__strip { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+    .color-chip { flex: 1; min-width: 100px; padding: 14px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--grey); display: flex; align-items: center; gap: 10px; }
+    .color-dot { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; }
 
-    .colors__strip { display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap; }
-    .color-chip {
-      flex: 1; min-width: 120px; padding: 16px; border-radius: 12px;
-      border: 1px solid var(--border);
-      font-size: 14px; font-weight: 600; color: var(--grey);
-      display: flex; align-items: center; gap: 12px;
-    }
-    .color-dot { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
-
-    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 64px; }
-    .gallery__item {
-      aspect-ratio: 3/4; border-radius: 16px; overflow: hidden;
-      background: linear-gradient(160deg, var(--navy), var(--blue));
-    }
-
-    /* ═══════════════ FOR WHOM ═══════════════ */
-    .whom__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
-    .whom__card {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--radius); padding: 28px;
-      transition: background .2s, transform .2s;
-    }
+    /* ── FOR WHOM (B2C) ── */
+    .whom__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .whom__card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 28px; transition: background .2s, transform .2s; }
     .whom__card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
-    .whom__icon { font-size: 32px; margin-bottom: 16px; }
-    .whom__title { font-weight: 700; font-size: 17px; color: var(--white); margin-bottom: 8px; }
-    .whom__body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.6; }
+    .whom__icon { font-size: 30px; margin-bottom: 14px; }
+    .whom__title { font-weight: 700; font-size: 16px; color: var(--white); margin-bottom: 8px; }
+    .whom__body { font-size: 14px; color: rgba(255,255,255,.58); line-height: 1.65; }
 
-    /* ═══════════════ WHY / DIFF ═══════════════ */
-    .diff__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 56px; }
-    .diff__card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 32px;
-      transition: box-shadow .2s, transform .2s;
-    }
+    /* ── DIFF ── */
+    .diff__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 52px; }
+    .diff__card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 32px; transition: box-shadow .2s, transform .2s; }
     .diff__card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-    .diff__icon { width: 44px; height: 44px; border-radius: 10px; background: var(--paper); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .diff__title { font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 10px; }
-    .diff__body { font-size: 15px; color: var(--grey); line-height: 1.65; }
+    .diff__icon { width: 44px; height: 44px; border-radius: 10px; background: var(--paper); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .diff__title { font-weight: 700; font-size: 17px; color: var(--navy); margin-bottom: 10px; }
+    .diff__body { font-size: 15px; color: var(--grey); line-height: 1.7; }
 
-    /* ═══════════════ PRICING ═══════════════ */
+    /* ── PRICING ── */
     .pricing__header { text-align: center; margin-bottom: 56px; }
-    .pricing__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .price-card {
-      border: 2px solid var(--border); border-radius: 20px;
-      padding: 36px 28px; text-align: center;
-      transition: all .2s; position: relative;
-    }
-    .price-card--featured {
-      border-color: var(--celeste);
-      box-shadow: 0 0 0 4px rgba(56,178,214,.12);
-    }
-    .price-card__badge {
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--celeste); color: var(--white);
-      font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 20px;
-    }
-    .price-card:hover { border-color: var(--celeste); transform: translateY(-4px); box-shadow: var(--shadow); }
-    .price-card__label { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--grey); margin-bottom: 8px; }
-    .price-card__price { font-family: var(--display); font-size: 52px; color: var(--navy); line-height: 1; margin-bottom: 4px; }
-    .price-card__price span { font-size: 20px; vertical-align: super; }
-    .price-card__period { font-size: 14px; color: var(--grey); margin-bottom: 24px; }
-    .price-card__items { text-align: left; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
-    .price-item { display: flex; align-items: center; gap: 10px; font-size: 15px; }
-    .price-item::before { content: '✓'; width: 20px; height: 20px; border-radius: 50%; background: var(--celeste); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .free-note { text-align: center; margin-top: 32px; font-size: 14px; color: var(--grey); background: var(--paper); padding: 16px 24px; border-radius: 10px; }
-    .free-note strong { color: var(--navy); }
+    .pricing__tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+    .pricing__inst { background: var(--navy); border-radius: 20px; padding: 44px 40px; display: flex; flex-direction: column; gap: 20px; }
+    .pricing__inst h3 { font-family: var(--display); font-size: 26px; color: var(--white); }
+    .pricing__inst p { color: rgba(255,255,255,.7); font-size: 15px; line-height: 1.7; }
+    .inst-items { display: flex; flex-direction: column; gap: 10px; }
+    .inst-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.82); font-size: 15px; }
+    .inst-item::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: var(--celeste); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pricing__personal { display: flex; flex-direction: column; gap: 16px; }
+    .price-card { border: 2px solid var(--border); border-radius: 18px; padding: 32px 28px; position: relative; transition: all .2s; }
+    .price-card--feat { border-color: var(--celeste); box-shadow: 0 0 0 4px rgba(56,178,214,.1); }
+    .price-card:hover { border-color: var(--celeste); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .price-card__badge { position: absolute; top: -12px; left: 24px; background: var(--celeste); color: white; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+    .price-card__row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .price-card__label { font-weight: 700; font-size: 17px; color: var(--navy); margin-bottom: 4px; }
+    .price-card__desc { font-size: 14px; color: var(--grey); }
+    .price-card__price { font-family: var(--display); font-size: 36px; color: var(--navy); white-space: nowrap; }
+    .price-card__price span { font-size: 18px; }
+    .free-note { background: var(--paper); border-radius: 12px; padding: 18px 24px; font-size: 14px; color: var(--grey); text-align: center; border: 1px solid var(--border); }
 
-    /* ═══════════════ STORY ═══════════════ */
+    /* ── STORY ── */
     .story__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .story__quote {
-      font-family: var(--display); font-size: 26px; font-style: italic;
-      color: var(--white); line-height: 1.45;
-      border-left: 4px solid var(--celeste); padding-left: 28px;
-      margin-bottom: 32px;
-    }
-    .story__body { font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.75; }
-    .story__sig { margin-top: 28px; font-weight: 600; color: var(--celeste); font-size: 15px; }
+    .story__quote { font-family: var(--display); font-size: 26px; font-style: italic; color: var(--white); line-height: 1.45; border-left: 4px solid var(--celeste); padding-left: 28px; margin-bottom: 28px; }
+    .story__body { font-size: 16px; color: rgba(255,255,255,.7); line-height: 1.8; }
+    .story__sig { margin-top: 24px; font-weight: 600; color: var(--celeste); }
+    .testimonial { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 28px; }
+    .testimonial p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+    .testimonial cite { font-size: 14px; color: var(--celeste); font-weight: 600; font-style: normal; }
 
-    /* ═══════════════ CONTACT ═══════════════ */
+    /* ── CONTACT ── */
     .contact__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .contact__info h2 { margin-bottom: 20px; }
-    .contact__info p { color: var(--grey); line-height: 1.7; margin-bottom: 32px; }
-    .contact__detail { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--grey); font-size: 15px; }
-    .contact__detail svg { color: var(--celeste); flex-shrink: 0; }
-
-    .form { display: flex; flex-direction: column; gap: 20px; }
-    .form__group { display: flex; flex-direction: column; gap: 8px; }
+    .form { display: flex; flex-direction: column; gap: 18px; }
+    .form__group { display: flex; flex-direction: column; gap: 7px; }
     .form__label { font-size: 14px; font-weight: 600; color: var(--navy); }
-    .form__input, .form__select, .form__textarea {
-      padding: 14px 16px; border: 1.5px solid var(--border);
-      border-radius: 10px; font-size: 16px; font-family: var(--body);
-      color: var(--black); background: var(--white);
-      transition: border-color .2s, box-shadow .2s;
-      outline: none;
-    }
-    .form__input:focus, .form__select:focus, .form__textarea:focus {
-      border-color: var(--celeste); box-shadow: 0 0 0 3px rgba(56,178,214,.15);
-    }
+    .form__input, .form__select, .form__textarea { padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 16px; font-family: var(--body); color: var(--black); background: var(--white); transition: border-color .2s, box-shadow .2s; outline: none; }
+    .form__input:focus, .form__select:focus, .form__textarea:focus { border-color: var(--celeste); box-shadow: 0 0 0 3px rgba(56,178,214,.14); }
     .form__textarea { min-height: 120px; resize: vertical; }
-    .form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form__submit {
-      background: var(--navy); color: var(--white);
-      padding: 16px; border: none; border-radius: 10px;
-      font-size: 16px; font-weight: 700; cursor: pointer;
-      transition: background .2s, transform .2s;
-    }
+    .form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form__submit { background: var(--navy); color: var(--white); padding: 16px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background .2s, transform .2s; font-family: var(--body); }
     .form__submit:hover { background: #0f3459; transform: translateY(-2px); }
-    .form__note { font-size: 13px; color: var(--grey); text-align: center; margin-top: -8px; }
+    .form__note { font-size: 13px; color: var(--grey); text-align: center; }
+    .contact__detail { display: flex; align-items: center; gap: 12px; color: var(--grey); font-size: 15px; margin-bottom: 14px; }
 
-    /* ═══════════════ FOOTER ═══════════════ */
-    .footer {
-      background: #050f1c; color: rgba(255,255,255,.5);
-      padding: 48px 0; font-size: 14px;
-    }
-    .footer__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    /* ── FOOTER ── */
+    .footer { background: #060e1b; color: rgba(255,255,255,.45); padding: 48px 0; font-size: 14px; }
+    .footer__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
     .footer__logo { color: var(--white); font-family: var(--display); font-size: 20px; display: flex; align-items: center; gap: 8px; }
     .footer__links { display: flex; gap: 24px; }
-    .footer__links a { transition: color .2s; }
     .footer__links a:hover { color: var(--white); }
-    .footer__copy { width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; margin-top: 8px; }
+    .footer__copy { width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; margin-top: 8px; }
 
-    /* ═══════════════ RESPONSIVE ═══════════════ */
+    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero { grid-template-columns: 1fr; text-align: center; padding-bottom: 48px; }
       .hero__sub { margin-inline: auto; }
       .hero__actions { justify-content: center; }
       .hero__visual { display: none; }
       .stats__grid { grid-template-columns: repeat(2, 1fr); }
       .how__steps::before { display: none; }
-      .how__steps { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; }
+      .how__steps { grid-template-columns: 1fr; max-width: 380px; margin-inline: auto; }
       .product__layout { grid-template-columns: 1fr; }
+      .channels__grid { grid-template-columns: 1fr; }
+      .inst-tabs { grid-template-columns: 1fr; }
       .whom__grid { grid-template-columns: repeat(2, 1fr); }
       .diff__grid { grid-template-columns: 1fr; }
-      .pricing__grid { grid-template-columns: 1fr; max-width: 360px; margin-inline: auto; }
+      .pricing__tabs { grid-template-columns: 1fr; }
       .story__layout { grid-template-columns: 1fr; }
       .contact__layout { grid-template-columns: 1fr; }
-      .nav__links { display: none; }
-      .nav__cta.desktop { display: none; }
+      .nav__links, .nav__cta { display: none; }
       .nav__hamburger { display: block; }
-      .gallery { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 540px) {
-      .stats__grid { grid-template-columns: 1fr 1fr; }
-      .whom__grid { grid-template-columns: 1fr; }
+    @media (max-width: 560px) {
+      .stats__grid, .whom__grid { grid-template-columns: 1fr 1fr; }
       .form__grid { grid-template-columns: 1fr; }
       .footer__inner { flex-direction: column; text-align: center; }
-      .section { padding-block: 64px; }
+      .section { padding-block: 60px; }
       .colors__strip { flex-direction: column; }
-      .gallery { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
+<!-- NAV -->
 <nav class="nav" id="nav">
   <div class="container">
     <div class="nav__inner">
       <a href="#" class="nav__logo">
-        <svg width="28" height="28" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="60" y1="36" x2="60" y2="6" stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
-          <line x1="47" y1="40" x2="28" y2="22" stroke="#38B2D6" stroke-width="4" stroke-linecap="round" opacity=".6"/>
-          <line x1="73" y1="40" x2="92" y2="22" stroke="#38B2D6" stroke-width="4" stroke-linecap="round" opacity=".6"/>
-          <rect x="4" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
+        <svg width="26" height="26" viewBox="0 0 120 120" fill="none">
+          <line x1="60" y1="34" x2="60" y2="6"  stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
+          <line x1="46" y1="39" x2="26" y2="20" stroke="#38B2D6" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+          <line x1="74" y1="39" x2="94" y2="20" stroke="#38B2D6" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+          <rect x="4"  y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
           <rect x="30" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
           <circle cx="60" cy="60" r="30" fill="#0D2B4A"/>
           <circle cx="60" cy="60" r="22" fill="#38B2D6"/>
-          <rect x="54" y="47" width="12" height="12" rx="2" fill="#0D2B4A"/>
-          <rect x="57" y="50" width="6" height="6" rx="1" fill="#38B2D6"/>
-          <rect x="43" y="61" width="12" height="12" rx="2" fill="#0D2B4A"/>
-          <rect x="46" y="64" width="6" height="6" rx="1" fill="#38B2D6"/>
-          <rect x="65" y="61" width="12" height="12" rx="2" fill="#0D2B4A"/>
-          <rect x="68" y="64" width="6" height="6" rx="1" fill="#38B2D6"/>
+          <rect x="54" y="47" width="12" height="12" rx="2" fill="#0D2B4A"/><rect x="57" y="50" width="6" height="6" rx="1" fill="#38B2D6"/>
+          <rect x="43" y="62" width="12" height="12" rx="2" fill="#0D2B4A"/><rect x="46" y="65" width="6" height="6" rx="1" fill="#38B2D6"/>
+          <rect x="65" y="62" width="12" height="12" rx="2" fill="#0D2B4A"/><rect x="68" y="65" width="6" height="6" rx="1" fill="#38B2D6"/>
           <circle cx="60" cy="60" r="7" fill="white"/>
           <rect x="68" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
           <rect x="94" y="52" width="22" height="16" rx="4" fill="#1A6FAA"/>
@@ -395,188 +285,200 @@
         Faro
       </a>
       <ul class="nav__links">
+        <li><a href="#instituciones">Para instituciones</a></li>
         <li><a href="#como-funciona">Cómo funciona</a></li>
-        <li><a href="#producto">El producto</a></li>
-        <li><a href="#para-quien">Para quién</a></li>
-        <li><a href="#precios">Precios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <a href="#contacto" class="nav__cta desktop">Solicitar información</a>
-      <button class="nav__hamburger" aria-label="Menú" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="#contacto" class="nav__cta">Hablar con nosotros</a>
+      <button class="nav__hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     </div>
-    <div class="nav__mobile" id="mobile-menu">
+    <div class="nav__mobile" id="mm">
+      <a href="#instituciones" onclick="toggleMenu()">Para instituciones</a>
       <a href="#como-funciona" onclick="toggleMenu()">Cómo funciona</a>
-      <a href="#producto" onclick="toggleMenu()">El producto</a>
-      <a href="#para-quien" onclick="toggleMenu()">Para quién</a>
-      <a href="#precios" onclick="toggleMenu()">Precios</a>
-      <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+      <a href="#contacto"      onclick="toggleMenu()">Contacto</a>
     </div>
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section class="hero">
-  <div class="container" style="display:contents">
-    <div class="hero__text container" style="width: min(560px, 100% - 48px); padding-left: max(24px, (100% - 1140px)/2);">
-      <p class="hero__overline">Identificación médica de emergencia</p>
-      <h1 class="hero__h1">La pulsera que habla por ti <em>cuando no puedes</em></h1>
-      <p class="hero__sub">Escanea el QR. En dos segundos aparece la ficha médica completa de quien la lleva. Sin apps, sin contraseña, sin cobertura especial. Funciona en cualquier móvil, en cualquier lugar.</p>
-      <div class="hero__actions">
-        <a href="#contacto" class="btn btn--celeste">Solicitar información</a>
-        <a href="#como-funciona" class="btn btn--outline">Ver cómo funciona</a>
-      </div>
+  <div style="padding-left:max(24px,(100% - 1140px)/2);max-width:calc(570px + max(24px,(100% - 1140px)/2))">
+    <span class="hero__pill">Identificación médica de emergencia</span>
+    <h1 class="hero__h1">La información médica que puede <em>salvar una vida</em></h1>
+    <p class="hero__sub">Para hospitales y residencias que quieren que sus pacientes estén siempre identificados. Para familias que no quieren que sus seres queridos sean un desconocido en una emergencia. Un escaneo. Toda la información.</p>
+    <div class="hero__actions">
+      <a href="#instituciones" class="btn btn--celeste">Para instituciones →</a>
+      <a href="#personal"      class="btn btn--outline">Para uso personal</a>
     </div>
-    <div class="hero__visual" style="padding-right: max(24px, (100% - 1140px)/2);">
-      <!-- Gran icono Faro animado -->
-      <svg width="340" height="380" viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Resplandor de fondo -->
-        <ellipse cx="170" cy="200" rx="120" ry="100" fill="url(#glow)" opacity=".18"/>
-        <defs>
-          <radialGradient id="glow" cx="50%" cy="50%">
-            <stop offset="0%" stop-color="#38B2D6"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-        </defs>
-        <!-- Rayos -->
-        <line class="beam beam-left"  x1="147" y1="159" x2="96"  y2="88"  stroke="#38B2D6" stroke-width="5" stroke-linecap="round"/>
-        <line class="beam"            x1="170" y1="153" x2="170" y2="72"  stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
-        <line class="beam beam-right" x1="193" y1="159" x2="244" y2="88"  stroke="#38B2D6" stroke-width="5" stroke-linecap="round"/>
-        <!-- Correa izquierda -->
-        <rect x="12"  y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".85"/>
-        <rect x="41"  y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".9"/>
-        <rect x="70"  y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
-        <rect x="99"  y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
-        <!-- Correa derecha -->
-        <rect x="217" y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
-        <rect x="246" y="186" width="24" height="27" rx="5" fill="#1A6FAA"/>
-        <rect x="275" y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".9"/>
-        <rect x="304" y="186" width="24" height="27" rx="5" fill="#1A6FAA" opacity=".85"/>
-        <!-- Aro exterior -->
-        <circle class="hero-disc" cx="170" cy="200" r="48" fill="#0C2340"/>
-        <!-- Disco celeste -->
-        <circle cx="170" cy="200" r="36" fill="#38B2D6"/>
-        <!-- Finders QR -->
-        <rect x="157" y="183" width="14" height="14" rx="2.5" fill="#0D2B4A"/>
-        <rect x="160" y="186" width="8"  height="8"  rx="1"   fill="#38B2D6"/>
-        <rect x="142" y="205" width="14" height="14" rx="2.5" fill="#0D2B4A"/>
-        <rect x="145" y="208" width="8"  height="8"  rx="1"   fill="#38B2D6"/>
-        <rect x="184" y="205" width="14" height="14" rx="2.5" fill="#0D2B4A"/>
-        <rect x="187" y="208" width="8"  height="8"  rx="1"   fill="#38B2D6"/>
-        <!-- Datos QR -->
-        <rect x="155" y="204" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".8"/>
-        <rect x="180" y="190" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".8"/>
-        <rect x="163" y="216" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".7"/>
-        <rect x="174" y="216" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".7"/>
-        <!-- Núcleo -->
-        <circle cx="170" cy="200" r="10" fill="white"/>
-        <!-- Tagline bajo el icono -->
-        <text x="170" y="284" text-anchor="middle" font-family="Figtree, system-ui" font-size="15" fill="rgba(255,255,255,.5)" letter-spacing=".04em">PARA QUE NUNCA TE PIERDAN DE VISTA</text>
-      </svg>
-    </div>
+  </div>
+  <div class="hero__visual" style="padding-right:max(24px,(100% - 1140px)/2)">
+    <svg width="340" height="380" viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="170" cy="200" rx="130" ry="110" fill="#38B2D6" opacity=".07"/>
+      <line class="beam beam-l" x1="147" y1="159" x2="96"  y2="88"  stroke="#38B2D6" stroke-width="5" stroke-linecap="round"/>
+      <line class="beam"        x1="170" y1="153" x2="170" y2="72"  stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
+      <line class="beam beam-r" x1="193" y1="159" x2="244" y2="88"  stroke="#38B2D6" stroke-width="5" stroke-linecap="round"/>
+      <rect x="12"  y="187" width="24" height="26" rx="5" fill="#1A6FAA" opacity=".8"/>
+      <rect x="41"  y="187" width="24" height="26" rx="5" fill="#1A6FAA" opacity=".88"/>
+      <rect x="70"  y="187" width="24" height="26" rx="5" fill="#1A6FAA"/>
+      <rect x="99"  y="187" width="24" height="26" rx="5" fill="#1A6FAA"/>
+      <rect x="217" y="187" width="24" height="26" rx="5" fill="#1A6FAA"/>
+      <rect x="246" y="187" width="24" height="26" rx="5" fill="#1A6FAA"/>
+      <rect x="275" y="187" width="24" height="26" rx="5" fill="#1A6FAA" opacity=".88"/>
+      <rect x="304" y="187" width="24" height="26" rx="5" fill="#1A6FAA" opacity=".8"/>
+      <circle class="hero-disc" cx="170" cy="200" r="48" fill="#0C2340"/>
+      <circle cx="170" cy="200" r="36" fill="#38B2D6"/>
+      <rect x="157" y="183" width="14" height="14" rx="2.5" fill="#0D2B4A"/><rect x="160" y="186" width="8" height="8" rx="1" fill="#38B2D6"/>
+      <rect x="142" y="205" width="14" height="14" rx="2.5" fill="#0D2B4A"/><rect x="145" y="208" width="8" height="8" rx="1" fill="#38B2D6"/>
+      <rect x="184" y="205" width="14" height="14" rx="2.5" fill="#0D2B4A"/><rect x="187" y="208" width="8" height="8" rx="1" fill="#38B2D6"/>
+      <rect x="155" y="204" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".75"/>
+      <rect x="180" y="190" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".75"/>
+      <rect x="163" y="216" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".65"/>
+      <rect x="174" y="216" width="5" height="5" rx="1" fill="#0D2B4A" opacity=".65"/>
+      <circle cx="170" cy="200" r="10" fill="white"/>
+      <text x="170" y="284" text-anchor="middle" font-family="Figtree,system-ui" font-size="13" fill="rgba(255,255,255,.4)" letter-spacing=".06em">PARA QUE NUNCA TE PIERDAN DE VISTA</text>
+    </svg>
   </div>
 </section>
 
-<!-- ═══ STATS ═══ -->
+<!-- STATS -->
 <div class="stats">
   <div class="container">
     <div class="stats__grid">
-      <div class="stat reveal">
-        <div class="stat__num" data-target="800000" data-prefix="+">+800.000</div>
-        <div class="stat__desc">personas con Alzheimer en España hoy<br><small style="font-size:11px;opacity:.5">(Sociedad Española de Neurología)</small></div>
-      </div>
-      <div class="stat reveal" style="transition-delay:.1s">
-        <div class="stat__num">×2</div>
-        <div class="stat__desc">casos de demencia estimados en 2050 respecto a hoy</div>
-      </div>
-      <div class="stat reveal" style="transition-delay:.2s">
-        <div class="stat__num">35%</div>
-        <div class="stat__desc">de los casos de demencia todavía sin diagnosticar</div>
-      </div>
-      <div class="stat reveal" style="transition-delay:.3s">
-        <div class="stat__num">2 seg</div>
-        <div class="stat__desc">es todo lo que tarda en abrirse la ficha médica al escanear</div>
-      </div>
+      <div class="stat reveal"><div class="stat__num">+5.000</div><div class="stat__desc">centros y residencias de mayores en España</div></div>
+      <div class="stat reveal" style="transition-delay:.1s"><div class="stat__num">+800k</div><div class="stat__desc">personas con Alzheimer en España<br><small style="font-size:11px;opacity:.5">(SEN, 2025)</small></div></div>
+      <div class="stat reveal" style="transition-delay:.2s"><div class="stat__num">35%</div><div class="stat__desc">de casos de demencia todavía sin diagnosticar</div></div>
+      <div class="stat reveal" style="transition-delay:.3s"><div class="stat__num">2 seg</div><div class="stat__desc">para abrir la ficha médica completa al escanear</div></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ CÓMO FUNCIONA ═══ -->
-<section class="section" id="como-funciona">
+<!-- DOS CANALES -->
+<section class="section channels">
   <div class="container">
-    <div class="how__header reveal">
-      <p class="label">Tan simple que funciona en una emergencia</p>
-      <h2>Tres pasos. Sin apps. Sin barreras.</h2>
-      <p class="section__sub" style="margin-inline:auto">Cualquier persona con un móvil puede acceder a la información médica de quien lleva la pulsera, incluso sin saber qué es Faro.</p>
+    <div class="reveal">
+      <span class="label">Dos canales, un mismo producto</span>
+      <h2>Faro funciona para instituciones<br>y para uso personal</h2>
+      <p class="sub">Mismo QR, misma pulsera, misma plataforma. El canal institucional permite gestión centralizada de cientos de pacientes. El canal personal permite a cualquier persona tener su ficha siempre en la muñeca.</p>
     </div>
-    <div class="how__steps">
-      <div class="step reveal">
-        <div class="step__num">1</div>
-        <h3 class="step__title">Llevas la pulsera</h3>
-        <p class="step__body">La correa 3D impresa lleva en el centro una chapa grabada a láser con un QR único. Se lleva siempre puesta, como un reloj.</p>
+    <div class="channels__grid">
+      <div class="channel-card channel-card--inst reveal" style="transition-delay:.1s">
+        <span class="channel-card__tag light">Canal institucional — B2B</span>
+        <h3 class="channel-card__h3">Hospitales, residencias y asociaciones</h3>
+        <p class="channel-card__body">La institución compra las pulseras, carga los datos de cada paciente o residente, y distribuye. El personal puede actualizar la información en tiempo real desde cualquier dispositivo.</p>
+        <ul class="channel-card__list">
+          <li class="channel-item">Compra por lotes con precio institucional</li>
+          <li class="channel-item">Panel de gestión centralizado para el personal</li>
+          <li class="channel-item">Alta hospitalaria con historial en la muñeca</li>
+          <li class="channel-item">Cumplimiento RGPD para datos médicos</li>
+        </ul>
+        <a href="#contacto" class="btn btn--celeste">Solicitar propuesta institucional</a>
+        <div class="channel-card__deco">🏥</div>
       </div>
-      <div class="step reveal" style="transition-delay:.15s">
-        <div class="step__num">2</div>
-        <h3 class="step__title">Alguien escanea el QR</h3>
-        <p class="step__body">Con cualquier cámara de móvil. Sin instalar nada, sin abrir ninguna app. Un escaneo de dos segundos.</p>
-      </div>
-      <div class="step reveal" style="transition-delay:.3s">
-        <div class="step__num">3</div>
-        <h3 class="step__title">Aparece la ficha médica</h3>
-        <p class="step__body">Quién es, qué condiciones tiene, qué medicación toma, a quién llamar. La información que salva vidas, justo cuando más importa.</p>
+      <div class="channel-card channel-card--pers reveal" style="transition-delay:.2s" id="personal">
+        <span class="channel-card__tag" style="color:var(--blue)">Canal directo — B2C</span>
+        <h3 class="channel-card__h3">Para ti y para quien quieres proteger</h3>
+        <p class="channel-card__body">Compra directamente la pulsera para ti o para un familiar. Creas la ficha en minutos, recibes la pulsera con el QR ya grabado, y actualizas los datos online cuando quieras.</p>
+        <ul class="channel-card__list">
+          <li class="channel-item">Desde 10 € la chapa, 15 € la pulsera completa</li>
+          <li class="channel-item">Ficha médica básica siempre gratuita</li>
+          <li class="channel-item">Actualizable online de por vida</li>
+          <li class="channel-item">Entrega en toda España</li>
+        </ul>
+        <a href="#precios" class="btn btn--navy">Ver precios →</a>
+        <div class="channel-card__deco">🤝</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ EL PRODUCTO ═══ -->
-<section class="section section--paper" id="producto">
+<!-- INSTITUCIONAL — CASOS DE USO -->
+<section class="section section--dark inst-section" id="instituciones">
+  <div class="container">
+    <div class="reveal">
+      <span class="label">Para instituciones</span>
+      <h2 class="light">Cómo lo usan hospitales y residencias</h2>
+      <p class="sub light">Dos casos de uso concretos que resuelven un problema real: que el personal médico tenga la información de cada paciente en segundos, siempre actualizada.</p>
+    </div>
+    <div class="inst-tabs">
+      <div class="inst-tab reveal" style="transition-delay:.1s">
+        <div class="inst-tab__icon">🏥</div>
+        <h3 class="inst-tab__title">Alta hospitalaria</h3>
+        <p class="inst-tab__body">El paciente sale del hospital con toda su información médica en la muñeca. Si vuelve a urgencias — ese hospital u otro — el equipo médico lo sabe todo en dos segundos.</p>
+        <div class="inst-step"><div class="inst-step__num">1</div><div class="inst-step__text">El hospital carga el historial del paciente al alta: medicación, alergias, diagnósticos, últimas intervenciones.</div></div>
+        <div class="inst-step"><div class="inst-step__num">2</div><div class="inst-step__text">El paciente recibe la pulsera Faro con su QR único ya grabado en la chapa.</div></div>
+        <div class="inst-step"><div class="inst-step__num">3</div><div class="inst-step__text">En cualquier urgencia futura, cualquier médico o paramédico escanea y accede al historial completo al instante.</div></div>
+        <span class="inst-badge">→ Reduce errores de medicación en readmisiones</span>
+      </div>
+      <div class="inst-tab reveal" style="transition-delay:.2s">
+        <div class="inst-tab__icon">🏠</div>
+        <h3 class="inst-tab__title">Residencias de mayores</h3>
+        <p class="inst-tab__body">Cada residente lleva su Faro. El personal actualiza la medicación en tiempo real. Los paramédicos llegan ya informados. Las familias tienen tranquilidad.</p>
+        <div class="inst-step"><div class="inst-step__num">1</div><div class="inst-step__text">La residencia crea una ficha por residente: nombre, diagnósticos, medicación, alergias, contacto de familia.</div></div>
+        <div class="inst-step"><div class="inst-step__num">2</div><div class="inst-step__text">Cuando cambia la medicación, el personal lo actualiza desde la app Faro en segundos. El QR en la pulsera no cambia nunca.</div></div>
+        <div class="inst-step"><div class="inst-step__num">3</div><div class="inst-step__text">Si un residente tiene una emergencia, los paramédicos escanean antes de llegar al hospital y saben exactamente qué hay.</div></div>
+        <span class="inst-badge">→ Gestión centralizada de toda la plantilla de residentes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA (la mecánica del QR) -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="how__header reveal">
+      <span class="label">La mecánica</span>
+      <h2>Un escaneo. Sin apps. Sin barreras.</h2>
+      <p class="sub" style="margin-inline:auto">Tanto si lo distribuye un hospital como si lo compra una familia, el funcionamiento es idéntico: cualquier móvil, dos segundos, ficha médica completa.</p>
+    </div>
+    <div class="how__steps">
+      <div class="step reveal">
+        <div class="step__num">1</div>
+        <h3 class="step__title">La pulsera en la muñeca</h3>
+        <p class="step__body">La correa 3D lleva en el centro una chapa grabada a láser con un QR único e irrepetible. Se lleva siempre puesta.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.15s">
+        <div class="step__num">2</div>
+        <h3 class="step__title">Escaneo con cualquier cámara</h3>
+        <p class="step__body">Sin instalar nada. Sin abrir ninguna app. La cámara del móvil lee el código y abre la ficha automáticamente.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.3s">
+        <div class="step__num">3</div>
+        <h3 class="step__title">Ficha médica en pantalla</h3>
+        <p class="step__body">Quién es, condiciones médicas, medicación, alergias críticas y contactos de emergencia. Actualizado siempre, sin tocar la chapa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTO -->
+<section class="section section--paper">
   <div class="container">
     <div class="product__layout">
       <div class="product__photo reveal">
-        <!-- Reemplaza este div con tu foto: añade img/bracelet-hero.jpg -->
-        <img src="img/bracelet-hero.jpg" alt="Pulsera Faro con chapa QR grabada a láser" onerror="this.style.display='none'">
+        <img src="img/bracelet-hero.jpg" alt="Pulsera Faro con QR grabado" onerror="this.style.display='none'">
       </div>
       <div class="product__feats">
         <div class="reveal">
-          <p class="label">El producto</p>
-          <h2>Diseñada para llevarla siempre</h2>
-          <p class="section__sub">Un wearable que combina la personalización del diseño 3D con la permanencia del grabado láser y la flexibilidad de una plataforma digital.</p>
+          <span class="label">El producto</span>
+          <h2>Un wearable que da gusto llevar</h2>
+          <p class="sub">La pulsera que no se lleva puesta no protege a nadie. Por eso el diseño importa tanto como la tecnología.</p>
         </div>
         <div class="feat reveal" style="transition-delay:.1s">
-          <div class="feat__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/>
-            </svg>
-          </div>
-          <div>
-            <p class="feat__title">Correa impresa en 3D</p>
-            <p class="feat__body">Fabricada por encargo con diseño de eslabones, en varios colores. Ajustable, resistente al agua y al uso diario.</p>
-          </div>
+          <div class="feat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg></div>
+          <div><p class="feat__title">Correa impresa en 3D</p><p class="feat__body">Diseño de eslabones personalizable en varios colores. Resistente al agua y al uso diario. Ajustable.</p></div>
         </div>
         <div class="feat reveal" style="transition-delay:.2s">
-          <div class="feat__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/>
-            </svg>
-          </div>
-          <div>
-            <p class="feat__title">Chapa grabada a láser</p>
-            <p class="feat__body">El QR se graba de forma permanente en la chapa central. Una vez grabado, nunca cambia aunque actualices tus datos.</p>
-          </div>
+          <div class="feat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><p class="feat__title">QR grabado a láser — permanente</p><p class="feat__body">El QR se graba en la chapa central de forma definitiva. Nunca cambia, nunca se borra. La información detrás sí es editable.</p></div>
         </div>
         <div class="feat reveal" style="transition-delay:.3s">
-          <div class="feat__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-            </svg>
-          </div>
-          <div>
-            <p class="feat__title">Ficha editable online</p>
-            <p class="feat__body">Cambia la medicación, añade un diagnóstico, actualiza un contacto. El QR sigue funcionando siempre, sin tocar la pulsera.</p>
-          </div>
+          <div class="feat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <div><p class="feat__title">Ficha editable de por vida</p><p class="feat__body">Cambia la medicación, añade diagnósticos, actualiza contactos en cualquier momento. El QR grabado en la chapa nunca cambia.</p></div>
         </div>
-
+        <div class="feat reveal" style="transition-delay:.4s">
+          <div class="feat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <div><p class="feat__title">App de gestión — iOS y Android</p><p class="feat__body">La ficha médica se crea y actualiza desde la app Faro. Para instituciones, el personal del centro gestiona todos los perfiles desde un único panel.</p></div>
+        </div>
         <div class="colors__strip reveal" style="transition-delay:.4s">
           <div class="color-chip"><span class="color-dot" style="background:#e63946"></span>Roja</div>
           <div class="color-chip"><span class="color-dot" style="background:#9ca3af"></span>Gris</div>
@@ -585,254 +487,149 @@
         </div>
       </div>
     </div>
-
-    <!-- Galería de variantes -->
-    <div class="gallery">
-      <div class="gallery__item reveal"><img src="img/bracelet-roja.jpg"   alt="Pulsera Faro roja"   onerror="this.style.display='none'"></div>
-      <div class="gallery__item reveal" style="transition-delay:.1s"><img src="img/bracelet-gris.jpg"   alt="Pulsera Faro gris"   onerror="this.style.display='none'"></div>
-      <div class="gallery__item reveal" style="transition-delay:.2s"><img src="img/bracelet-blanca.jpg" alt="Pulsera Faro blanca" onerror="this.style.display='none'"></div>
-    </div>
   </div>
 </section>
 
-<!-- ═══ PARA QUIÉN ═══ -->
+<!-- PARA QUIÉN (B2C) -->
 <section class="section section--dark" id="para-quien">
   <div class="container">
-    <p class="label label--dark reveal">Para quién</p>
-    <h2 class="light reveal">Todos los que merecen estar protegidos</h2>
-    <p class="section__sub light reveal">Faro protege a cualquier persona que, en un momento crítico, no pueda comunicarse por sí misma.</p>
-    <div class="whom__grid">
-      <div class="whom__card reveal">
-        <div class="whom__icon">🧠</div>
-        <h3 class="whom__title">Alzheimer y demencia</h3>
-        <p class="whom__body">Personas que se desorientan o se pierden. Quien las encuentre sabe en segundos quiénes son y a quién llamar.</p>
-      </div>
-      <div class="whom__card reveal" style="transition-delay:.1s">
-        <div class="whom__icon">🧩</div>
-        <h3 class="whom__title">TEA (Autismo)</h3>
-        <p class="whom__body">Niños y adultos con autismo que no hablan o tienen una crisis en un lugar público. La pulsera habla por ellos.</p>
-      </div>
-      <div class="whom__card reveal" style="transition-delay:.2s">
-        <div class="whom__icon">⚡</div>
-        <h3 class="whom__title">Epilepsia</h3>
-        <p class="whom__body">Al perder el conocimiento, quien auxilia necesita saber que no debe moverlos y qué medicación toman.</p>
-      </div>
-      <div class="whom__card reveal" style="transition-delay:.3s">
-        <div class="whom__icon">💉</div>
-        <h3 class="whom__title">Diabetes tipo 1</h3>
-        <p class="whom__body">Los episodios hipoglucémicos se confunden con intoxicación. La ficha médica evita intervenciones erróneas.</p>
-      </div>
-      <div class="whom__card reveal" style="transition-delay:.4s">
-        <div class="whom__icon">🏃</div>
-        <h3 class="whom__title">Deportistas</h3>
-        <p class="whom__body">Corredores, ciclistas, triatletas. En competición o entrenamiento, siempre identificados en caso de accidente.</p>
-      </div>
-      <div class="whom__card reveal" style="transition-delay:.5s">
-        <div class="whom__icon">🏠</div>
-        <h3 class="whom__title">Residencias y centros</h3>
-        <p class="whom__body">Gestión de toda la plantilla de residentes con una sola plataforma. Canal institucional con precio de lote.</p>
-      </div>
+    <div class="reveal">
+      <span class="label">Uso personal</span>
+      <h2 class="light">Para quien necesita que su información médica esté siempre disponible</h2>
+      <p class="sub light">Además del canal institucional, cualquier persona puede comprar su Faro directamente.</p>
+    </div>
+    <div class="whom__grid" style="margin-top:48px">
+      <div class="whom__card reveal"><div class="whom__icon">🧠</div><h3 class="whom__title">Alzheimer y demencia</h3><p class="whom__body">Cuando se desorientan o se pierden, quien los encuentra sabe en segundos quiénes son y a quién llamar.</p></div>
+      <div class="whom__card reveal" style="transition-delay:.08s"><div class="whom__icon">🧩</div><h3 class="whom__title">TEA (Autismo)</h3><p class="whom__body">Niños y adultos que no hablan o tienen una crisis. La pulsera comunica lo que ellos no pueden.</p></div>
+      <div class="whom__card reveal" style="transition-delay:.16s"><div class="whom__icon">⚡</div><h3 class="whom__title">Epilepsia</h3><p class="whom__body">En una crisis, quien auxilia necesita saber la medicación y lo que no debe hacer. La ficha lo tiene todo.</p></div>
+      <div class="whom__card reveal" style="transition-delay:.24s"><div class="whom__icon">💉</div><h3 class="whom__title">Diabetes y alergias</h3><p class="whom__body">Un episodio hipoglucémico o una anafilaxia requieren actuación inmediata y precisa. La ficha evita errores.</p></div>
+      <div class="whom__card reveal" style="transition-delay:.32s"><div class="whom__icon">🏃</div><h3 class="whom__title">Deportistas</h3><p class="whom__body">Corredores, ciclistas, triatletas. En competición o entrenamiento, siempre identificados.</p></div>
+      <div class="whom__card reveal" style="transition-delay:.40s"><div class="whom__icon">✈️</div><h3 class="whom__title">Viajeros frecuentes</h3><p class="whom__body">Fuera de tu entorno habitual, la ficha funciona igual: cualquier cámara, cualquier país.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ POR QUÉ FARO ═══ -->
-<section class="section" id="por-que-faro">
+<!-- POR QUÉ FARO -->
+<section class="section">
   <div class="container">
-    <div style="max-width:600px; margin-bottom:56px;" class="reveal">
-      <p class="label">Por qué Faro</p>
-      <h2>Lo que nos diferencia</h2>
-      <p class="section__sub">Existen pulseras identificativas. Faro va más allá: diseño que da gusto llevar, tecnología que nunca caduca y protección de datos real.</p>
+    <div class="reveal" style="max-width:600px;margin-bottom:52px">
+      <span class="label">Diferenciadores</span>
+      <h2>Lo que hace a Faro distinto</h2>
+      <p class="sub">El mercado tiene pulseras identificativas. Faro tiene tecnología que no caduca, diseño que se lleva y protección de datos real.</p>
     </div>
     <div class="diff__grid">
       <div class="diff__card reveal">
-        <div class="diff__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </div>
-        <h3 class="diff__title">QR atemporal: se graba una vez, funciona siempre</h3>
-        <p class="diff__body">El código gravado en la chapa no contiene los datos, solo apunta a una dirección fija en internet. Si cambia la medicación o un contacto, actualizas la ficha online. La pulsera no cambia nunca.</p>
+        <div class="diff__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h3 class="diff__title">QR atemporal — se graba una vez, funciona siempre</h3>
+        <p class="diff__body">El código grabado en la chapa no contiene los datos, solo apunta a una dirección fija. La información se actualiza online sin tocar nunca la pulsera física.</p>
       </div>
       <div class="diff__card reveal" style="transition-delay:.1s">
-        <div class="diff__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
-          </svg>
-        </div>
-        <h3 class="diff__title">RGPD desde el diseño</h3>
-        <p class="diff__body">Los datos de salud son la categoría más protegida por la ley europea. Faro aplica base legal de interés vital, mínimos datos, alojamiento en la UE y derecho a actualizar o borrar en cualquier momento.</p>
+        <div class="diff__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3 class="diff__title">RGPD desde el diseño, no como parche</h3>
+        <p class="diff__body">Datos médicos = categoría especial en la ley europea. Aplicamos base legal de interés vital, mínimos datos, alojamiento en la UE y derecho a borrado. Las instituciones públicas lo exigen.</p>
       </div>
       <div class="diff__card reveal" style="transition-delay:.2s">
-        <div class="diff__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
-          </svg>
-        </div>
-        <h3 class="diff__title">Sin apps, sin registro, sin barreras</h3>
-        <p class="diff__body">Quien encuentra a la persona en la calle no necesita descargarse nada ni saber nada. Cualquier cámara de móvil escanea el QR y abre la ficha en el navegador.</p>
+        <div class="diff__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+        <h3 class="diff__title">Sin apps, sin fricción, sin barreras</h3>
+        <p class="diff__body">La cámara de cualquier móvil abre la ficha. El equipo de urgencias no necesita saber qué es Faro para usarlo. Funciona igual en cualquier país.</p>
       </div>
       <div class="diff__card reveal" style="transition-delay:.3s">
-        <div class="diff__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-          </svg>
-        </div>
-        <h3 class="diff__title">Diseño que da gusto llevar</h3>
-        <p class="diff__body">La pulsera que no se lleva puesta no protege a nadie. El diseño de eslabones 3D en varios colores es un accesorio que la gente elige llevar, no solo una etiqueta médica.</p>
+        <div class="diff__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6FAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3 class="diff__title">Diseño que se lleva — no una etiqueta médica</h3>
+        <p class="diff__body">Un competidor directo en España vende pulseras de silicona genérica. Faro es un accesorio con diseño propio que la gente elige llevar, lo que lo hace útil de verdad.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PRECIOS ═══ -->
-<section class="section section--paper" id="precios">
-  <div class="container">
-    <div class="pricing__header reveal">
-      <p class="label">Precios</p>
-      <h2>Sencillo y sin sorpresas</h2>
-      <p class="section__sub" style="margin-inline:auto">Pagas el objeto físico. La ficha médica básica es siempre gratuita.</p>
-    </div>
-    <div class="pricing__grid">
-      <div class="price-card reveal">
-        <p class="price-card__label">Pulsera</p>
-        <p class="price-card__price"><span>€</span>15</p>
-        <p class="price-card__period">pago único</p>
-        <ul class="price-card__items">
-          <li class="price-item">Correa 3D impresa</li>
-          <li class="price-item">Chapa con QR grabado a láser</li>
-          <li class="price-item">Ficha médica online incluida</li>
-          <li class="price-item">Actualizable de por vida</li>
-        </ul>
-        <a href="#contacto" class="btn btn--navy" style="width:100%;justify-content:center">Solicitar</a>
-      </div>
-      <div class="price-card price-card--featured reveal" style="transition-delay:.1s">
-        <div class="price-card__badge">Más popular</div>
-        <p class="price-card__label">Pack familiar</p>
-        <p class="price-card__price"><span>€</span>45</p>
-        <p class="price-card__period">3 pulseras completas</p>
-        <ul class="price-card__items">
-          <li class="price-item">3 pulseras con QR</li>
-          <li class="price-item">3 fichas médicas individuales</li>
-          <li class="price-item">Colores a elegir</li>
-          <li class="price-item">Gestión independiente de cada ficha</li>
-        </ul>
-        <a href="#contacto" class="btn btn--celeste" style="width:100%;justify-content:center">Solicitar</a>
-      </div>
-      <div class="price-card reveal" style="transition-delay:.2s">
-        <p class="price-card__label">Solo chapa</p>
-        <p class="price-card__price"><span>€</span>10</p>
-        <p class="price-card__period">pago único</p>
-        <ul class="price-card__items">
-          <li class="price-item">Chapa QR grabada a láser</li>
-          <li class="price-item">Compatible con cualquier pulsera</li>
-          <li class="price-item">Ficha médica online incluida</li>
-          <li class="price-item">Actualizable de por vida</li>
-        </ul>
-        <a href="#contacto" class="btn btn--navy" style="width:100%;justify-content:center">Solicitar</a>
-      </div>
-    </div>
-    <p class="free-note reveal" style="margin-top:32px">
-      <strong>¿Residencias o asociaciones?</strong> Tenemos precios especiales para lotes institucionales. Escríbenos y lo hablamos.
-    </p>
-  </div>
-</section>
 
-<!-- ═══ HISTORIA ═══ -->
+<!-- HISTORIA -->
 <section class="section section--dark">
   <div class="container">
     <div class="story__layout">
       <div class="reveal">
-        <p class="label label--dark">Por qué existe Faro</p>
-        <blockquote class="story__quote">"Mi abuela tiene demencia. Yo sufro síncopes. Faro nació de ahí."</blockquote>
+        <span class="label">Por qué existe Faro</span>
+        <blockquote class="story__quote">"Mi abuela tiene demencia. Yo sufro síncopes. Faro nació de eso."</blockquote>
         <p class="story__body">Cuando mi abuela empezó a desorientarse en la calle, buscamos una solución. Lo que encontramos era caro, genérico o no se actualizaba. Al mismo tiempo, yo sé lo que es perder el conocimiento en un lugar desconocido y depender de que alguien sepa qué hacer.</p>
-        <p class="story__body" style="margin-top:16px">Faro no nació en un hackathon. Nació de una necesidad familiar muy concreta. Eso es lo que le da sentido — y lo que nos obliga a hacerlo bien.</p>
+        <p class="story__body" style="margin-top:16px">Esa experiencia personal es la que hace que Faro exista. Y es la misma experiencia que tienen miles de familias, médicos de urgencias y directores de residencias que saben que la información correcta en el momento correcto lo cambia todo.</p>
         <p class="story__sig">— Jaime, fundador de Faro</p>
       </div>
-      <div class="reveal" style="transition-delay:.2s; display:flex; flex-direction:column; gap:20px;">
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;">
-          <p style="font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:16px;">"Gracias a la pulsera, el equipo de urgencias supo en segundos que mi madre tiene Alzheimer y a quién llamar. Fue un alivio enorme."</p>
-          <p style="font-size:14px;color:var(--celeste);font-weight:600;">— Ana G., cuidadora</p>
+      <div class="reveal" style="transition-delay:.2s;display:flex;flex-direction:column;gap:20px">
+        <div class="testimonial">
+          <p>"Cuando llega una ambulancia con un residente de nuestra planta, los paramédicos ya saben su medicación antes de entrar. Faro nos ha cambiado la forma de trabajar."</p>
+          <cite>— Directora de enfermería, residencia de mayores</cite>
         </div>
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;">
-          <p style="font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:16px;">"Soy paramédico. Tener acceso inmediato a la información médica cambia todo en una emergencia. Faro facilita nuestro trabajo y puede salvar vidas."</p>
-          <p style="font-size:14px;color:var(--celeste);font-weight:600;">— David S., paramédico</p>
+        <div class="testimonial">
+          <p>"Mi madre tiene Alzheimer. Gracias a la pulsera, cuando se desorientó en la calle el equipo de urgencias supo en segundos quién era y me llamó. Fue un alivio enorme."</p>
+          <cite>— Ana G., cuidadora</cite>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACTO ═══ -->
+<!-- CONTACTO -->
 <section class="section" id="contacto">
   <div class="container">
     <div class="contact__layout">
       <div class="reveal">
-        <p class="label">Contacto</p>
+        <span class="label">Contacto</span>
         <h2>¿Hablamos?</h2>
-        <p class="contact__info p" style="color:var(--grey);line-height:1.7;margin:16px 0 32px">Si quieres pedir una pulsera, preguntar por precios institucionales o simplemente saber más, escríbenos. Respondemos en 24 horas.</p>
-        <div class="contact__detail">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          hola@faro.es
-        </div>
-        <div class="contact__detail">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Madrid, España
-        </div>
-        <div style="margin-top:40px;padding:20px;background:var(--paper);border-radius:12px;font-size:14px;color:var(--grey);line-height:1.6;">
-          🔒 <strong style="color:var(--navy)">RGPD:</strong> Los datos que nos envíes se usan únicamente para responder a tu consulta. No los cedemos a terceros ni enviamos publicidad. Puedes ejercer tus derechos de acceso y borrado en cualquier momento.
+        <p style="color:var(--grey);line-height:1.7;margin:16px 0 32px;font-size:16px">Tanto si eres una institución buscando una propuesta personalizada como si quieres pedir una pulsera, escríbenos. Respondemos en menos de 24 horas.</p>
+        <div class="contact__detail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38B2D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>hola@faro.es</div>
+        <div class="contact__detail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38B2D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Madrid, España</div>
+        <div style="margin-top:36px;padding:18px 22px;background:var(--paper);border-radius:12px;border:1px solid var(--border);font-size:14px;color:var(--grey);line-height:1.6">
+          🔒 <strong style="color:var(--navy)">RGPD:</strong> Tus datos se usan únicamente para responder tu consulta. No los cedemos a terceros. Puedes ejercer tus derechos de acceso y borrado cuando quieras.
         </div>
       </div>
       <form class="form reveal" style="transition-delay:.15s" action="https://formspree.io/f/TU_ID_AQUI" method="POST">
-        <!-- Sustituye TU_ID_AQUI por tu ID de Formspree: https://formspree.io -->
         <div class="form__grid">
-          <div class="form__group">
-            <label class="form__label" for="nombre">Nombre</label>
-            <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-          </div>
-          <div class="form__group">
-            <label class="form__label" for="email">Correo electrónico</label>
-            <input class="form__input" type="email" id="email" name="email" placeholder="tu@email.com" required>
-          </div>
+          <div class="form__group"><label class="form__label" for="nombre">Nombre</label><input class="form__input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required></div>
+          <div class="form__group"><label class="form__label" for="email">Email</label><input class="form__input" type="email" id="email" name="email" placeholder="tu@email.com" required></div>
         </div>
         <div class="form__group">
-          <label class="form__label" for="interes">¿Qué te interesa?</label>
-          <select class="form__select" id="interes" name="interes">
+          <label class="form__label" for="tipo">Tipo de consulta</label>
+          <select class="form__select" id="tipo" name="tipo">
             <option value="">Selecciona una opción</option>
-            <option>Pulsera individual (15 €)</option>
-            <option>Pack familiar (45 €)</option>
-            <option>Solo chapa (10 €)</option>
-            <option>Precio institucional (residencia / asociación)</option>
+            <optgroup label="Institucional">
+              <option>Hospital — propuesta institucional</option>
+              <option>Residencia de mayores — propuesta institucional</option>
+              <option>Asociación de pacientes — propuesta institucional</option>
+              <option>Ayuntamiento / Servicios sociales</option>
+            </optgroup>
+            <optgroup label="Uso personal">
+              <option>Pulsera individual (15 €)</option>
+              <option>Pack familiar (45 €)</option>
+              <option>Solo chapa QR (10 €)</option>
+            </optgroup>
             <option>Solo tengo una pregunta</option>
           </select>
         </div>
-        <div class="form__group">
-          <label class="form__label" for="mensaje">Mensaje</label>
-          <textarea class="form__textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas..."></textarea>
-        </div>
+        <div class="form__group"><label class="form__label" for="org">Organización (si aplica)</label><input class="form__input" type="text" id="org" name="org" placeholder="Hospital / Residencia / Asociación..."></div>
+        <div class="form__group"><label class="form__label" for="mensaje">Mensaje</label><textarea class="form__textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas..."></textarea></div>
         <button type="submit" class="form__submit">Enviar mensaje →</button>
-        <p class="form__note">Sin spam. Sin venta de datos. Solo te respondemos nosotros.</p>
+        <p class="form__note">Sin spam. Te respondemos en menos de 24 horas.</p>
       </form>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer__inner">
       <span class="footer__logo">
         <svg width="22" height="22" viewBox="0 0 120 120" fill="none">
-          <line x1="60" y1="36" x2="60" y2="6" stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="60" cy="60" r="30" fill="#0D2B4A"/>
-          <circle cx="60" cy="60" r="22" fill="#38B2D6"/>
-          <circle cx="60" cy="60" r="7" fill="white"/>
+          <line x1="60" y1="34" x2="60" y2="6" stroke="#38B2D6" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="60" cy="60" r="28" fill="#0D2B4A"/>
+          <circle cx="60" cy="60" r="20" fill="#38B2D6"/>
+          <circle cx="60" cy="60" r="7"  fill="white"/>
         </svg>
         Faro
       </span>
       <nav class="footer__links">
+        <a href="#instituciones">Instituciones</a>
         <a href="#como-funciona">Cómo funciona</a>
-        <a href="#precios">Precios</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <p class="footer__copy">© 2025 Faro · Madrid, España · Todos los derechos reservados · Privacidad y RGPD</p>
@@ -841,23 +638,13 @@
 </footer>
 
 <script>
-  // Nav scroll behavior
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('mobile-menu').classList.toggle('open');
-  }
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  function toggleMenu() { document.getElementById('mm').classList.toggle('open'); }
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
